@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "./node_modules/webpack/bin/webpack.js -w"
+    "start": "./node_modules/webpack/bin/webpack.js -w",
+    "build": "./node_modules/webpack/bin/webpack.js",
+    "test:isomorphic": "./node_modules/webpack/bin/webpack.js; node ./dist/out.js"
   },
   "repository": {
     "type": "git",

@@ -1,5 +1,13 @@
 import { pt, Polygon, distance, ccw } from './math'
 import { drawPolygon } from './renderer/draw'
+import {isNode, DocumentMock} from './renderer/isomorphic-helpers'
+
+if(isNode()){
+    var document = new DocumentMock()
+    console.log('isNode')
+} else {
+    console.log('isBrowser')
+}
 
 let c = document.getElementById('canvas').getContext('2d')
 
