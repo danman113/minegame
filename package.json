@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "./node_modules/standard/bin/cmd.js  src/**/*.js",
+    "lint": "./node_modules/standard/bin/cmd.js  src/**/*.js --fix",
     "start": "./node_modules/webpack/bin/webpack.js -w",
     "build": "./node_modules/webpack/bin/webpack.js",
     "test:isomorphic": "./node_modules/webpack/bin/webpack.js; node ./dist/out.js"
