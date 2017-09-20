@@ -1,4 +1,12 @@
-class ContextMock {
+class DOMMock {
+  addEventListener(){}
+}
+
+class WindowMock extends DOMMock {
+  requestAnimationFrame(){}
+}
+
+class ContextMock extends DOMMock {
   lineTo(){}
   closePath(){}
   fill(){}
@@ -6,9 +14,10 @@ class ContextMock {
   fillRect(){}
   beginPath(){}
   moveTo(){}
+  clearRect(){}
 }
 
-class CanvasMock {
+class CanvasMock extends DOMMock {
   getContext(type) {
     if (type === '2d') {
       return new ContextMock()
@@ -16,7 +25,7 @@ class CanvasMock {
   }
 }
 
-class DocumentMock {
+class DocumentMock extends DOMMock {
   getElementById(id) {
     if (id === 'canvas') {
       return new CanvasMock()
@@ -26,4 +35,4 @@ class DocumentMock {
 
 const isNode = _ => typeof window === 'undefined'
 
-export { isNode, DocumentMock }
+export { isNode, DOMMock, DocumentMock, WindowMock }

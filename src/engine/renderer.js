@@ -1,5 +1,5 @@
-const drawPolygon = (c, poly) => {
-  c.fillStyle = '#f00'
+const drawPolygon = (c, poly, color = '#f00') => {
+  c.fillStyle = color
   c.strokeStyle = 'white'
 	c.beginPath();
   let str = ""

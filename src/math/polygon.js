@@ -1,8 +1,8 @@
-import { distance, ccw } from './point'
+import { distance, ccw, angle3, pt } from './point'
 
 class Polygon {
-	constructor(...pts) {
-  	this.verticies = [...pts]
+	constructor(...points) {
+  	this.verticies = [...points]
   	this.size = this.verticies.length
   	this.isConvex = this.convex()
   }
@@ -23,6 +23,14 @@ class Polygon {
       p += distance(p1, p2)
     }
     return p
+  }
+  
+  center() {
+    let center = pt(this.verticies[0].x, this.verticies[0].y)
+    for(let i = 1; i < this.verticies.length; i++) {
+      let p0 = this.verticies[i]
+      this.verticies[i]
+    }
   }
   
   area() {
@@ -52,6 +60,32 @@ class Polygon {
       }
     }
     return true
+  }
+  
+  intersectsPt(pt) {
+    let sum = 0
+    let c = false
+    for(var i = -1, l = this.verticies.length, j = l - 1; ++i < l; j = i) {
+      let p0 = this.verticies[i]
+      let p1 = this.verticies[j]
+      let int = (
+        (p0.y <= pt.y && pt.y < p1.y) ||
+        (p1.y <= pt.y && pt.y < p0.y)
+      ) && (
+        (pt.x < (p1.x - p0.x) * (pt.y - p0.y) /
+        (p1.y - p0.y) + p0.x)
+      ) && (c = !c)
+    }
+    return c
+  }
+  
+  // Fix later
+  intersectsPoly(poly){
+    for(let i = 0; i < this.size; i++) {
+      let p0 = this.verticies[i]
+      if(poly.intersectsPt(p0))
+        return true
+    }
   }
 }
 
