@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "",
+    "lint": "./node_modules/standard/bin/cmd.js  src/**/*.js",
     "start": "./node_modules/webpack/bin/webpack.js -w",
     "build": "./node_modules/webpack/bin/webpack.js",
     "test:isomorphic": "./node_modules/webpack/bin/webpack.js; node ./dist/out.js"
@@ -19,8 +19,12 @@
   "bugs": {
     "url": "https://github.com/danman113/vertexEngine/issues"
   },
+  "standard": {
+    "parser": "babel-eslint"
+  },
   "homepage": "https://github.com/danman113/vertexEngine#readme",
   "devDependencies": {
+    "babel-eslint": "^8.0.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "html-webpack-plugin": "^2.30.1",

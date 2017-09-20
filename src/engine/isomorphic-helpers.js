@@ -1,24 +1,24 @@
 class DOMMock {
-  addEventListener(){}
+  addEventListener () {}
 }
 
 class WindowMock extends DOMMock {
-  requestAnimationFrame(){}
+  requestAnimationFrame () {}
 }
 
 class ContextMock extends DOMMock {
-  lineTo(){}
-  closePath(){}
-  fill(){}
-  stroke(){}
-  fillRect(){}
-  beginPath(){}
-  moveTo(){}
-  clearRect(){}
+  lineTo () {}
+  closePath () {}
+  fill () {}
+  stroke () {}
+  fillRect () {}
+  beginPath () {}
+  moveTo () {}
+  clearRect () {}
 }
 
 class CanvasMock extends DOMMock {
-  getContext(type) {
+  getContext (type) {
     if (type === '2d') {
       return new ContextMock()
     }
@@ -26,7 +26,7 @@ class CanvasMock extends DOMMock {
 }
 
 class DocumentMock extends DOMMock {
-  getElementById(id) {
+  getElementById (id) {
     if (id === 'canvas') {
       return new CanvasMock()
     }
