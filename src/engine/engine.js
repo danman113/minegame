@@ -4,12 +4,12 @@ class Engine {
   mouse = pt(0, 0)
   keys = {}
   keyEvents = {}
+  draw (c) {}
+  update (delta) {}
   constructor (canvas) {
     this.canvas = canvas
     this.context = canvas.getContext('2d')
   }
-  draw (c) {}
-  update (delta) {}
   run (delta) {
     this.update(delta)
     this.draw(this.context)
@@ -17,8 +17,14 @@ class Engine {
   }
   start () {
     this.canvas.addEventListener('mousemove', e => {
-      this.mouse.x = e.pageX
-      this.mouse.y = e.pageY
+      if (e.offsetX) {
+        this.mouse.x = e.offsetX
+        this.mouse.y = e.offsetY
+      } else if (e.layerX) {
+        var box = this.canvas.getBoundingClientRect()
+        this.mouse.x = e.layerX - box.left
+        this.mouse.y = e.layerY - box.top
+      }
     })
     window.addEventListener('keydown', e => {
       this.keys[e.keyCode] = true

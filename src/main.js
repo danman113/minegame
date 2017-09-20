@@ -36,6 +36,8 @@ console.log(square.perimeter())
 
 console.log(square.area())
 
+console.log(square.center())
+
 square.translate(100, 100)
 
 drawPolygon(c, square)
@@ -44,14 +46,14 @@ console.log(Array(10).join('*') + 'ngon' + Array(10).join('*'))
 
 let ngon = new Polygon(pt(100, 120), pt(200, 60), pt(280, 200), pt(200, 260), pt(200, 180))
 
-console.log(ngon.perimeter(), ngon.area(), ngon.convex())
+console.log(ngon.perimeter(), ngon.area(), ngon.convex(), ngon.center())
 drawPolygon(c, ngon)
 
 console.log(Array(10).join('*') + 'rectangle' + Array(10).join('*'))
 
 let rectange = new Polygon(pt(120, 180), pt(260, 180), pt(260, 240), pt(120, 240))
 
-console.log(rectange.area())
+console.log(rectange.area(), rectange.center(), rectange.minPoints() ,rectange.verticies)
 
 console.log(angle3(pt(80, 40), pt(0, 0), pt(180, 60)))
 
@@ -72,6 +74,7 @@ console.log(
     intPoly.intersectsPt(pt(50, 50))
 )
 
+engine.keyEvents[84] = _ => rectange.moveToZero()
 const update = function (delta) {
   if (KEYS.KEY_UP in this.keys) {
     rectange.translate(0, -1)
@@ -85,13 +88,14 @@ const update = function (delta) {
   if (KEYS.KEY_RIGHT in this.keys) {
     rectange.translate(1, 0)
   }
+  console.log(this.keys)
 }
 
 const draw = function (c) {
   let mouse = pt(this.mouse.x, this.mouse.y)
   c.clearRect(0, 0, 500, 300)
   let rectColor = rectange.intersectsPt(mouse) ? 'blue' : 'green'
-  if (rectange.intersectsPoly(ngon)) { rectColor = 'red' }
+  // if (rectange.intersectsPoly(ngon)) { rectColor = 'red' }
   drawPolygon(c, rectange, rectColor)
   drawPolygon(c, ngon, ngon.intersectsPt(mouse) ? 'blue' : 'green')
   c.fillStyle = 'red'

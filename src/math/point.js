@@ -13,6 +13,10 @@ const ccw = (a, b, c) => (b.x - a.x) * (c.y - a.y) - (c.x - a.x) * (b.y - a.y)
 const angle2 = (a, b) => Math.atan2(b.y - a.y, b.x - a.x)
 
 // Angle between three points in radians
-var angle3 = (a, b, c) => Math.atan2(a.y - b.y, a.x - b.x) - Math.atan2(c.y - b.y, c.x - b.x)
+const angle3 = (a, b, c) => Math.atan2(a.y - b.y, a.x - b.x) - Math.atan2(c.y - b.y, c.x - b.x)
 
-export { distance, pt, ccw, angle2, angle3 }
+const sum = (a, b) => pt(a.x + b.x, a.y + b.y)
+
+const scalar = (a, c) => pt(a.x * c, a.y * c)
+
+export { distance, pt, ccw, angle2, angle3, sum, scalar }

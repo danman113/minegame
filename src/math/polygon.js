@@ -1,4 +1,5 @@
-import { distance, ccw, pt } from './point'
+import { distance, ccw, pt, sum, scalar } from './point'
+import { Rectangle } from './rectangle'
 
 class Polygon {
   constructor (...points) {
@@ -25,13 +26,53 @@ class Polygon {
     return p
   }
 
+  // Returns both the min x and y value of polygon
+  minPoints () {
+    let x = this.verticies.reduce((a, b) => pt(Math.min(a.x, b.x), 0), pt(Infinity, Infinity))
+    let y = this.verticies.reduce((a, b) => pt(0, Math.min(a.y, b.y)), pt(Infinity, Infinity))
+    return pt(x.x, y.y)
+  }
+
+  // Returns both the minimum and maximum elements of a polygon
+  maxPoints () {
+    let x = this.verticies.reduce((a, b) => pt(Math.max(a.x, b.x), 0), pt(-Infinity, -Infinity))
+    let y = this.verticies.reduce((a, b) => pt(0, Math.max(a.y, b.y)), pt(-Infinity, -Infinity))
+    return pt(x.x, y.y)
+  }
+
+  AABB () {
+    let min = this.minPoints()
+    let max = this.maxPoints()
+    return new Rectangle(min.x, min.y, max.x - min.x, max.y - min.y)
+  }
+
+  // Returns the verticies of polygon as if it were located at (0, 0)
+  fromZero () {
+    let min = (scalar(this.minPoints(), -1))
+    let verticies = []
+    this.verticies.forEach(v => {
+      verticies.push(sum(v, min))
+    })
+    return verticies
+  }
+
   center () {
-    let center = pt(this.verticies[0].x, this.verticies[0].y)
-    for (let i = 1; i < this.verticies.length; i++) {
-      let p0 = this.verticies[i]
-      center.x += p0.x
-      center.y += p0.y
+    // X = SUM[(Xi + Xi+1) * (Xi * Yi+1 - Xi+1 * Yi)] / 6 / A
+    // Y = SUM[(Yi + Yi+1) * (Xi * Yi+1 - Xi+1 * Yi)] / 6 / A
+    let center = pt(0, 0)
+    const area = Math.abs(this.area())
+    const min = this.minPoints()
+    // Need to normalize from 0
+    const zerod = this.fromZero()
+    for (let i = 0; i < zerod.length - 1; i++) {
+      let p0 = zerod[i]
+      let p1 = zerod[i + 1]
+      const normalizingConstant = (p0.x * p1.y - p1.x * p0.y)
+      center.x += (p0.x + p1.x) * normalizingConstant
+      center.y += (p0.y + p1.y) * normalizingConstant
     }
+    center.x = (center.x / (6 * area)) + min.x
+    center.y = (center.y / (6 * area)) + min.y
     return center
   }
 
@@ -70,6 +111,7 @@ class Polygon {
       let p0 = this.verticies[i]
       let p1 = this.verticies[j]
       /* eslint-disable no-unused-vars */
+      // Have to set this to a dummy variable due to bad babel translations/syntax?
       let int = (
         (p0.y <= pt.y && pt.y < p1.y) ||
         (p1.y <= pt.y && pt.y < p0.y)
