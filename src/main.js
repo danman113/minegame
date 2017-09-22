@@ -1,4 +1,4 @@
-import { pt, Polygon, distance, ccw, angle3 } from './math'
+import { pt, Polygon, ccw, angle3 } from './math'
 import { drawPolygon } from './engine/renderer'
 import * as KEYS from './engine/keys'
 import { isNode, DocumentMock, WindowMock } from './engine/isomorphic-helpers'
@@ -53,7 +53,7 @@ console.log(Array(10).join('*') + 'rectangle' + Array(10).join('*'))
 
 let rectange = new Polygon(pt(120, 180), pt(260, 180), pt(260, 240), pt(120, 240))
 
-console.log(rectange.area(), rectange.center(), rectange.minPoints() ,rectange.verticies)
+console.log(rectange.area(), rectange.center(), rectange.minPoints(), rectange.verticies)
 
 console.log(angle3(pt(80, 40), pt(0, 0), pt(180, 60)))
 
