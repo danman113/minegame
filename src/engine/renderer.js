@@ -21,4 +21,51 @@ const drawPolygon = (c, poly, color = '#f00', bg = '#00a') => {
   c.fillRect(center.x - 1, center.y - 1, 3, 3)
 }
 
-export { drawPolygon }
+const drawLine = (c, line, color = '#fff', bg = '#f00') => {
+  // Before
+  c.strokeStyle = bg
+  c.beginPath()
+  c.moveTo(line.p0.x, line.p0.y)
+  c.lineTo(line.p0.x - (line.p1.x - line.p0.x) * 0xffff, line.p0.y - (line.p1.y - line.p0.y) * 0xffff)
+  c.closePath()
+  c.stroke()
+  // Segment
+  c.strokeStyle = color
+  c.beginPath()
+  c.moveTo(line.p0.x, line.p0.y)
+  c.lineTo(line.p1.x, line.p1.y)
+  c.closePath()
+  c.stroke()
+  // After
+  c.strokeStyle = bg
+  c.beginPath()
+  c.moveTo(line.p1.x, line.p1.y)
+  c.lineTo(line.p1.x + (line.p1.x - line.p0.x) * 0xffff, line.p1.y + (line.p1.y - line.p0.y) * 0xffff)
+  c.closePath()
+  c.stroke()
+}
+
+const drawSegment = (c, seg, color = '#fff', fill = '#f00') => {
+  c.strokeStyle = color
+  c.beginPath()
+  c.moveTo(seg.p0.x, seg.p0.y)
+  c.lineTo(seg.p1.x, seg.p1.y)
+  c.closePath()
+  c.stroke()
+  c.fillStyle = fill
+  c.fillRect(seg.p0.x - 1, seg.p0.y - 1, 3, 3)
+  c.fillRect(seg.p1.x - 1, seg.p1.y - 1, 3, 3)
+}
+
+const drawRay = (c, seg, color = '#fff', fill = '#f00') => {
+  c.strokeStyle = color
+  c.beginPath()
+  c.moveTo(seg.p0.x, seg.p0.y)
+  c.lineTo(seg.p1.x, seg.p1.y)
+  c.closePath()
+  c.stroke()
+  c.fillStyle = fill
+  c.fillRect(seg.p0.x - 1, seg.p0.y - 1, 3, 3)
+}
+
+export { drawPolygon, drawLine, drawSegment, drawRay }

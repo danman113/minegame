@@ -1,5 +1,5 @@
-import { pt, Polygon, ccw, angle3 } from './math'
-import { drawPolygon } from './engine/renderer'
+import { pt, Polygon, ccw, angle3, Line, Segment, Ray } from './math'
+import { drawPolygon, drawLine, drawSegment, drawRay } from './engine/renderer'
 import * as KEYS from './engine/keys'
 import { isNode, DocumentMock, WindowMock } from './engine/isomorphic-helpers'
 import Engine from './engine'
@@ -63,6 +63,20 @@ drawPolygon(c, rectange)
 
 rectange.translate(200, 0)
 
+console.log(Array(10).join('*') + 'Lines' + Array(10).join('*'))
+
+let line = new Line(pt(20,20), pt(40,40))
+drawLine(c, line)
+let line2 = new Line(pt(400,20), pt(430,100))
+drawLine(c, line2)
+let seg = new Segment(pt(50,15), pt(70,20))
+drawSegment(c, seg)
+let ray = new Ray(pt(20,200), pt(50,250))
+drawRay(c, ray)
+
+console.log('Intersection: ', line.intersectsLine(line2))
+
+
 console.log(Array(10).join('*') + 'Intersections' + Array(10).join('*'))
 
 let intPoly = new Polygon(pt(0, 0), pt(40, 0), pt(40, 40), pt(0, 40))
@@ -75,6 +89,7 @@ console.log(
 )
 
 engine.keyEvents[84] = _ => rectange.moveToZero()
+engine.keyEvents[81] = _ => { line.p1.x = engine.mouse.x; line.p1.y = engine.mouse.y}
 const update = function (delta) {
   if (KEYS.KEY_UP in this.keys) {
     rectange.translate(0, -1)
@@ -98,6 +113,13 @@ const draw = function (c) {
   // if (rectange.intersectsPoly(ngon)) { rectColor = 'red' }
   drawPolygon(c, rectange, rectColor)
   drawPolygon(c, ngon, ngon.intersectsPt(mouse) ? 'blue' : 'green')
+  drawLine(c, line)
+  drawLine(c, line2)
+  let inter = line.intersectsLine(line2)
+  c.fillStyle = 'white'
+  c.fillRect(inter.x, inter.y, 3, 3)
+  drawSegment(c, seg)
+  drawRay(c, ray)
   c.fillStyle = 'red'
   c.fillRect(this.mouse.x - 1, this.mouse.y - 1, 3, 3)
 }
