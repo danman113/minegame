@@ -66,6 +66,13 @@ const drawRay = (c, seg, color = '#fff', fill = '#f00') => {
   c.stroke()
   c.fillStyle = fill
   c.fillRect(seg.p0.x - 1, seg.p0.y - 1, 3, 3)
+  
+  c.strokeStyle = fill
+  c.beginPath()
+  c.moveTo(seg.p1.x, seg.p1.y)
+  c.lineTo(seg.p1.x + (seg.p1.x - seg.p0.x) * 0xffff, seg.p1.y + (seg.p1.y - seg.p0.y) * 0xffff)
+  c.closePath()
+  c.stroke()
 }
 
 export { drawPolygon, drawLine, drawSegment, drawRay }

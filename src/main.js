@@ -65,7 +65,7 @@ rectange.translate(200, 0)
 
 console.log(Array(10).join('*') + 'Lines' + Array(10).join('*'))
 
-let line = new Line(pt(20,20), pt(40,40))
+let line = new Ray(pt(30,30), pt(40,40))
 drawLine(c, line)
 let line2 = new Line(pt(400,20), pt(430,100))
 drawLine(c, line2)
@@ -88,8 +88,9 @@ console.log(
     intPoly.intersectsPt(pt(50, 50))
 )
 
-engine.keyEvents[84] = _ => rectange.moveToZero()
-engine.keyEvents[81] = _ => { line.p1.x = engine.mouse.x; line.p1.y = engine.mouse.y}
+// engine.keyEvents[84] = _ => rectange.moveToZero()
+// engine.keyEvents[81] = _ => { line.p1.x = engine.mouse.x; line.p1.y = engine.mouse.y}
+// engine.keyEvents[82] = _ => { line.p0.x = engine.mouse.x; line.p0.y = engine.mouse.y}
 const update = function (delta) {
   if (KEYS.KEY_UP in this.keys) {
     rectange.translate(0, -1)
@@ -103,6 +104,12 @@ const update = function (delta) {
   if (KEYS.KEY_RIGHT in this.keys) {
     rectange.translate(1, 0)
   }
+  if (KEYS.Q in this.keys){
+    line.p1.x = engine.mouse.x; line.p1.y = engine.mouse.y
+  }
+  if (KEYS.W in this.keys){
+    line.p0.x = engine.mouse.x; line.p0.y = engine.mouse.y
+  }
   console.log(this.keys)
 }
 
@@ -113,11 +120,14 @@ const draw = function (c) {
   // if (rectange.intersectsPoly(ngon)) { rectColor = 'red' }
   drawPolygon(c, rectange, rectColor)
   drawPolygon(c, ngon, ngon.intersectsPt(mouse) ? 'blue' : 'green')
-  drawLine(c, line)
+  drawRay(c, line)
   drawLine(c, line2)
-  let inter = line.intersectsLine(line2)
-  c.fillStyle = 'white'
-  c.fillRect(inter.x, inter.y, 3, 3)
+  let inter = line.intersectsSegment(line2)
+  // console.log(inter)
+  if (inter != null) {
+    c.fillStyle = 'white'
+    c.fillRect(inter.x - 1, inter.y - 1, 3, 3)
+  }
   drawSegment(c, seg)
   drawRay(c, ray)
   c.fillStyle = 'red'
