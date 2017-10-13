@@ -66,7 +66,7 @@ const drawRay = (c, seg, color = '#fff', fill = '#f00') => {
   c.stroke()
   c.fillStyle = fill
   c.fillRect(seg.p0.x - 1, seg.p0.y - 1, 3, 3)
-  
+
   c.strokeStyle = fill
   c.beginPath()
   c.moveTo(seg.p1.x, seg.p1.y)
