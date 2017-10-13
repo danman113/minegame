@@ -15,8 +15,13 @@ const angle2 = (a, b) => Math.atan2(b.y - a.y, b.x - a.x)
 // Angle between three points in radians
 const angle3 = (a, b, c) => Math.atan2(a.y - b.y, a.x - b.x) - Math.atan2(c.y - b.y, c.x - b.x)
 
+const piNum = Math.PI / 180
+const numPi = 180 / Math.PI
+const degToRad = deg => deg * piNum
+const radToDeg = rad => rad * numPi
+
 const sum = (a, b) => pt(a.x + b.x, a.y + b.y)
 
 const scalar = (a, c) => pt(a.x * c, a.y * c)
 
-export { distance, pt, ccw, angle2, angle3, sum, scalar }
+export { distance, pt, ccw, angle2, angle3, degToRad, radToDeg, sum, scalar }

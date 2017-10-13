@@ -67,15 +67,14 @@ console.log(Array(10).join('*') + 'Lines' + Array(10).join('*'))
 
 let line = new Ray(pt(30,30), pt(40,40))
 drawLine(c, line)
-let line2 = new Line(pt(400,20), pt(430,100))
+let line2 = new Line(pt(400, 20), pt(430, 100))
 drawLine(c, line2)
-let seg = new Segment(pt(50,15), pt(70,20))
+let seg = new Segment(pt(50, 15), pt(70, 20))
 drawSegment(c, seg)
-let ray = new Ray(pt(20,200), pt(50,250))
+let ray = new Ray(pt(20, 200), pt(50, 250))
 drawRay(c, ray)
 
 console.log('Intersection: ', line.intersectsLine(line2))
-
 
 console.log(Array(10).join('*') + 'Intersections' + Array(10).join('*'))
 
