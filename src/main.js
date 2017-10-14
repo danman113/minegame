@@ -65,7 +65,7 @@ rectange.translate(200, 0)
 
 console.log(Array(10).join('*') + 'Lines' + Array(10).join('*'))
 
-let line = new Ray(pt(30,30), pt(40,40))
+let line = new Ray(pt(30, 30), pt(40, 40))
 drawLine(c, line)
 let line2 = new Line(pt(400, 20), pt(430, 100))
 drawLine(c, line2)
@@ -103,10 +103,10 @@ const update = function (delta) {
   if (KEYS.KEY_RIGHT in this.keys) {
     rectange.translate(1, 0)
   }
-  if (KEYS.Q in this.keys){
+  if (KEYS.Q in this.keys) {
     line.p1.x = engine.mouse.x; line.p1.y = engine.mouse.y
   }
-  if (KEYS.W in this.keys){
+  if (KEYS.W in this.keys) {
     line.p0.x = engine.mouse.x; line.p0.y = engine.mouse.y
   }
   console.log(this.keys)

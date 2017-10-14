@@ -1,4 +1,4 @@
-import { pt, distance, angle3, degToRad, radToDeg } from '../../src/math'
+import { pt, distance, angle3, degToRad } from '../../src/math'
 import {expect} from 'chai'
 
 describe('Point', function () {

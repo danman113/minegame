@@ -1,5 +1,5 @@
 import { Polygon, pt } from '../../src/math'
-import {expect} from 'chai'
+import { expect } from 'chai'
 
 describe('polygon', function () {
   it('Polygon works with 3 verticies', function () {
