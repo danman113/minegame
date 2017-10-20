@@ -1,4 +1,4 @@
-import { pt } from './point'
+import { pt, degToRad } from './point'
 
 const slope = (p0, p1) => (p0.y - p1.y) / (p0.x - p1.x)
 
@@ -45,15 +45,19 @@ class Line {
   }
 
   //
-  rotate (deg) {
+  rotate (rad) {
     const x = this.p1.x - this.p0.x
     const y = this.p1.y - this.p0.y
-    const rotx = Math.cos(deg)
-    const roty = Math.sin(deg)
+    const rotx = Math.cos(rad)
+    const roty = Math.sin(rad)
     const dx = x * rotx - y * roty
     const dy = x * roty + y * rotx
     this.p1.x = this.p0.x + dx
     this.p1.y = this.p0.y + dy
+  }
+
+  rotateDeg (deg) {
+    this.rotate(degToRad(deg))
   }
 }
 
@@ -75,6 +79,30 @@ class Segment extends Line {
     // let r1x = (intersectX - ln.p0.x) / (ln.p1.x - ln.p0.x)
     // let r1y = (intersectY - ln.p0.y) / (ln.p1.y - ln.p0.y)
     if ((r0x >= 0 && r0x <= 1) || (r0y >= 0 && r0y <= 1)) { return pt(intersectX, intersectY) }
+    return null
+  }
+
+  intersectsSegment (seg) {
+    let A0 = this.p1.y - this.p0.y
+    let B0 = this.p0.x - this.p1.x
+    let C0 = A0 * this.p0.x + B0 * this.p0.y
+
+    let A1 = seg.p1.y - seg.p0.y
+    let B1 = seg.p0.x - seg.p1.x
+    let C1 = A1 * seg.p0.x + B1 * seg.p0.y
+    let denom = A0 * B1 - A1 * B0
+    if (denom === 0) { return null }
+    let intersectX = (B1 * C0 - B0 * C1) / denom
+    let intersectY = (A0 * C1 - A1 * C0) / denom
+
+    let r0x = (intersectX - this.p0.x) / (this.p1.x - this.p0.x)
+    let r0y = (intersectY - this.p0.y) / (this.p1.y - this.p0.y)
+    let r1x = (intersectX - seg.p0.x) / (seg.p1.x - seg.p0.x)
+    let r1y = (intersectY - seg.p0.y) / (seg.p1.y - seg.p0.y)
+    if (
+        ((r1x >= 0 && r1x <= 1) || (r1y >= 0 && r1y <= 1)) &&
+        ((r0x >= 0 && r0x <= 1) || (r0y >= 0 && r0y <= 1))
+    ) { return pt(intersectX, intersectY) }
     return null
   }
 }
@@ -108,4 +136,28 @@ class Ray extends Line {
   }
 }
 
-export { Line, Segment, Ray, slope }
+const segmentIntersectsSegment = (p0, p1, p2, p3) => {
+  let A0 = p1.y - p0.y
+  let B0 = p0.x - p1.x
+  let C0 = A0 * p0.x + B0 * p0.y
+
+  let A1 = p3.y - p3.y
+  let B1 = p3.x - p3.x
+  let C1 = A1 * p3.x + B1 * p3.y
+  let denom = A0 * B1 - A1 * B0
+  if (denom === 0) { return null }
+  let intersectX = (B1 * C0 - B0 * C1) / denom
+  let intersectY = (A0 * C1 - A1 * C0) / denom
+
+  let r0x = (intersectX - p0.x) / (p1.x - p0.x)
+  let r0y = (intersectY - p0.y) / (p1.y - p0.y)
+  let r1x = (intersectX - p3.x) / (p3.x - p3.x)
+  let r1y = (intersectY - p3.y) / (p3.y - p3.y)
+  if (
+      ((r1x >= 0 && r1x <= 1) || (r1y >= 0 && r1y <= 1)) &&
+      ((r0x >= 0 && r0x <= 1) || (r0y >= 0 && r0y <= 1))
+  ) { return pt(intersectX, intersectY) }
+  return null
+}
+
+export { Line, Segment, Ray, slope, segmentIntersectsSegment }

@@ -104,10 +104,10 @@ const update = function (delta) {
     rectange.translate(1, 0)
   }
   if (KEYS.Q in this.keys) {
-    line.rotate(.1)
+    line.rotateDeg(1)
   }
   if (KEYS.E in this.keys) {
-    line.rotate(-.1)
+    line.rotateDeg(-1)
   }
   if (this.mouse.left) {
     line.p1.x = engine.mouse.x; line.p1.y = engine.mouse.y

@@ -1,11 +1,19 @@
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
+const fs = require('fs')
+
+const demos = fs.readdirSync(path.resolve(__dirname, 'demos'))
+const entries = {}
+demos.map(key => entries[key] = './demos/' + key + '/index.js')
+entries.out = './src/main.js'
+
+
 
 module.exports = {
-   entry: './src/main.js',
+   entry: entries,
    output: {
      path: path.resolve(__dirname, 'dist'),
-     filename: 'out.js'
+     filename: '[name].js'
    },
    
    module: {
