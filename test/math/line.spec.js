@@ -1,6 +1,10 @@
 import { Line, pt, slope } from '../../src/math'
 import { expect } from 'chai'
 
+const roundPoint = ({x, y}) => {
+  return pt(Math.round(x), Math.round(y))
+}
+
 describe('Line', function () {
   it('line works as expected', function () {
     const ln = new Line(pt(0,1), pt(2,3))
@@ -72,5 +76,21 @@ describe('Line', function () {
     expect(ln3.intersectsSegment(seg)).to.be.equal(null)
     // Top from bottom
     expect(ln4.intersectsSegment(seg)).to.be.equal(null)
+  })
+
+  it('line rotation works correctly', function () {
+    const ln = new Line(pt(0, 0), pt(1, 0))
+    ln.rotate(Math.PI/2)
+    expect(roundPoint(ln.p1)).deep.equal(pt(0, 1))
+    
+    ln.rotate(Math.PI/2)
+    expect(roundPoint(ln.p1)).deep.equal(pt(-1, 0))
+    
+    ln.rotate(Math.PI/2)
+    expect(roundPoint(ln.p1)).deep.equal(pt(-0, -1))
+    
+    ln.rotate(Math.PI/2)
+    expect(roundPoint(ln.p1)).deep.equal(pt(1, -0))
+    
   })
 })

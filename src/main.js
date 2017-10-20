@@ -104,12 +104,18 @@ const update = function (delta) {
     rectange.translate(1, 0)
   }
   if (KEYS.Q in this.keys) {
+    line.rotate(.1)
+  }
+  if (KEYS.E in this.keys) {
+    line.rotate(-.1)
+  }
+  if (this.mouse.left) {
     line.p1.x = engine.mouse.x; line.p1.y = engine.mouse.y
   }
-  if (KEYS.W in this.keys) {
+  if (this.mouse.right) {
     line.p0.x = engine.mouse.x; line.p0.y = engine.mouse.y
   }
-  console.log(this.keys)
+  // console.log(this.keys)
 }
 
 const draw = function (c) {

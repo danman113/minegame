@@ -43,6 +43,18 @@ class Line {
     if ((r1x >= 0 && r1x <= 1) || (r1y >= 0 && r1y <= 1)) { return pt(intersectX, intersectY) }
     return null
   }
+
+  //
+  rotate (deg) {
+    const x = this.p1.x - this.p0.x
+    const y = this.p1.y - this.p0.y
+    const rotx = Math.cos(deg)
+    const roty = Math.sin(deg)
+    const dx = x * rotx - y * roty
+    const dy = x * roty + y * rotx
+    this.p1.x = this.p0.x + dx
+    this.p1.y = this.p0.y + dy
+  }
 }
 
 class Segment extends Line {
