@@ -141,9 +141,9 @@ const segmentIntersectsSegment = (p0, p1, p2, p3) => {
   let B0 = p0.x - p1.x
   let C0 = A0 * p0.x + B0 * p0.y
 
-  let A1 = p3.y - p3.y
-  let B1 = p3.x - p3.x
-  let C1 = A1 * p3.x + B1 * p3.y
+  let A1 = p3.y - p2.y
+  let B1 = p2.x - p3.x
+  let C1 = A1 * p2.x + B1 * p2.y
   let denom = A0 * B1 - A1 * B0
   if (denom === 0) { return null }
   let intersectX = (B1 * C0 - B0 * C1) / denom
@@ -151,8 +151,8 @@ const segmentIntersectsSegment = (p0, p1, p2, p3) => {
 
   let r0x = (intersectX - p0.x) / (p1.x - p0.x)
   let r0y = (intersectY - p0.y) / (p1.y - p0.y)
-  let r1x = (intersectX - p3.x) / (p3.x - p3.x)
-  let r1y = (intersectY - p3.y) / (p3.y - p3.y)
+  let r1x = (intersectX - p2.x) / (p3.x - p2.x)
+  let r1y = (intersectY - p2.y) / (p3.y - p2.y)
   if (
       ((r1x >= 0 && r1x <= 1) || (r1y >= 0 && r1y <= 1)) &&
       ((r0x >= 0 && r0x <= 1) || (r0y >= 0 && r0y <= 1))

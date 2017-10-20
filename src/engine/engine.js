@@ -9,6 +9,7 @@ class Engine {
   }
   keys = {}
   keyEvents = {}
+  onClick () {}
   draw (c) {}
   update (delta) {}
   constructor (canvas) {
@@ -52,6 +53,7 @@ class Engine {
       if (!this.mouse.left && !this.mouse.right && !this.mouse.middle) {
         this.mouse.down = false
       }
+      this.onClick(this)
     })
 
     window.addEventListener('keydown', e => {

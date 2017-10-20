@@ -1,7 +1,9 @@
-const drawPolygon = (c, poly, color = '#f00', bg = '#00a') => {
-  c.fillStyle = bg
-  const box = poly.AABB()
-  c.fillRect(box.x, box.y, box.width, box.height)
+const drawPolygon = (c, poly, color = '#f00', bg = '#00a', showBox = false) => {
+  if (showBox) {
+    c.fillStyle = bg
+    const box = poly.AABB()
+    c.fillRect(box.x, box.y, box.width, box.height)
+  }
   c.fillStyle = color
   c.strokeStyle = 'white'
   c.beginPath()

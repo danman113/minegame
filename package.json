@@ -6,6 +6,7 @@
   "scripts": {
     "test": "npm run lint && mocha --compilers js:babel-core/register ./test/**/*.spec.js",
     "lint": "$(npm bin)/standard src/**/*.js --fix",
+    "lint:demos": "$(npm bin)/standard demos/**/*.js --fix",
     "start": "$(npm bin)/webpack -w",
     "build": "$(npm bin)/webpack",
     "test:isomorphic": "$(npm bin)/webpack; node ./dist/out.js"

@@ -1,4 +1,5 @@
 import { distance, ccw, pt, sum, scalar } from './point'
+import { segmentIntersectsSegment } from './line'
 import { Rectangle } from './rectangle'
 
 class Polygon {
@@ -125,11 +126,26 @@ class Polygon {
   }
 
   // Fix later
-  intersectsPoly (poly) {
+  intersectsConvexPoly (poly) {
     for (let i = 0; i < this.size; i++) {
       let p0 = this.verticies[i]
       if (poly.intersectsPt(p0)) { return true }
     }
+  }
+
+  intersectsConcavePoly (poly) {
+    for (let i = 0, j = 1, size = this.size; i < size; i++, j = (i + 1) % size) {
+      let p0 = this.verticies[i]
+      let p1 = this.verticies[j]
+      for (let x = 0, y = 1, psize = poly.size; x < psize; x++, y = (x + 1) % psize) {
+        let p2 = poly.verticies[x]
+        let p3 = poly.verticies[y]
+        if (segmentIntersectsSegment(p0, p1, p2, p3)) {
+          return true
+        }
+      }
+    }
+    return false
   }
 }
 
