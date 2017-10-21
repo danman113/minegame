@@ -35,9 +35,16 @@ class Engine {
 
     this.canvas.addEventListener('mousedown', e => {
       this.mouse.down = true
-      this.mouse.left = e.which === 1
-      this.mouse.middle = e.which === 2
-      this.mouse.right = e.which === 3
+
+      if (e.which === 1) {
+        this.mouse.left = true
+      }
+      if (e.which === 2) {
+        this.mouse.middle = true
+      }
+      if (e.which === 3) {
+        this.mouse.right = true
+      }
     })
 
     this.canvas.addEventListener('contextmenu', e => e.preventDefault())
@@ -47,7 +54,7 @@ class Engine {
         this.mouse.left = false
       } else if (e.which === 3) {
         this.mouse.right = false
-      } else {
+      } else if (e.which === 2) {
         this.mouse.middle = false
       }
       if (!this.mouse.left && !this.mouse.right && !this.mouse.middle) {

@@ -1,3 +1,5 @@
+import { pt } from './point'
+
 class Rectangle {
   constructor (x, y, width, height) {
     this.x = x
@@ -25,6 +27,10 @@ class Rectangle {
 
   intersectsPt (pt) {
     return this.intersectsRect(pt.x, pt.y, 1, 1)
+  }
+
+  center () {
+    return pt(this.x + this.width / 2, this.y + this.height / 2)
   }
 }
 

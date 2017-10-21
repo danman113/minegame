@@ -62,7 +62,6 @@ const draw = function (c) {
     const p = polyQueue[i]
     drawPolygon(c, p, 'green')
   }
-  
 }
 
 engine.draw = draw

@@ -1,4 +1,4 @@
-import { distance, ccw, pt, sum, scalar } from './point'
+import { distance, ccw, pt, sum, scalar, degToRad } from './point'
 import { segmentIntersectsSegment } from './line'
 import { Rectangle } from './rectangle'
 
@@ -14,6 +14,23 @@ class Polygon {
       vertex.x += x
       vertex.y += y
     }
+  }
+
+  rotate (pt, rad) {
+    for (let vertex of this.verticies) {
+      const x = vertex.x - pt.x
+      const y = vertex.y - pt.y
+      const rotx = Math.cos(rad)
+      const roty = Math.sin(rad)
+      const dx = x * rotx - y * roty
+      const dy = x * roty + y * rotx
+      vertex.x = pt.x + dx
+      vertex.y = pt.y + dy
+    }
+  }
+
+  rotateDeg (pt, deg) {
+    this.rotate(pt, degToRad(deg))
   }
 
   perimeter () {
@@ -225,12 +242,6 @@ class Polygon {
     const c = this.verticies[largestIndex]
     this._findHull(hull, c, xmin, -this._findSide(c, xmin, xmax))
     this._findHull(hull, c, xmax, -this._findSide(c, xmax, xmin))
-
-    // Find firthest point away from xmin, xmax = c
-    // Add c to the complex hull
-    // Make a triangle from c, xmin, xmax, discard any points in the center
-    // s1 = points to left of xmin -> c
-    // s2 = points to the right of c -> xmax
   }
 }
 

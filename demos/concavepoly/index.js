@@ -44,6 +44,12 @@ const update = function (delta) {
   if (KEYS.KEY_DOWN in this.keys) {
     poly.translate(0, 1)
   }
+  if (KEYS.Q in this.keys) {
+    poly.rotateDeg(poly.AABB().center(), 1)
+  }
+  if (KEYS.E in this.keys) {
+    poly.rotateDeg(poly.AABB().center(), -1)
+  }
   // console.log(this.keys)
 }
 
@@ -51,9 +57,8 @@ const draw = function (c) {
   let mouse = pt(this.mouse.x, this.mouse.y)
   c.clearRect(0, 0, 500, 300)
   let collide = false
-  for (var i = 0; i < polyQueue.length; i++) {
+  for (let i = 0; i < polyQueue.length; i++) {
     const p = polyQueue[i]
-    // console.log(poly.intersectsConcavePoly(p))
     if (poly.intersectsConcavePoly(p)) {
       collide = true
       break
@@ -62,12 +67,12 @@ const draw = function (c) {
   drawPolygon(c, poly, !collide ? 'blue' : 'red')
   c.fillStyle = 'red'
   c.fillRect(this.mouse.x - 1, this.mouse.y - 1, 3, 3)
-  for (var i = 0; i < pointQueue.length; i++) {
+  for (let i = 0; i < pointQueue.length; i++) {
     const x = pointQueue[i].x
     const y = pointQueue[i].y
     c.fillRect(x - 1, y - 1, 3, 3)
   }
-  for (var i = 0; i < polyQueue.length; i++) {
+  for (let i = 0; i < polyQueue.length; i++) {
     const p = polyQueue[i]
     drawPolygon(c, p, 'green')
   }
