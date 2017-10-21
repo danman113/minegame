@@ -125,7 +125,7 @@ class Polygon {
     return c
   }
 
-  // Fix later
+  // Fix later using SAT
   intersectsConvexPoly (poly) {
     for (let i = 0; i < this.size; i++) {
       let p0 = this.verticies[i]
@@ -146,6 +146,91 @@ class Polygon {
       }
     }
     return false
+  }
+
+  // Generates a convex hull of the polygon. Not optimized for speed
+  generateConvexHull () {
+    let hull = []
+    // Find min x value in poly
+    let xmin = this.verticies.reduce(
+      (a, b, i) => {
+        if (Math.min(a.x, b.x) === a.x) {
+          return a
+        } else {
+          return b
+        }
+      }, pt(Infinity, Infinity)
+    )
+    // let y = this.verticies.reduce((a, b) => pt(0, Math.min(a.y, b.y)), pt(Infinity, Infinity))
+
+    // find max x value in poly
+    let xmax = this.verticies.reduce(
+      (a, b, i) => {
+        if (Math.max(a.x, b.x) === a.x) {
+          return a
+        } else {
+          return b
+        }
+      }, pt(-Infinity, -Infinity)
+    )
+
+    this._findHull(hull, xmin, xmax, 1)
+    this._findHull(hull, xmin, xmax, -1)
+
+    // Need to sort points w/ respect to original poly
+    let sortedHull = []
+    for (let i = 0; i < this.verticies.length; i++) {
+      const v = this.verticies[i]
+      for (let j = 0; j < hull.length; j++) {
+        const h = hull[j]
+        if (h.x === v.x && h.y === v.y) {
+          sortedHull.push(h)
+          break
+        }
+      }
+    }
+    return new Polygon(...sortedHull)
+  }
+
+  _findSide (p1, p2, p) {
+    const dist = (p.y - p1.y) * (p2.x - p1.x) -
+      (p2.y - p1.y) * (p.x - p1.x)
+
+    if (dist > 0) { return 1 }
+    if (dist < 0) { return -1 }
+    return 0
+  }
+
+  _lineDist (p1, p2, p) {
+    return Math.abs((p.y - p1.y) * (p2.x - p1.x) - (p2.y - p1.y) * (p.x - p1.x))
+  }
+  _findHull (hull, xmin, xmax, side) {
+    // Find the furthest point from the line from xmin -> xmax
+    let largestDist = 0
+    let largestIndex = -1
+    for (let i = 0; i < this.verticies.length; i++) {
+      const v = this.verticies[i]
+      const dist = this._lineDist(xmin, xmax, v)
+      if (dist > largestDist && this._findSide(xmin, xmax, v) === side) {
+        largestDist = dist
+        largestIndex = i
+      }
+    }
+
+    if (largestIndex === -1) {
+      hull.push(xmin, xmax)
+      return
+    }
+
+    const c = this.verticies[largestIndex]
+    this._findHull(hull, c, xmin, -this._findSide(c, xmin, xmax))
+    this._findHull(hull, c, xmax, -this._findSide(c, xmax, xmin))
+
+    // Find firthest point away from xmin, xmax = c
+    // Add c to the complex hull
+    // Make a triangle from c, xmin, xmax, discard any points in the center
+    // s1 = points to left of xmin -> c
+    // s2 = points to the right of c -> xmax
   }
 }
 
