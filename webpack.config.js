@@ -7,8 +7,6 @@ const entries = {}
 demos.map(key => entries[key] = './demos/' + key + '/index.js')
 entries.out = './src/main.js'
 
-
-
 module.exports = {
    entry: entries,
    output: {
