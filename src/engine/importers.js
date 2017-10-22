@@ -19,7 +19,11 @@ const importTiledMap = json => {
             let newpt = pt(xOffset + point.x, yOffset + point.y)
             poly.push(newpt)
           }
-          currentLayer.push(new Polygon(...poly))
+          let newpoly = new Polygon(...poly)
+          if (obj.rotation) {
+            newpoly.rotateDeg(newpoly.verticies[0], obj.rotation)
+          }
+          currentLayer.push(newpoly)
         } else {
           currentLayer.push(new Rectangle(obj.x, obj.y, obj.width, obj.height))
         }
@@ -30,11 +34,12 @@ const importTiledMap = json => {
 }
 
 const readJson = (fileEvent, callback) => {
-  var files = fileEvent.target.files
+  let files = fileEvent.target.files
   for (let file of files) {
-    if (file.type.match('.json')) {
+    const fileSet = file.name.split('.')
+    if (fileSet[fileSet.length - 1] === 'json') {
       /* global FileReader */
-      var reader = new FileReader()
+      let reader = new FileReader()
 
       reader.onload = function (e) {
         try {
@@ -52,6 +57,25 @@ const readJson = (fileEvent, callback) => {
   }
 }
 
+const readPlaintext = (fileEvent, callback) => {
+  let files = fileEvent.target.files
+  for (let file of files) {
+      /* global FileReader */
+    let reader = new FileReader()
+
+    reader.onload = function (e) {
+      try {
+        const text = reader.result
+        callback(null, text)
+      } catch (e) {
+        callback(e)
+      }
+    }
+
+    reader.readAsText(file)
+  }
+}
+
 const makeFileImporter = (parentElement, callback) => {
   let elem = document.createElement('input')
   elem.type = 'file'
@@ -65,4 +89,4 @@ const makeFileImporter = (parentElement, callback) => {
   parentElement.appendChild(elem)
 }
 
-export { importTiledMap, makeFileImporter }
+export { importTiledMap, makeFileImporter, readPlaintext, readJson }
