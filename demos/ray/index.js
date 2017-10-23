@@ -25,6 +25,10 @@ drawSegment(c, seg)
 let ray = new Ray(pt(20, 200), pt(50, 250))
 drawRay(c, ray)
 
+let poly = new Polygon(pt(100, 120), pt(200, 60), pt(280, 200), pt(200, 260), pt(200, 180))
+poly.translate(140, 100)
+poly.rotateDeg(poly.AABB().center(), 40)
+
 const update = function (delta) {
   if (KEYS.Q in this.keys) {
     line.rotateDeg(1)
@@ -54,6 +58,12 @@ const draw = function (c) {
   }
   drawSegment(c, seg)
   drawRay(c, ray)
+  drawPolygon(c, poly, 'green')
+  inter = line.intersectsPoly(poly)
+  if (inter != null) {
+    c.fillStyle = 'white'
+    c.fillRect(inter.x - 1, inter.y - 1, 3, 3)
+  }
   c.fillStyle = 'red'
   c.fillRect(this.mouse.x - 1, this.mouse.y - 1, 3, 3)
 }

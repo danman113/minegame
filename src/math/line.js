@@ -1,4 +1,4 @@
-import { pt, degToRad } from './point'
+import { pt, degToRad, distance } from './point'
 
 const slope = (p0, p1) => (p0.y - p1.y) / (p0.x - p1.x)
 
@@ -133,6 +133,52 @@ class Ray extends Line {
     let r1y = (intersectY - seg.p0.y) / (seg.p1.y - seg.p0.y)
     if ((r1x >= 0 && r1x <= 1) || (r1y >= 0 && r1y <= 1)) { return pt(intersectX, intersectY) }
     return null
+  }
+
+  // Decomposes intersectsSeg, used in poly to save allocs
+  intersectsLine (p0, p1) {
+    let A0 = this.p1.y - this.p0.y
+    let B0 = this.p0.x - this.p1.x
+    let C0 = A0 * this.p0.x + B0 * this.p0.y
+
+    let A1 = p1.y - p0.y
+    let B1 = p0.x - p1.x
+    let C1 = A1 * p0.x + B1 * p0.y
+    let denom = A0 * B1 - A1 * B0
+    if (denom === 0) { return null }
+    let intersectX = (B1 * C0 - B0 * C1) / denom
+    let intersectY = (A0 * C1 - A1 * C0) / denom
+    let dist1X = Math.abs(intersectX - this.p1.x)
+    let dist1Y = Math.abs(intersectY - this.p1.y)
+    let dist0X = Math.abs(intersectX - this.p0.x)
+    let dist0Y = Math.abs(intersectY - this.p0.y)
+    if (dist1X > dist0X || dist1Y > dist0Y) { return null }
+    // let r0x = (intersectX - this.p0.x) / (this.p1.x - this.p0.x)
+    // let r0y = (intersectY - this.p0.y) / (this.p1.y - this.p0.y)
+    let r1x = (intersectX - p0.x) / (p1.x - p0.x)
+    let r1y = (intersectY - p0.y) / (p1.y - p0.y)
+    if ((r1x >= 0 && r1x <= 1) || (r1y >= 0 && r1y <= 1)) { return pt(intersectX, intersectY) }
+    return null
+  }
+
+  intersectsPoly (poly) {
+    let intersect = null
+    let maxDistance = Infinity
+    for (let i = 0, j = 1; i < poly.size; i++, j = (i + 1) % poly.size) {
+      const p0 = poly.verticies[i]
+      const p1 = poly.verticies[j]
+      const collision = this.intersectsLine(p0, p1)
+      if (!collision) continue
+      const dist = distance(this.p0, collision)
+      if (intersect === null) {
+        intersect = collision
+        maxDistance = dist
+      } else if (dist < maxDistance) {
+        maxDistance = dist
+        intersect = collision
+      }
+    }
+    return intersect
   }
 }
 
