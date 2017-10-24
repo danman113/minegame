@@ -18,9 +18,11 @@ const drawPolygon = (c, poly, color = '#f00', bg = '#00a', showBox = false) => {
   c.closePath()
   c.fill()
   c.stroke()
-  const center = poly.center()
-  c.fillStyle = 'black'
-  c.fillRect(center.x - 1, center.y - 1, 3, 3)
+  if (showBox) {
+    const center = poly.center()
+    c.fillStyle = 'black'
+    c.fillRect(center.x - 1, center.y - 1, 3, 3)
+  }
 }
 
 const drawLine = (c, line, color = '#fff', bg = '#f00') => {

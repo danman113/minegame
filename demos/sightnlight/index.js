@@ -1,4 +1,4 @@
-import { pt, Polygon, angle3, Line, Segment, Ray, distance } from '../../src/math'
+import { pt, Polygon, angle3, Line, Segment, Ray, distance, angle2 } from '../../src/math'
 import { drawPolygon, drawLine, drawSegment, drawRay } from '../../src/engine/renderer'
 import { importTiledMap } from '../../src/engine/importers'
 import * as KEYS from '../../src/engine/keys'
@@ -24,6 +24,9 @@ let pointQueue = []
 let rayQueue = []
 let collisionQueue = []
 
+let showRays = false
+let showPolygon = true
+
 for (let layerNames in tileMap) {
   let layer = tileMap[layerNames]
   polyQueue.push(...layer)
@@ -40,15 +43,10 @@ engine.keyEvents[KEYS.ENTER] = _ => {
   pointQueue = []
 }
 
+engine.keyEvents[KEYS.V] = _ => showPolygon = !showPolygon
+engine.keyEvents[KEYS.R] = _ => showRays = !showRays
+
 const update = function (delta) {
-  // if (KEYS.Q in this.keys) {
-  //   poly.rotateDeg(poly.AABB().center(), 1)
-  // }
-  // if (KEYS.E in this.keys) {
-  //   poly.rotateDeg(poly.AABB().center(), -1)
-  // }
-  // console.log(this.keys)
-  // 
   collisionQueue = []
   rayQueue = []
   const offset = 0.01
@@ -65,6 +63,10 @@ const update = function (delta) {
       rayQueue.push(r0, r1, r2)
     }
   }
+  
+  rayQueue.sort((a, b) => {
+    return angle2(a.p0, a.p1) - angle2(b.p0, b.p1)
+  })
 
   for (let ray of rayQueue) {
     let minDist = -1
@@ -88,28 +90,29 @@ const update = function (delta) {
 
 const draw = function (c) {
   c.clearRect(0, 0, 500, 500)
+
+  if(showRays) {
+    for (let ray of rayQueue) {
+      drawRay(c, ray)
+    }
+  }
+
+  if (collisionQueue.length && showPolygon) {
+    // Sort collisions by angle...
+    const col = new Polygon(...collisionQueue)
+    drawPolygon(c, col, 'white')
+  }
+  
   for (let i = 1; i < polyQueue.length; i++) {
     let poly = polyQueue[i]
     drawPolygon(c, poly, 'green')
   }
 
-  const r = new Ray(pt(250, 250))
-  r.pointAt(this.mouse.x, this.mouse.y)
-  drawRay(c, r)
-
-  for (let ray of rayQueue) {
-    drawRay(c, ray)
-  }
-
-  if (collisionQueue.length) {
-    // Sort collisions by angle...
-    const col = new Polygon(...collisionQueue)
-    drawPolygon(c, col, 'blue')
-  }
-
-  c.fillStyle = 'white'
-  for (let col of collisionQueue) {
-    c.fillRect(col.x - 1, col.y - 1, 3, 3)
+  if(showRays) {
+    c.fillStyle = 'white'
+    for (let col of collisionQueue) {
+      c.fillRect(col.x - 1, col.y - 1, 3, 3)
+    }
   }
 
   c.fillStyle = 'red'
