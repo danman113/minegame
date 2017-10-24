@@ -6,6 +6,10 @@ class Line {
   // Takes two points as a line segment.
   constructor (p0, p1) {
     this.p0 = p0
+    // Default line point up
+    if (!p1) {
+      p1 = pt(p0.x, p0.y - 0.01)
+    }
     this.p1 = p1
   }
 
@@ -58,6 +62,20 @@ class Line {
 
   rotateDeg (deg) {
     this.rotate(degToRad(deg))
+  }
+
+  translate (x, y) {
+    this.p1.x = this.p1.x - this.p0.x + x
+    this.p1.y = this.p1.y - this.p0.y + y
+    this.p0.x = x
+    this.p0.y = y
+  }
+
+  pointAt (x, y) {
+    const dx = this.p0.x - x
+    const dy = this.p1.y - y
+    this.p1.x = (this.p0.x - (dx / 100))
+    this.p1.y = (this.p0.y - (dy / 100))
   }
 }
 

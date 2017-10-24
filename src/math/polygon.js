@@ -144,10 +144,7 @@ class Polygon {
 
   // Fix later using SAT
   intersectsConvexPoly (poly) {
-    for (let i = 0; i < this.size; i++) {
-      let p0 = this.verticies[i]
-      if (poly.intersectsPt(p0)) { return true }
-    }
+    return pt(0, 0)
   }
 
   intersectsConcavePoly (poly) {
@@ -170,7 +167,7 @@ class Polygon {
     let hull = []
     // Find min x value in poly
     let xmin = this.verticies.reduce(
-      (a, b, i) => {
+      (a, b) => {
         if (Math.min(a.x, b.x) === a.x) {
           return a
         } else {
@@ -182,7 +179,7 @@ class Polygon {
 
     // find max x value in poly
     let xmax = this.verticies.reduce(
-      (a, b, i) => {
+      (a, b) => {
         if (Math.max(a.x, b.x) === a.x) {
           return a
         } else {

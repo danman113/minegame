@@ -42,7 +42,7 @@ const drawLine = (c, line, color = '#fff', bg = '#f00') => {
   c.strokeStyle = bg
   c.beginPath()
   c.moveTo(line.p1.x, line.p1.y)
-  c.lineTo(line.p1.x + (line.p1.x - line.p0.x) * 0xffff, line.p1.y + (line.p1.y - line.p0.y) * 0xffff)
+  c.lineTo(line.p1.x + (line.p1.x - line.p0.x) * 0xffffffff, line.p1.y + (line.p1.y - line.p0.y) * 0xffffffff)
   c.closePath()
   c.stroke()
 }
