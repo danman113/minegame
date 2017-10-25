@@ -1,4 +1,4 @@
-import { pt, Polygon, angle3, Line, Segment, Ray, distance, angle2 } from '../../src/math'
+import { pt, Polygon, angle3, Line, Segment, Ray, distance, angle2, radToDeg, degToRad } from '../../src/math'
 import { drawPolygon, drawLine, drawSegment, drawRay } from '../../src/engine/renderer'
 import { importTiledMap } from '../../src/engine/importers'
 import * as KEYS from '../../src/engine/keys'
@@ -19,6 +19,27 @@ if (isNode()) {
 
 let engine = new Engine(document.getElementById('canvas'))
 
+let visibilityPolygon = new Polygon(pt(250, 250), pt(20,20), pt(20, 20))
+const reAngleVisibility = (lower, higher, tpoint) => {
+  let center = visibilityPolygon.verticies[0] = tpoint
+  const length = 0xfff
+  let left = visibilityPolygon.verticies[1]
+  const ldx = Math.cos(lower) * length
+  const ldy = Math.sin(lower) * length
+  left.x = center.x + ldx
+  left.y = center.y + ldy
+  let right = visibilityPolygon.verticies[2]
+  const rdx = Math.cos(higher) * length
+  const rdy = Math.sin(higher) * length
+  right.x = center.x + rdx
+  right.y = center.y + rdy
+  const voffset = -5
+  visibilityPolygon.translate(
+    Math.cos((lower + higher) / 2) * voffset,
+    Math.sin((lower + higher) / 2) * voffset
+  )
+}
+
 let polyQueue = [new Polygon(pt(0, 0), pt(500, 0), pt(500, 500), pt(0, 500))]
 let pointQueue = []
 let rayQueue = []
@@ -27,11 +48,14 @@ let collisionQueue = []
 let showRays = false
 showRays = false
 let showPolygon = true
+let firstDeg = 0, lastDeg = 360
 
 for (let layerNames in tileMap) {
   let layer = tileMap[layerNames]
   polyQueue.push(...layer)
 }
+
+polyQueue.push(visibilityPolygon)
 
 const clk = function () {
   console.log(pointQueue)
@@ -46,11 +70,35 @@ engine.keyEvents[KEYS.ENTER] = _ => {
 
 engine.keyEvents[KEYS.V] = _ => showPolygon = !showPolygon
 engine.keyEvents[KEYS.R] = _ => showRays = !showRays
+engine.keyEvents[KEYS.TWO] = _ => lastDeg = 120
+engine.keyEvents[KEYS.NINE] = _ => lastDeg = 90
 
 const update = function (delta) {
+  
+  if (KEYS.Q in this.keys) {
+    firstDeg += 1
+    lastDeg += 1
+  }
+  if (KEYS.E in this.keys) {
+    firstDeg -= 1
+    lastDeg -= 1
+  }
+  if (KEYS.SHIFT in this.keys) {
+    if (lastDeg < 360) {
+      lastDeg++
+    }
+  }
+  if (KEYS.CTRL in this.keys) {
+    if (lastDeg > 0) {
+      lastDeg--
+    }
+  }
+  
   collisionQueue = []
   rayQueue = []
   const offset = 0.2
+  
+  reAngleVisibility(degToRad(firstDeg), degToRad(lastDeg), pt(this.mouse.x, this.mouse.y))
   for (let poly of polyQueue) {
     for (let vertex of poly.verticies) {
       let r0 = new Ray(pt(this.mouse.x, this.mouse.y))
@@ -100,6 +148,8 @@ const draw = function (c) {
   
   for (let i = 1; i < polyQueue.length; i++) {
     let poly = polyQueue[i]
+    if (poly == visibilityPolygon)
+      continue
     drawPolygon(c, poly, 'green')
   }
 
