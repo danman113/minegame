@@ -1,4 +1,4 @@
-import { distance, ccw, pt, sum, scalar, degToRad } from './point'
+import { distance, ccw, pt, sum, sub, dot, scalar, degToRad, orthoginal } from './point'
 import { segmentIntersectsSegment } from './line'
 import { Rectangle } from './rectangle'
 
@@ -143,8 +143,62 @@ class Polygon {
   }
 
   // Fix later using SAT
+  _seperatingAxis (projectionAxis, poly0, poly1) {
+    let min1 = Infinity
+    let min2 = Infinity
+    let max1 = -Infinity
+    let max2 = -Infinity
+
+    for (let vertex of poly0) {
+      const projection = dot(vertex, projectionAxis)
+      min1 = Math.min(min1, projection)
+      max1 = Math.max(max1, projection)
+    }
+
+    for (let vertex of poly1) {
+      const projection = dot(vertex, projectionAxis)
+      min2 = Math.min(min2, projection)
+      max2 = Math.max(max2, projection)
+    }
+
+    if (max1 >= min2 && max2 >= min1) {
+      // const d = Math.min(max2 - min1, max1 - min2)
+      // const pv = d/dot(projectionAxis, projectionAxis) + 1e-10)
+      /*
+        d_over_o_squared = d/np.dot(o, o) + 1e-10
+        pv = d_over_o_squared*o
+        return False, pv
+      */
+      return false
+    } else {
+      return true
+    }
+  }
+
   intersectsConvexPoly (poly) {
-    return pt(0, 0)
+    // get edges
+    for (let i = 0, j = 1; i < this.size; i++, j = (i + 1) % this.size) {
+      const p0 = this.verticies[i]
+      const p1 = this.verticies[j]
+      let edge = sub(p1, p0)
+      let orth = orthoginal(edge)
+      const sep = this._seperatingAxis(orth, this.verticies, poly.verticies)
+      if (sep) {
+        return false
+      }
+    }
+
+    for (let i = 0, j = 1; i < poly.size; i++, j = (i + 1) % poly.size) {
+      const p0 = poly.verticies[i]
+      const p1 = poly.verticies[j]
+      let edge = sub(p1, p0)
+      let orth = orthoginal(edge)
+      const sep = this._seperatingAxis(orth, this.verticies, poly.verticies)
+      if (sep) {
+        return false
+      }
+    }
+    return true
   }
 
   intersectsConcavePoly (poly) {
@@ -159,7 +213,8 @@ class Polygon {
         }
       }
     }
-    return false
+
+    return poly.intersectsPt(this.verticies[0])
   }
 
   // Generates a convex hull of the polygon. Not optimized for speed

@@ -64,7 +64,6 @@ const draw = function (c) {
       break
     }
   }
-  drawPolygon(c, poly, !collide ? 'blue' : 'red')
   c.fillStyle = 'red'
   c.fillRect(this.mouse.x - 1, this.mouse.y - 1, 3, 3)
   for (let i = 0; i < pointQueue.length; i++) {
@@ -76,6 +75,7 @@ const draw = function (c) {
     const p = polyQueue[i]
     drawPolygon(c, p, 'green')
   }
+  drawPolygon(c, poly, !collide ? 'blue' : 'red')
 }
 
 engine.draw = draw

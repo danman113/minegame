@@ -16,7 +16,7 @@ let engine = new Engine(document.getElementById('canvas'))
 
 let c = document.getElementById('canvas').getContext('2d')
 
-let poly = new Polygon(pt(103, 56), pt(127, 33), pt(166, 35), pt(175, 76), pt(160, 108), pt(128, 108), pt(99, 89))
+let poly = new Polygon(pt(347, 79), pt(291, 69), pt(278, 126), pt(328, 133))
 
 let polyQueue = []
 let pointQueue = []
@@ -67,12 +67,11 @@ const draw = function (c) {
   let collide = false
   for (let i = 0; i < polyQueue.length; i++) {
     const p = polyQueue[i]
-    if (poly.intersectsConvexPoly(p)) {
+    if (poly.intersectsConvexPoly(p, c)) {
       collide = true
       break
     }
   }
-  drawPolygon(c, poly, !collide ? 'blue' : 'red')
   c.fillStyle = 'red'
   c.fillRect(this.mouse.x - 1, this.mouse.y - 1, 3, 3)
   for (let i = 0; i < pointQueue.length; i++) {
@@ -84,6 +83,7 @@ const draw = function (c) {
     const p = polyQueue[i]
     drawPolygon(c, p, 'green')
   }
+  drawPolygon(c, poly, !collide ? 'blue' : 'red')
 }
 
 engine.draw = draw

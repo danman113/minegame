@@ -21,11 +21,15 @@ const degToRad = deg => deg * piNum
 const radToDeg = rad => rad * numPi
 
 const sum = (a, b) => pt(a.x + b.x, a.y + b.y)
+const sub = (a, b) => pt(a.x - b.x, a.y - b.y)
+
 const dot = (a, b) => a.x * b.x + a.y * b.y
 const unit = a => {
   const dist = distance(pt(0, 0), a)
   return pt(a.x / dist, a.y / dist)
 }
+
+const orthoginal = v => pt(-v.y, v.x)
 
 const scalar = (a, c) => pt(a.x * c, a.y * c)
 
@@ -35,6 +39,7 @@ export {
   pt,
   ccw,
   sum,
+  sub,
   dot,
   ZERO,
   unit,
@@ -43,5 +48,6 @@ export {
   angle3,
   degToRad,
   radToDeg,
-  distance
+  distance,
+  orthoginal
 }
