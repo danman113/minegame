@@ -180,8 +180,8 @@ class Polygon {
     for (let i = 0, j = 1; i < this.size; i++, j = (i + 1) % this.size) {
       const p0 = this.verticies[i]
       const p1 = this.verticies[j]
-      let edge = sub(p1, p0)
-      let orth = orthoginal(edge)
+      const edge = sub(p1, p0)
+      const orth = orthoginal(edge)
       const sep = this._seperatingAxis(orth, this.verticies, poly.verticies)
       if (sep) {
         return false
@@ -191,8 +191,8 @@ class Polygon {
     for (let i = 0, j = 1; i < poly.size; i++, j = (i + 1) % poly.size) {
       const p0 = poly.verticies[i]
       const p1 = poly.verticies[j]
-      let edge = sub(p1, p0)
-      let orth = orthoginal(edge)
+      const edge = sub(p1, p0)
+      const orth = orthoginal(edge)
       const sep = this._seperatingAxis(orth, this.verticies, poly.verticies)
       if (sep) {
         return false
@@ -203,13 +203,14 @@ class Polygon {
 
   intersectsConcavePoly (poly) {
     for (let i = 0, j = 1, size = this.size; i < size; i++, j = (i + 1) % size) {
-      let p0 = this.verticies[i]
-      let p1 = this.verticies[j]
+      const p0 = this.verticies[i]
+      const p1 = this.verticies[j]
       for (let x = 0, y = 1, psize = poly.size; x < psize; x++, y = (x + 1) % psize) {
-        let p2 = poly.verticies[x]
-        let p3 = poly.verticies[y]
-        if (segmentIntersectsSegment(p0, p1, p2, p3)) {
-          return true
+        const p2 = poly.verticies[x]
+        const p3 = poly.verticies[y]
+        const intersectsPt = segmentIntersectsSegment(p0, p1, p2, p3)
+        if (intersectsPt) {
+          return intersectsPt
         }
       }
     }

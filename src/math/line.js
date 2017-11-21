@@ -48,14 +48,18 @@ class Line {
     return null
   }
 
-  //
   rotate (rad) {
+    // getting the distance of each component
     const x = this.p1.x - this.p0.x
     const y = this.p1.y - this.p0.y
+    // find the rotated point from the origin and multiply
+    // it by the size of each component to get the new offset
+    // from p0 to p1
     const rotx = Math.cos(rad)
     const roty = Math.sin(rad)
     const dx = x * rotx - y * roty
     const dy = x * roty + y * rotx
+    // add the rotated points to the root
     this.p1.x = this.p0.x + dx
     this.p1.y = this.p0.y + dy
   }
