@@ -14,8 +14,6 @@ if (isNode()) {
 
 let engine = new Engine(document.getElementById('canvas'))
 
-let c = document.getElementById('canvas').getContext('2d')
-
 let poly = new Polygon(pt(347, 79), pt(291, 69), pt(278, 126), pt(328, 133))
 
 let polyQueue = []
@@ -63,7 +61,7 @@ const update = function (delta) {
 }
 
 const draw = function (c) {
-  c.clearRect(0, 0, 500, 300)
+  c.clearRect(0, 0, this.width, this.height)
   let collide = false
   for (let i = 0; i < polyQueue.length; i++) {
     const p = polyQueue[i]

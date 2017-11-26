@@ -14,8 +14,6 @@ if (isNode()) {
 
 let engine = new Engine(document.getElementById('canvas'))
 
-let c = document.getElementById('canvas').getContext('2d')
-
 let poly = new Polygon(pt(100, 120), pt(200, 60), pt(280, 200), pt(200, 260), pt(200, 180))
 
 let polyQueue = []
@@ -45,7 +43,7 @@ const update = function (delta) {
 
 const draw = function (c) {
   let mouse = pt(this.mouse.x, this.mouse.y)
-  c.clearRect(0, 0, 500, 300)
+  c.clearRect(0, 0, this.width, this.height)
   c.fillStyle = 'red'
   c.fillRect(this.mouse.x - 1, this.mouse.y - 1, 3, 3)
   for (var i = 0; i < pointQueue.length; i++) {

@@ -1,4 +1,5 @@
 import { pt } from './point'
+import { Polygon } from './polygon'
 
 class Rectangle {
   constructor (x, y, width, height) {
@@ -41,4 +42,12 @@ class Square extends Rectangle {
   }
 }
 
-export { Rectangle, Square }
+const rectToPolygon = (x, y, width, height) => {
+  const topLeft = pt(x, y)
+  const topRight = pt(x + width, y)
+  const bottomRight = pt(x + width, y + height)
+  const bottomLeft = pt(x, y + height)
+  return new Polygon(topLeft, topRight, bottomRight, bottomLeft)
+}
+
+export { Rectangle, Square, rectToPolygon }

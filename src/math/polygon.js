@@ -6,7 +6,6 @@ class Polygon {
   constructor (...points) {
     this.verticies = [...points]
     this.size = this.verticies.length
-    this.isConvex = this.convex()
   }
 
   translate (x, y) {
@@ -75,6 +74,16 @@ class Polygon {
   }
 
   center () {
+    let sumValue = pt(0, 0)
+    for (let vertex of this.verticies) {
+      sumValue = sum(vertex, sumValue)
+    }
+    sumValue.x /= this.verticies.length
+    sumValue.y /= this.verticies.length
+    return sumValue
+  }
+
+  centerOfMass () {
     // X = SUM[(Xi + Xi+1) * (Xi * Yi+1 - Xi+1 * Yi)] / 6 / A
     // Y = SUM[(Yi + Yi+1) * (Xi * Yi+1 - Xi+1 * Yi)] / 6 / A
     let center = pt(0, 0)

@@ -34,3 +34,4 @@ export const SIX = 54
 export const SEVEN = 55
 export const EIGHT = 56
 export const NINE = 57
+export const ESC = 27

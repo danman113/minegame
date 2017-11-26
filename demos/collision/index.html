@@ -6,24 +6,25 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Collision Test</title>
   <style type="text/css">
+    #canvas {
+      margin-left:-8px;
+      margin-top:-8px;
+    }
     canvas {
       width: 500px;
       height: 500px;
       background-color: black;
-      margin-left:-8px;
-      margin-top:-8px;
     }
     body {
-      background-color: #222;
+      background-color: #999;
     }
   </style>
 </head>
 <body>
-  <canvas id="canvas" width="500" height="500">
-    Get a better browser
-  </canvas>
-  <h2>Mouse to move light. Click to add points. Enter to make polygon. V toggles light. R toggles rays.</h2>
-  <h2>Q/E to rotate vision cone. 9 to turn vision cone on to 90 degrees. 2 Turns it to 120 degrees. SHIFT/CTRL raise/lower degrees. A bit fiddly at random degree increments.</h2>
+  <div id="canvas" width="500" height="500">
+  </div>
+  <h2>Basic Collision Detection</h2>
+  <h2>Arrow keys to move. Q/E to rotate. H to toggle hitboxes.</h2>
 </body>
   <script type="text/javascript" src="../../dist/collision.js"></script>
 </html>

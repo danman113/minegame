@@ -19,7 +19,7 @@ const drawPolygon = (c, poly, color = '#f00', bg = '#00a', showBox = false) => {
   c.fill()
   c.stroke()
   if (showBox) {
-    const center = poly.center()
+    const center = poly.AABB().center()
     c.fillStyle = 'black'
     c.fillRect(center.x - 1, center.y - 1, 3, 3)
   }
@@ -40,7 +40,7 @@ const drawLine = (c, line, color = '#fff', bg = '#f00') => {
   c.lineTo(line.p1.x, line.p1.y)
   c.closePath()
   c.stroke()
-  // After
+  // Afters
   c.strokeStyle = bg
   c.beginPath()
   c.moveTo(line.p1.x, line.p1.y)
@@ -79,4 +79,9 @@ const drawRay = (c, seg, color = '#fff', fill = '#f00') => {
   c.stroke()
 }
 
-export { drawPolygon, drawLine, drawSegment, drawRay }
+const drawBox = (c, box, color = '#fff', fill = '#f00') => {
+  c.fillStyle = color
+  c.fillRect(box.x, box.y, box.width, box.height)
+}
+
+export { drawPolygon, drawLine, drawSegment, drawRay, drawBox }

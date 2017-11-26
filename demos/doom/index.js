@@ -35,7 +35,7 @@ const rayCast = (c) => {
   const maxHeight = 500
   const width = 5
   c.fillStyle = 'red'
-  c.clearRect(0, 0, 500, 500)
+  c.clearRect(0, 0, this.width, this.height)
   console.log('============================')
   for(let i = 0; i < rayQueue.length; i++) {
     const ray = rayQueue[i]
@@ -118,7 +118,7 @@ const update = function (delta) {
 }
 
 const draw = function (c) {
-  c.clearRect(0, 0, 500, 500)
+  c.clearRect(0, 0, this.width, this.height)
   
   for (let i = 1; i < polyQueue.length; i++) {
     let poly = polyQueue[i]

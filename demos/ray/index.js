@@ -12,18 +12,12 @@ if (isNode()) {
   console.log('isBrowser')
 }
 
-let engine = new Engine(document.getElementById('canvas'))
-
-let c = document.getElementById('canvas').getContext('2d')
+let engine = new Engine(document.getElementById('canvas'), 500, 300)
 
 let line = new Ray(pt(30, 30), pt(40, 40))
-drawLine(c, line)
 let line2 = new Line(pt(400, 20), pt(430, 100))
-drawLine(c, line2)
 let seg = new Segment(pt(50, 15), pt(70, 20))
-drawSegment(c, seg)
 let ray = new Ray(pt(20, 200), pt(50, 250))
-drawRay(c, ray)
 
 let poly = new Polygon(pt(100, 120), pt(200, 60), pt(280, 200), pt(200, 260), pt(200, 180))
 poly.translate(140, 100)
@@ -47,7 +41,7 @@ const update = function (delta) {
 
 const draw = function (c) {
   let mouse = pt(this.mouse.x, this.mouse.y)
-  c.clearRect(0, 0, 500, 300)
+  c.clearRect(0, 0, this.width, this.height)
   drawRay(c, line)
   drawLine(c, line2)
   let inter = line.intersectsSegment(line2)
