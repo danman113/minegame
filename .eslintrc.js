@@ -17,6 +17,12 @@ module.exports = {
             "error",
             2
         ],
+        "no-unused-vars": [
+          "error", {
+            "varsIgnorePattern": "_\w*",
+            "argsIgnorePattern": "_\w*",
+          }
+        ],
         "comma-dangle": ["error", {
             "arrays": "never",
             "objects": "ignore",

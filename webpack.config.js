@@ -8,19 +8,19 @@ demos.map(key => entries[key] = './demos/' + key + '/index.js')
 entries.out = './src/main.js'
 
 module.exports = {
-   entry: entries,
-   output: {
-     path: path.resolve(__dirname, 'dist'),
-     filename: '[name].js'
-   },
-   resolve: {
+  entry: entries,
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js'
+  },
+  resolve: {
     extensions: ['.js'],
     modules: [
       path.resolve('./src/'),
       path.resolve('./node_modules')
     ]
   },
-   module: {
+  module: {
     loaders: [
       {
         test: /\.js$/,
@@ -36,12 +36,11 @@ module.exports = {
             }]
           ]
         }
-       }
-     ]
-   },
-   stats: {
-     colors: true
-   },
-   devtool: 'source-map'
-   
-};
+      }
+    ]
+  },
+  stats: {
+    colors: true
+  },
+  devtool: 'source-map'
+}
