@@ -1,3 +1,5 @@
+import 'babel-polyfill'
+
 class Engine {
   // Data to handle mouse events. Updated each frame
   mouse = {
@@ -27,6 +29,7 @@ class Engine {
 
   // callback for click events
   onClick (engine) {}
+  keyUp (engine, key, event) {}
 
   // drawn each frame
   draw (engine, c) {}
@@ -86,6 +89,8 @@ class Engine {
     })
 
     this.canvas.addEventListener('contextmenu', e => e.preventDefault())
+    this.canvas.addEventListener('dragenter', e => e.preventDefault())
+    console.log(this.canvas)
 
     window.addEventListener('mouseup', e => {
       if (e.which === 1) {
@@ -111,6 +116,7 @@ class Engine {
     window.addEventListener('keyup', e => {
       if (typeof this.keyEvents[e.keyCode] === 'function') { this.keyEvents[e.keyCode](this) }
       delete this.keys[e.keyCode]
+      this.keyUp(this, e.keyCode, e)
     }, false)
 
     window.addEventListener('resize', e => {

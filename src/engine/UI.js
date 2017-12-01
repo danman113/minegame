@@ -1,4 +1,5 @@
-import { pt, sum, Polygon, rectToPolygon } from '../math'
+import { pt, sum, sub, Polygon, rectToPolygon } from '../math'
+import * as keys from './keys'
 
 const noop = _ => {}
 
@@ -20,6 +21,7 @@ class UIElement {
   addChildren (...children) {
     for (let child of children) {
       child.parent = this
+      child._onChildAdd()
     }
     this.children.push(...children)
   }
@@ -44,6 +46,8 @@ class UIElement {
       child.update(e, scene)
     }
   }
+
+  _onChildAdd () {}
 }
 
 class Container extends UIElement {
@@ -74,7 +78,7 @@ const defaultHoverButtonRender = function (c) {
     x = this.globalPosition.x
   }
   if (this.verticalAlign === 'center') {
-    y = this.globalPosition.y + rect.height / 2 + this.fontSize / 4
+    y = this.globalPosition.y + (rect.height * 1) / 2 + this.fontSize / 4
   } else {
     y = this.globalPosition.y + this.fontSize
   }
@@ -99,7 +103,7 @@ const defaultButtonRender = function (c) {
     x = this.globalPosition.x
   }
   if (this.verticalAlign === 'center') {
-    y = this.globalPosition.y + (rect.height * 0.75) / 2 + this.fontSize / 4
+    y = this.globalPosition.y + (rect.height * 1) / 2 + this.fontSize / 4
   } else {
     y = this.globalPosition.y + this.fontSize
   }
@@ -119,7 +123,7 @@ class Button extends Container {
     textAlign = 'center',
     verticalAlign = 'center',
     update = noop,
-    click = _ => console.log('click'),
+    onClick = _ => console.log('click'),
     render = c => {
       if (this.state === 1) {
         this.renderHover(c)
@@ -134,7 +138,9 @@ class Button extends Container {
     renderDown = defaultButtonRender,
     ...rest
   }) {
-    let u = (e, scene) => {
+    super({render, update, ...rest})
+    const oldUpdate = this.update
+    const u = (e, scene) => {
       this.dimensions.translate(this.globalPosition.x, this.globalPosition.y)
       const intersects = this.dimensions.intersectsPt(e.mouse)
       this.dimensions.translate(-this.globalPosition.x, -this.globalPosition.y)
@@ -146,9 +152,8 @@ class Button extends Container {
       } else {
         this.state = 0
       }
-      update(e, scene)
+      oldUpdate(e, scene)
     }
-    super({render, update: u, ...rest})
     this.text = text
     this.font = font
     this.fontSize = fontSize
@@ -160,9 +165,111 @@ class Button extends Container {
     this.renderDefault = renderDefault.bind(this)
     this.renderHover = renderHover.bind(this)
     this.renderDown = renderDown.bind(this)
-    this.click = click.bind(this)
+    this.update = u
+    this.onClick = onClick.bind(this)
     this.state = 0
+  }
+
+  handleClick (e) {
+    if (this.state === 2) {
+      this.onClick(e)
+    }
+    for (let child of this.children) {
+      if (child.handleClick) {
+        child.handleClick(e)
+      }
+    }
+  }
+
+  _addClickHandler () {
+    if (this.parent && !this.parent.handleClick) {
+      this.parent.handleClick = this.handleClick
+      this.parent.handleClick()
+    }
+  }
+
+  _onChildAdd () {
+    this._addClickHandler()
   }
 }
 
-export { Button, Container, UIElement }
+class Draggable extends Button {
+  constructor ({...rest}) {
+    super({...rest})
+    this.dragging = null
+    this.originalPosition = null
+    this.lastState = 0
+    const oldUpdate = this.update
+    const u = (e, scene) => {
+      if (this.state === 2 && this.lastState === 1 && !this.dragging) {
+        this.dragging = pt(e.mouse.x, e.mouse.y)
+        this.originalPosition = pt(this.position.x, this.position.y)
+      }
+      if (this.dragging && e.mouse.down) {
+        const difference = sub(e.mouse, this.dragging)
+        this.position = sum(this.originalPosition, difference)
+      } else if (!e.mouse.down && this.dragging) {
+        this.dragging = null
+        this.originalPosition = null
+      }
+      this.lastState = this.state
+      oldUpdate(e, scene)
+    }
+    this.update = u
+  }
+}
+
+class KeyBoardButtonManager {
+  constructor ({
+    children = []
+  }) {
+    this.selected = null
+    this.children = children
+  }
+
+  addEdge (btn, {
+    ...rest
+  }) {
+    btn.buttons = rest
+    this.children.push(btn)
+  }
+
+  select (btn) {
+    this.selected = btn
+  }
+
+  callDirection (direction) {
+    if (this.selected) {
+      if (this.selected.buttons) {
+        if (typeof this.selected.buttons[direction] === 'object') {
+          this.select(this.selected.buttons[direction])
+        } else if (typeof this.selected.buttons[direction] === 'function') {
+          this.selected.buttons[direction](this.selected, this)
+        }
+      } else {
+        throw new Error(
+          'Selected is either not a button or has no method for direction'
+        )
+      }
+    }
+  }
+
+  handleUpdate (e) {
+    for (let btn of this.children) {
+      if (btn.state === 1) {
+        this.select(btn)
+      }
+    }
+    for (let btn of this.children) {
+      if (this.selected === btn && btn.state < 2) {
+        btn.state = 1
+      }
+    }
+  }
+
+  handleKey (e, key, evt) {
+    this.callDirection(key)
+  }
+}
+
+export { Button, Container, UIElement, Draggable, KeyBoardButtonManager }

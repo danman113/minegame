@@ -5,13 +5,15 @@ class Scene {
     onEnter = noop,
     onClick = noop,
     render = noop,
-    update = noop
+    update = noop,
+    keyUp = noop
   ) {
     this.keyEvents = keyEvents
     this.onEnter = onEnter
     this.onClick = onClick
     this.render = render
     this.update = update
+    this.keyUp = keyUp
     this.goto = noop
   }
 }
@@ -36,6 +38,7 @@ class SceneManager {
     this.engine.onClick = scene.onClick
     this.engine.draw = scene.render
     this.engine.update = scene.update
+    this.engine.keyUp = scene.keyUp
     if (!silent) {
       scene.onEnter(this.engine, oldScene, this)
     }

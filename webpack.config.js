@@ -13,15 +13,29 @@ module.exports = {
      path: path.resolve(__dirname, 'dist'),
      filename: '[name].js'
    },
-   
+   resolve: {
+    extensions: ['.js'],
+    modules: [
+      path.resolve('./src/'),
+      path.resolve('./node_modules')
+    ]
+  },
    module: {
-     loaders: [
-       {
-         test: /\.js$/,
-         loader: 'babel-loader',
-         query: {
-           presets: ['stage-0']
-         }
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015', 'stage-0'],
+          plugins: [
+            ['transform-runtime', {
+              helpers: false,
+              polyfill: false,
+              regenerator: true
+            }]
+          ]
+        }
        }
      ]
    },

@@ -4,8 +4,8 @@ import Engine from '../../src/engine'
 
 import start from './start'
 // import main from './main'
-// import settings from './settings'
-// import game from './game'
+import settings from './settings'
+import game from './game'
 
 if (isNode()) {
   global.document = new DocumentMock()
@@ -19,6 +19,8 @@ let engine = new Engine(document.getElementById('canvas'), 640, 480, true)
 
 let scenes = {
   start,
+  settings,
+  game
 }
 
 console.log('Loaded scenes')
