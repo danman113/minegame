@@ -18,9 +18,8 @@ let acceleration = 0
 let color = 'red'
 
 const generateAsteroid = _ => {
-  let center = pt(0, 0)
   let pts = []
-  for(let i = 0; i < (Math.PI * 2); i+= (Math.PI * 2) / 12) {
+  for (let i = 0; i < (Math.PI * 2); i += (Math.PI * 2) / 12) {
     const x = Math.cos(i) * 40 + (Math.random() - 1) * 15
     const y = Math.sin(i) * 40 + (Math.random() - 1) * 15
     pts.push(pt(x, y))
@@ -28,8 +27,8 @@ const generateAsteroid = _ => {
   return new Polygon(...pts)
 }
 
-const randomColor = _ => 
-  '#' + (Math.random()*0xFFFFFF<<0).toString(16)
+const randomColor = _ =>
+  '#' + (Math.random() * 0xFFFFFF << 0).toString(16)
 
 const onEnter = e => {
   velocity = 0
@@ -40,8 +39,8 @@ const onEnter = e => {
     pt(30, 30)
   )
   color = 'red'
-  
-  ship.translate(e.width/2, e.height/2)
+
+  ship.translate(e.width / 2, e.height / 2)
   asteroids = []
   for (var i = 0; i < (e.width * e.height) / 30000; i++) {
     const asteroid = generateAsteroid()
@@ -63,16 +62,16 @@ const onEnter = e => {
 
 const render = function (c) {
   c.clearRect(0, 0, this.width, this.height)
-  
+
   c.fillStyle = '#f00'
   c.fillRect(this.mouse.x - 1, this.mouse.y - 1, 3, 3)
 
   drawPolygon(c, ship, color || randomColor(), 'blue')
-  
-  for(let ast of asteroids) {
+
+  for (let ast of asteroids) {
     drawPolygon(c, ast, color || randomColor(), 'blue')
   }
-  
+
   c.fillStyle = '#fff'
   c.font = '20px Arial,sans-serif'
   let messages = [
@@ -81,27 +80,25 @@ const render = function (c) {
     'Up/Down to move up/reverse',
     'Press S to enable seizure mode'
   ]
-  
+
   messages.forEach((msg, i) => {
-    let w = c.measureText(msg)
     c.fillText(msg, 0, 30 + i * 30)
   })
 }
 
 const keyEvents = {
-  [keys.ENTER]: e => {game.goto('main')},
-  [keys.S]: _ => {color = color?'':'red'}
+  [keys.ENTER]: e => { game.goto('main') },
+  [keys.S]: _ => { color = color?'':'red' }
 }
 
 const update = (e, delta) => {
-  
-  for(let asteroid of asteroids) {
+  for (let asteroid of asteroids) {
     if (ship.intersectsConcavePoly(asteroid)) {
       onEnter(e)
       game.goto('start')
     }
   }
-  
+
   let upVector = sub(ship.verticies[1], ship.center())
   let directionVector = unit(upVector)
   const maxVelocity = 5
@@ -109,8 +106,6 @@ const update = (e, delta) => {
   const accelerationConst = 0.05
   const friction = 0.99
   acceleration = 0
-  
-  
   if (keys.KEY_UP in e.keys) {
     acceleration = 1 * accelerationConst
   }
@@ -123,9 +118,9 @@ const update = (e, delta) => {
   velocity *= friction
   velocity += acceleration
   velocity = Math.min(Math.max(velocity, -1 * maxVelocity), maxVelocity)
-  
+
   ship.translate(directionVector.x * velocity, directionVector.y * velocity)
-  
+
   if (keys.KEY_LEFT in e.keys) {
     ship.rotateDeg(ship.center(), -turnSpeed)
   }

@@ -1,12 +1,12 @@
-import { Scene, SceneManager } from '../../src/engine/scene'
-import { rectToPolygon, pt, sum, sub } from '../../src/math'
-import { Button, Container, Draggable, KeyBoardButtonManager } from '../../src/engine/UI'
+import { Scene } from '../../src/engine/scene'
+import { rectToPolygon, pt } from '../../src/math'
+import { Button, Container, KeyBoardButtonManager } from 'engine/UI'
 import * as keys from '../../src/engine/keys'
 
 let start = new Scene()
 
 const centerButton = (margins) => {
-  return function(e) {
+  return function (e) {
     this.position.x = e.width * margins
     this.dimensions = rectToPolygon(0, 0, e.width * (1 - margins * 2), this.dimensions.verticies[2].y)
   }
@@ -57,15 +57,14 @@ console.log(startContainer)
 
 const render = function (c) {
   c.clearRect(0, 0, this.width, this.height)
-  
+
   startContainer.render(c)
-  
+
   c.fillStyle = '#f00'
   c.fillRect(this.mouse.x - 1, this.mouse.y - 1, 3, 3)
 }
 
-const update = function() {
-  
+const update = function () {
   startContainer.handleUpdate(this)
   keyM.handleUpdate(this)
 }

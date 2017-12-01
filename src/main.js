@@ -81,10 +81,10 @@ console.log(Array(10).join('*') + 'Intersections' + Array(10).join('*'))
 let intPoly = new Polygon(pt(0, 0), pt(40, 0), pt(40, 40), pt(0, 40))
 
 console.log(
-    intPoly.intersectsPt(pt(20, 20)),
-    intPoly.intersectsPt(pt(30, 30)),
-    intPoly.intersectsPt(pt(40, 40)),
-    intPoly.intersectsPt(pt(50, 50))
+  intPoly.intersectsPt(pt(20, 20)),
+  intPoly.intersectsPt(pt(30, 30)),
+  intPoly.intersectsPt(pt(40, 40)),
+  intPoly.intersectsPt(pt(50, 50))
 )
 
 // engine.keyEvents[84] = _ => rectange.moveToZero()

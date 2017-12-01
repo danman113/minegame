@@ -2,8 +2,8 @@ const pt = (x, y) => ({x: x, y: y})
 
 // Eucliean distance between two points
 const distance = (pt1, pt2) => Math.sqrt(
-    (pt2.x - pt1.x) * (pt2.x - pt1.x) +
-    (pt2.y - pt1.y) * (pt2.y - pt1.y)
+  (pt2.x - pt1.x) * (pt2.x - pt1.x) +
+  (pt2.y - pt1.y) * (pt2.y - pt1.y)
 )
 
 // Given the three points, are the counter clockwise?

@@ -1,67 +1,6 @@
-import { pt, sum, sub, Polygon, rectToPolygon } from '../math'
-import * as keys from './keys'
+import Container from './container'
 
 const noop = _ => {}
-
-class UIElement {
-  constructor ({
-    update = noop,
-    render = noop,
-    position = pt(0, 0),
-    children = [],
-    polygon = new Polygon()
-  }) {
-    this.position = position
-    this.render = render.bind(this)
-    this.update = update.bind(this)
-    this.children = children
-    this.parent = null
-  }
-
-  addChildren (...children) {
-    for (let child of children) {
-      child.parent = this
-      child._onChildAdd()
-    }
-    this.children.push(...children)
-  }
-
-  get globalPosition () {
-    if (this.parent) {
-      return sum(this.parent.globalPosition, this.position)
-    } else {
-      return this.position
-    }
-  }
-
-  renderChildren (c) {
-    for (let child of this.children) {
-      child.render(c)
-    }
-  }
-
-  handleUpdate (e, scene) {
-    this.update(e, scene)
-    for (let child of this.children) {
-      child.update(e, scene)
-    }
-  }
-
-  _onChildAdd () {}
-}
-
-class Container extends UIElement {
-  constructor (
-    {
-      dimensions = rectToPolygon(0, 0, 100, 100),
-      render = c => this.renderChildren(c),
-      ...rest
-    }
-    ) {
-    super({render, ...rest})
-    this.dimensions = dimensions
-  }
-}
 
 const defaultHoverButtonRender = function (c) {
   c.fillStyle = this.fillColor
@@ -111,7 +50,7 @@ const defaultButtonRender = function (c) {
   this.renderChildren(c)
 }
 
-class Button extends Container {
+export default class Button extends Container {
   static states = ['default', 'hover', 'down']
   constructor ({
     text = '',
@@ -192,84 +131,3 @@ class Button extends Container {
     this._addClickHandler()
   }
 }
-
-class Draggable extends Button {
-  constructor ({...rest}) {
-    super({...rest})
-    this.dragging = null
-    this.originalPosition = null
-    this.lastState = 0
-    const oldUpdate = this.update
-    const u = (e, scene) => {
-      if (this.state === 2 && this.lastState === 1 && !this.dragging) {
-        this.dragging = pt(e.mouse.x, e.mouse.y)
-        this.originalPosition = pt(this.position.x, this.position.y)
-      }
-      if (this.dragging && e.mouse.down) {
-        const difference = sub(e.mouse, this.dragging)
-        this.position = sum(this.originalPosition, difference)
-      } else if (!e.mouse.down && this.dragging) {
-        this.dragging = null
-        this.originalPosition = null
-      }
-      this.lastState = this.state
-      oldUpdate(e, scene)
-    }
-    this.update = u
-  }
-}
-
-class KeyBoardButtonManager {
-  constructor ({
-    children = []
-  }) {
-    this.selected = null
-    this.children = children
-  }
-
-  addEdge (btn, {
-    ...rest
-  }) {
-    btn.buttons = rest
-    this.children.push(btn)
-  }
-
-  select (btn) {
-    this.selected = btn
-  }
-
-  callDirection (direction) {
-    if (this.selected) {
-      if (this.selected.buttons) {
-        if (typeof this.selected.buttons[direction] === 'object') {
-          this.select(this.selected.buttons[direction])
-        } else if (typeof this.selected.buttons[direction] === 'function') {
-          this.selected.buttons[direction](this.selected, this)
-        }
-      } else {
-        throw new Error(
-          'Selected is either not a button or has no method for direction'
-        )
-      }
-    }
-  }
-
-  handleUpdate (e) {
-    for (let btn of this.children) {
-      if (btn.state === 1) {
-        this.select(btn)
-      }
-    }
-    for (let btn of this.children) {
-      if (this.selected === btn && btn.state < 2) {
-        btn.state = 1
-      }
-    }
-  }
-
-  handleKey (e, key, evt) {
-    this.callDirection(key)
-  }
-}
-
-export { Button, Container, UIElement, Draggable, KeyBoardButtonManager }
