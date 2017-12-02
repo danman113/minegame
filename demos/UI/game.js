@@ -44,15 +44,15 @@ gameContainer.addChildren(AddItem)
 
 const render = function (c) {
   c.clearRect(0, 0, this.width, this.height)
-  
+
   gameContainer.render(c)
-  
+
   c.fillStyle = '#f00'
   c.fillRect(this.mouse.x - 1, this.mouse.y - 1, 3, 3)
 }
 
 const update = function() {
-  
+
   gameContainer.handleUpdate(this)
 }
 

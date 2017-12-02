@@ -1,9 +1,15 @@
 import { Scene, SceneManager } from '../../src/engine/scene'
 import { rectToPolygon, pt, sum, sub } from '../../src/math'
 import { Button, Container, Draggable, KeyBoardButtonManager } from '../../src/engine/UI'
-import * as keys from '../../src/engine/keys'
+import * as keys from 'engine/keys'
 
 let settings = new Scene()
+settings.state.controls = {
+  UP: [keys.KEY_UP, keys.W],
+  DOWN: [keys.KEY_DOWN, keys.S],
+  LEFT: [keys.KEY_LEFT, keys.A],
+  RIGHT: [keys.KEY_RIGHT, keys.D],
+}
 
 let sounds = 100
 let music = 100
@@ -71,15 +77,15 @@ settingsContainer.addChildren(musicButton, soundButton, backButton)
 
 const render = function (c) {
   c.clearRect(0, 0, this.width, this.height)
-  
+
   settingsContainer.render(c)
-  
+
   c.fillStyle = '#f00'
   c.fillRect(this.mouse.x - 1, this.mouse.y - 1, 3, 3)
 }
 
 const update = function() {
-  
+
   settingsContainer.handleUpdate(this)
   keyM.handleUpdate(this)
 }

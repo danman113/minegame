@@ -1,5 +1,6 @@
 const noop = _ => {}
 class Scene {
+  state = {}
   constructor (
     keyEvents = {},
     onEnter = noop,
