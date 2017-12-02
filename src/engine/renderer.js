@@ -79,7 +79,7 @@ const drawRay = (c, seg, color = '#fff', fill = '#f00') => {
   c.stroke()
 }
 
-const drawBox = (c, box, color = '#fff', fill = '#f00') => {
+const drawBox = (c, box, color = '#fff', _fill = '#f00') => {
   c.fillStyle = color
   c.fillRect(box.x, box.y, box.width, box.height)
 }

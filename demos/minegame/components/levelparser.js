@@ -12,7 +12,7 @@ const parseGeometry = obj => {
     }
     let newpoly = new Polygon(...poly)
     if (obj.rotation) {
-      newpoly.rotateDeg(newpoly.verticies[0], obj.rotation)
+      newpoly.rotateDeg(obj, obj.rotation)
     }
     return new Geometry({
       polygon: newpoly,
@@ -30,7 +30,9 @@ export const loadTiled = json => {
       console.log(layer)
       for (let obj of layer.objects) {
         let newGeo = parseGeometry(obj)
-        geometry.push(newGeo)
+        if (newGeo) {
+          geometry.push(newGeo)
+        }
       }
       break
     }

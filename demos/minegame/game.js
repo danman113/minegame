@@ -1,5 +1,5 @@
 import { Scene } from 'engine/scene'
-import { rectToPolygon, pt, sum, sub } from 'math'
+import { rectToPolygon, pt, sum, sub, Circle } from 'math'
 // import { lerp } from 'math/animation'
 // import { Button, Container, Draggable, KeyBoardButtonManager } from 'engine/UI'
 import * as keys from 'engine/keys'
@@ -33,11 +33,13 @@ const actionInKeys = (action, keys) => {
 }
 
 let camera = new Camera()
-camera.addMob(new Mob(pt(50, 50)))
-camera.addMob(new Mob(pt(100, 500)))
+const player = new Mob(new Circle(pt(50, 50), 10))
+const enemy = new Mob(new Circle(pt(100, 500), 20))
+camera.addMob(player, enemy)
 
 console.log('Load Tiled')
 let testLevel = loadTiled(TestLevel)
+console.log(testLevel)
 for (let geom of testLevel.geometry) {
   camera.geometry.push(geom)
 }
@@ -45,9 +47,25 @@ for (let geom of testLevel.geometry) {
 global.camera = camera
 
 const render = function (c) {
+  let e = this
+  let d = 1
+  global.c = c
   c.clearRect(0, 0, this.width, this.height)
 
   camera.render(c, this)
+
+  if (actionInKeys(UP, e.keys)) {
+    selectedMob.translate(0, -1 * d, camera.mobs, camera.geometry)
+  }
+  if (actionInKeys(DOWN, e.keys)) {
+    selectedMob.translate(0, 1 * d, camera.mobs, camera.geometry)
+  }
+  if (actionInKeys(LEFT, e.keys)) {
+    selectedMob.translate(-1 * d, 0, camera.mobs, camera.geometry)
+  }
+  if (actionInKeys(RIGHT, e.keys)) {
+    selectedMob.translate(1 * d, 0, camera.mobs, camera.geometry)
+  }
 
   c.fillStyle = '#f00'
   c.fillRect(this.mouse.x - 1, this.mouse.y - 1, 3, 3)
@@ -59,16 +77,16 @@ const update = function (e, delta) {
   totalDelta = delta
   camera.centerOn(selectedMob.position)
   if (actionInKeys(UP, e.keys)) {
-    selectedMob.position.y -= 1 * d
+    selectedMob.translate(0, -1 * d, camera.mobs, camera.geometry)
   }
   if (actionInKeys(DOWN, e.keys)) {
-    selectedMob.position.y += 1 * d
+    selectedMob.translate(0, 1 * d, camera.mobs, camera.geometry)
   }
   if (actionInKeys(LEFT, e.keys)) {
-    selectedMob.position.x -= 1 * d
+    selectedMob.translate(-1 * d, 0, camera.mobs, camera.geometry)
   }
   if (actionInKeys(RIGHT, e.keys)) {
-    selectedMob.position.x += 1 * d
+    selectedMob.translate(1 * d, 0, camera.mobs, camera.geometry)
   }
 
   if (keys.H in e.keys) {

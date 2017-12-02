@@ -1,4 +1,8 @@
 {
   "mine": "assets/testmine.png",
+  "basicMine": "assets/mine_basic.png",
+  "basicEnemy": "assets/mine_basic.png",
+  "player": "assets/player_char.png",
+  "terrain": "assets/terrain.png",
   "test": "assets/test.jpg"
 }

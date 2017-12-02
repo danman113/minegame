@@ -1,8 +1,9 @@
-import { pt } from 'math'
+// import { pt } from 'math'
 
 export class Mob {
-  constructor (pos = pt(0, 0)) {
-    this.position = pos
+  constructor (circle) {
+    this.position = circle.position
+    this.collision = circle
   }
   render (c, camera) {
     c.fillStyle = '#f22'
@@ -10,8 +11,30 @@ export class Mob {
     c.arc(
       this.position.x + camera.position.x,
       this.position.y + camera.position.y,
-      20, 0, Math.PI * 2
+      this.collision.radius, 0, Math.PI * 2
     )
     c.fill()
+  }
+  _translate (x, y) {
+    this.collision.translate(x, y)
+    this.position.x += x
+    this.position.y += y
+  }
+
+  translate (x, y, mobs, geometry) {
+    this._translate(x, y)
+    for (let inter of mobs) {
+      if (inter !== this && this.collision.intersectsCircle(inter.collision)) {
+        this._translate(-x, -y)
+        return false
+      }
+    }
+    for (let geom of geometry) {
+      if (this.collision.intersectsPoly(geom.polygon)) {
+        this._translate(-x, -y)
+        return false
+      }
+    }
+    return true
   }
 }
