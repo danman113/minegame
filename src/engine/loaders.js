@@ -1,7 +1,5 @@
 import { Howl } from 'howler'
 
-console.log(Howler)
-
 export class ImageLoader {
   constructor (manifest) {
     this.manifest = manifest
@@ -56,8 +54,6 @@ export class AudioLoader {
       asset.loaded = false
       this.assets[name] = asset
       asset.once('load', _ => {
-        console.log(asset)
-        console.log(Array(16).join('*'))
         asset.loaded = true
       }, false)
     }

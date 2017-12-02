@@ -11,6 +11,8 @@ class Engine {
     middle: false
   }
 
+  state = {}
+
   _width = 500
   _height = 500
 

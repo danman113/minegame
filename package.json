@@ -8,7 +8,7 @@
     "test:unit": "$(npm bin)/mocha --compilers js:babel-core/register ./test/**/*.spec.js",
     "lint": "$(npm bin)/standard src/**/*.js --fix",
     "lint:demos": "$(npm bin)/standard demos/**/*.js --fix",
-    "start": "node server.js; $(npm bin)/webpack -w",
+    "start": "$(npm bin)/webpack -w",
     "build": "$(npm bin)/webpack",
     "test:isomorphic": "$(npm bin)/webpack; node ./dist/out.js"
   },
@@ -52,6 +52,8 @@
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
     "eslint": "^4.12.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
     "howler": "^2.0.5",
     "lodash": "^4.17.4"
   }
