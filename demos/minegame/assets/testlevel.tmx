@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="2017.11.22" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="32" tileheight="32" infinite="1" nextobjectid="6">
+ <layer name="Tile Layer 1" width="16" height="16">
+  <data encoding="csv"/>
+ </layer>
+ <objectgroup name="geometry">
+  <properties>
+   <property name="ondeath" type="file" value="../../assetloader/test.mp3"/>
+  </properties>
+  <object id="1" x="-77.6381" y="-123.565" rotation="33">
+   <polygon points="0,0 98.4144,-33.8983 158.557,51.3942 14.2154,88.573"/>
+  </object>
+  <object id="2" x="316.02" y="-145.435">
+   <properties>
+    <property name="collision" type="bool" value="false"/>
+   </properties>
+   <polygon points="0,0 -36.0853,82.012 89.6665,143.248 153.089,17.4959 119.191,-83.1055"/>
+  </object>
+  <object id="3" x="-13.1219" y="91.8535">
+   <polygon points="0,0 -114.817,103.882 6.56096,147.622 139.967,44.8332 136.687,-40.4593 40.4593,-87.4795"/>
+  </object>
+  <object id="4" x="271.28" y="167.305">
+   <polygon points="0,0 29.5243,89.6665 131.219,-12.0284 109.349,-79.825"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="mobs"/>
+</map>

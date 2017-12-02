@@ -35,8 +35,6 @@ export default class Camera {
   }
 
   centerOn (position) {
-    // this.x=-x+engine.width/2-width/2
-		// this.y=-y+engine.height/2-height/2
     this.position.x = -position.x + (this.width / 2)
     this.position.y = -position.y + (this.height / 2)
   }

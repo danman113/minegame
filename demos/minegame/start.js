@@ -53,8 +53,6 @@ keyM.addEdge(settingsButton, {
 
 startContainer.addChildren(startButton, settingsButton)
 
-console.log(startContainer)
-
 const render = function (c) {
   c.clearRect(0, 0, this.width, this.height)
 
