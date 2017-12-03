@@ -13,14 +13,15 @@ export default class Camera {
   render (c, e) {
     this.width = e.width
     this.height = e.height
+
+    for (let projectile of this.projectiles) {
+      projectile.render(c, this, e)
+    }
     for (let geom of this.geometry) {
       geom.render(c, this, e)
     }
     for (let mob of this.mobs) {
       mob.render(c, this, e)
-    }
-    for (let projectile of this.projectiles) {
-      projectile.render(c, this, e)
     }
   }
 
@@ -37,5 +38,23 @@ export default class Camera {
   centerOn (position) {
     this.position.x = -position.x + (this.width / 2)
     this.position.y = -position.y + (this.height / 2)
+  }
+
+  update (e, delta) {
+    for (let geom of this.geometry) {
+      if (geom.update) {
+        geom.update(geom, e, this, delta)
+      }
+    }
+    for (let mob of this.mobs) {
+      if (mob.update) {
+        mob.update(mob, e, this, delta)
+      }
+    }
+    for (let projectile of this.projectiles) {
+      if (projectile.update) {
+        projectile.update(projectile, e, this, delta)
+      }
+    }
   }
 }

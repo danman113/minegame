@@ -121,7 +121,7 @@ class Engine {
       this.keyUp(this, e.keyCode, e)
     }, false)
 
-    window.addEventListener('resize', e => {
+    window.addEventListener('resize', _e => {
       if (this.settings.fullscreen) {
         this.width = window.innerWidth
         this.height = window.innerHeight

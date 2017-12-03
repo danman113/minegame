@@ -1,5 +1,5 @@
 import { isNode, DocumentMock, WindowMock } from '../../src/engine/isomorphic-helpers'
-import { Scene, SceneManager } from '../../src/engine/scene'
+import { SceneManager } from '../../src/engine/scene'
 import Engine from '../../src/engine'
 
 import loading from './loading'

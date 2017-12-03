@@ -1,9 +1,10 @@
 // import { pt } from 'math'
 
 export class Mob {
-  constructor (circle) {
+  constructor (circle, update) {
     this.position = circle.position
     this.collision = circle
+    this.update = update
   }
   render (c, camera) {
     c.fillStyle = '#f22'
@@ -21,7 +22,8 @@ export class Mob {
     this.position.y += y
   }
 
-  translate (x, y, mobs, geometry) {
+  translate (x, y, camera) {
+    let { mobs, geometry, projectiles } = camera
     this._translate(x, y)
     for (let inter of mobs) {
       if (inter !== this && this.collision.intersectsCircle(inter.collision)) {
@@ -35,6 +37,13 @@ export class Mob {
         return false
       }
     }
+
+    for (let projectile of projectiles) {
+      if (this.collision.intersectsCircle(projectile.collider)) {
+        projectile.onCollide(this, camera)
+      }
+    }
+
     return true
   }
 }
