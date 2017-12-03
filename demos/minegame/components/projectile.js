@@ -13,7 +13,7 @@ export class Projectile {
     this.friction = friction
   }
 
-  render (c, camera) {
+  render (c, camera, _e) {
     c.fillStyle = '#22f'
     c.beginPath()
     c.arc(
@@ -22,6 +22,16 @@ export class Projectile {
       this.collider.radius, 0, Math.PI * 2
     )
     c.fill()
+    if (this.active) {
+      c.fillStyle = '#f22'
+      c.beginPath()
+      c.arc(
+        this.collider.position.x + camera.position.x,
+        this.collider.position.y + camera.position.y,
+        this.collider.radius / 2, 0, Math.PI * 2
+      )
+      c.fill()
+    }
   }
 
   update (_proj, _e, camera, _d) {
@@ -40,7 +50,7 @@ export class Projectile {
     let { mobs, geometry, projectiles } = camera
     this._translate(x, y)
     for (let inter of mobs) {
-      if (this.collider.intersectsCircle(inter.collision)) {
+      if (this.collider.intersectsCircle(inter.collider)) {
         this._translate(-x, -y)
         return false
       }
@@ -123,7 +133,7 @@ export class BasicMine extends Projectile {
     let { mobs, geometry, projectiles } = camera
     this._translate(x, y)
     for (let inter of mobs) {
-      if (this.collider.intersectsCircle(inter.collision) && this.active) {
+      if (this.collider.intersectsCircle(inter.collider) && this.active) {
         this._translate(-x, -y)
         this.onCollide(inter, camera)
         return false
@@ -144,5 +154,46 @@ export class BasicMine extends Projectile {
       }
     }
     return true
+  }
+
+  render (c, camera, e) {
+    let images = e.state.imageLoader.images
+    let x = this.collider.position.x + camera.position.x
+    let y = this.collider.position.y + camera.position.y
+    let width = this.collider.radius * 2
+    let height = this.collider.radius * 2
+    let direction = this.velocityVector || pt(0, 1)
+    let degToLook = -Math.atan2(direction.x, direction.y)
+    c.save()
+    c.translate(x, y)
+    c.rotate(degToLook)
+    x = 0
+    y = 0
+    if (this.active) {
+      c.drawImage(images['basicMineActive'], x - width / 2, y - height / 2, width, height)
+    } else {
+      c.drawImage(images['basicMineInactive'], x - width / 2, y - height / 2, width, height)
+    }
+    c.restore()
+
+    if (!global.debug) return
+    c.fillStyle = '#22f'
+    c.beginPath()
+    c.arc(
+      this.collider.position.x + camera.position.x,
+      this.collider.position.y + camera.position.y,
+      this.collider.radius, 0, Math.PI * 2
+    )
+    c.fill()
+    if (this.active) {
+      c.fillStyle = '#f22'
+      c.beginPath()
+      c.arc(
+        this.collider.position.x + camera.position.x,
+        this.collider.position.y + camera.position.y,
+        this.collider.radius / 2, 0, Math.PI * 2
+      )
+      c.fill()
+    }
   }
 }

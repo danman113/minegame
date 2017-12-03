@@ -9,6 +9,7 @@ settings.state.controls = {
   DOWN: [keys.KEY_DOWN, keys.S],
   LEFT: [keys.KEY_LEFT, keys.A],
   RIGHT: [keys.KEY_RIGHT, keys.D],
+  SPRINT: [keys.SHIFT]
 }
 
 let sounds = 100

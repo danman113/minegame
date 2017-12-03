@@ -51,6 +51,14 @@
                          "x":0.939055,
                          "y":-196.263
                         }],
+                 "properties":
+                    {
+                     "texture":"ice"
+                    },
+                 "propertytypes":
+                    {
+                     "texture":"string"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -141,6 +149,20 @@
                  "width":0,
                  "x":-224.421,
                  "y":223.556
+                }, 
+                {
+                 "id":25,
+                 "properties":
+                    {
+                     "spawnTime":23
+                    },
+                 "propertytypes":
+                    {
+                     "spawnTime":"int"
+                    },
+                 "template":"templates.tx",
+                 "x":-17,
+                 "y":-338
                 }],
          "opacity":1,
          "properties":
@@ -166,7 +188,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":25,
+ "nextobjectid":27,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"2017.11.22",

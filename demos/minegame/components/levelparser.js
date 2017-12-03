@@ -14,10 +14,15 @@ const parseGeometry = obj => {
     if (obj.rotation) {
       newpoly.rotateDeg(obj, obj.rotation)
     }
+    let texture = 'terrain'
+    if (obj.properties) {
+      texture = obj.properties.texture
+    }
     return new Geometry({
       polygon: newpoly,
       rotation: obj.rotation,
-      visible: obj.visible
+      visible: obj.visible,
+      texture: texture,
     })
   }
 }

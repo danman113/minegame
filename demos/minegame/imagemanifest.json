@@ -1,8 +1,10 @@
 {
   "mine": "assets/testmine.png",
-  "basicMine": "assets/mine_basic.png",
-  "basicEnemy": "assets/mine_basic.png",
+  "basicMineInactive": "assets/basic_mine.png",
+  "basicMineActive": "assets/basic_mine_activated.png",
+  "basicEnemy": "assets/enemy_basic.png",
   "player": "assets/player_char.png",
   "terrain": "assets/terrain.png",
+  "ice": "assets/terrain_frozen_overlay.png",
   "test": "assets/test.jpg"
 }
