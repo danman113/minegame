@@ -15,10 +15,11 @@ const onEnter = e => {
 }
 
 let frame = 0
-const render = function (c) {
+const render = (e, c) => {
   // Clear Frame
   frame++
-  c.clearRect(0, 0, this.width, this.height)
+  // console.log(c)
+  c.clearRect(0, 0, e.width, e.height)
 
   // Loading with dots
   const fontSize = 30
@@ -28,15 +29,15 @@ const render = function (c) {
   const textWidth = c.measureText(text).width
   const dotString = dots.substring(0, Math.floor(frame / 40) % 4)
   c.fillStyle = '#eee'
-  c.fillText(text + dotString, this.width / 2 - textWidth / 2, this.height / 4 - fontSize * 0.25)
+  c.fillText(text + dotString, e.width / 2 - textWidth / 2, e.height / 4 - fontSize * 0.25)
 
   // Loading Bar
   const loaded = imageLoader.loaded + audioLoader.loaded
   const total = imageLoader.total + audioLoader.total
   const barWidth = 200
   const barHeight = 100
-  const barX = this.width / 2 - barWidth / 2
-  const barY = this.height * 0.35 - barHeight / 2
+  const barX = e.width / 2 - barWidth / 2
+  const barY = e.height * 0.35 - barHeight / 2
   c.fillStyle = '#f44'
   c.fillRect(barX, barY, barWidth * (loaded / total), barHeight)
   c.strokeStyle = '#eee'
@@ -49,13 +50,13 @@ const render = function (c) {
   const loadedText = `Loaded ${loaded2}/${total2} Assets`
   const loadedTextWidth = c.measureText(loadedText).width
   c.fillStyle = '#eee'
-  c.fillText(loadedText, this.width / 2 - loadedTextWidth / 2, this.height * 0.5 - fontSize * 0.25)
+  c.fillText(loadedText, e.width / 2 - loadedTextWidth / 2, e.height * 0.5 - fontSize * 0.25)
 
   c.fillStyle = '#f00'
-  c.fillRect(this.mouse.x - 1, this.mouse.y - 1, 3, 3)
+  c.fillRect(e.mouse.x - 1, e.mouse.y - 1, 3, 3)
 }
 
-const update = function (_e) {
+const update = (_e) => {
   const loaded = imageLoader.loaded + audioLoader.loaded
   const total = imageLoader.total + audioLoader.total
   if (loaded >= total) {

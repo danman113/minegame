@@ -20,18 +20,6 @@
          "objects":[
                 {
                  "height":0,
-                 "id":11,
-                 "name":"0",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":0,
-                 "y":0
-                }, 
-                {
-                 "height":0,
                  "id":17,
                  "name":"",
                  "polygon":[
@@ -119,7 +107,7 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":194.114772287863,
+                 "x":194.115,
                  "y":-275.91
                 }, 
                 {
@@ -149,20 +137,6 @@
                  "width":0,
                  "x":-224.421,
                  "y":223.556
-                }, 
-                {
-                 "id":25,
-                 "properties":
-                    {
-                     "spawnTime":23
-                    },
-                 "propertytypes":
-                    {
-                     "spawnTime":"int"
-                    },
-                 "template":"templates.tx",
-                 "x":-17,
-                 "y":-338
                 }],
          "opacity":1,
          "properties":
@@ -181,14 +155,48 @@
         {
          "draworder":"topdown",
          "name":"mobs",
-         "objects":[],
+         "objects":[
+                {
+                 "id":25,
+                 "properties":
+                    {
+                     "spawnTime":23
+                    },
+                 "propertytypes":
+                    {
+                     "spawnTime":"int"
+                    },
+                 "template":"templates.tx",
+                 "x":-32,
+                 "y":-320
+                }, 
+                {
+                 "height":0,
+                 "id":11,
+                 "name":"0",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"player"
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":0,
+                 "y":0
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
          "x":0,
          "y":0
         }],
- "nextobjectid":27,
+ "nextobjectid":28,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"2017.11.22",

@@ -1,6 +1,6 @@
-import { Scene, SceneManager } from '../../src/engine/scene'
-import { rectToPolygon, pt, sum, sub } from '../../src/math'
-import { Button, Container, Draggable, KeyBoardButtonManager } from '../../src/engine/UI'
+import { Scene } from '../../src/engine/scene'
+import { rectToPolygon, pt } from '../../src/math'
+import { Button, Container, KeyBoardButtonManager } from '../../src/engine/UI'
 import * as keys from 'engine/keys'
 
 let settings = new Scene()
@@ -15,8 +15,8 @@ settings.state.controls = {
 let sounds = 100
 let music = 100
 
-const centerButton = (margins, offset = 0) => {
-  return function(e) {
+const centerButton = (margins, _offset = 0) => {
+  return function (e) {
     this.position.x = e.width * margins
     this.dimensions = rectToPolygon(0, 0, e.width * (1 - margins * 2), this.dimensions.verticies[2].y)
   }
@@ -32,7 +32,7 @@ let musicButton = new Button({
   text: 'Music',
   update: centerButton(0.25),
   fontSize: 30,
-  onClick: e => alert('In progress'),
+  onClick: _ => alert('In progress'),
   dimensions: rectToPolygon(0, 0, 500, 150),
 })
 
@@ -76,19 +76,18 @@ keyM.addEdge(backButton, {
 
 settingsContainer.addChildren(musicButton, soundButton, backButton)
 
-const render = function (c) {
-  c.clearRect(0, 0, this.width, this.height)
+const render = function (e, c) {
+  c.clearRect(0, 0, e.width, e.height)
 
   settingsContainer.render(c)
 
   c.fillStyle = '#f00'
-  c.fillRect(this.mouse.x - 1, this.mouse.y - 1, 3, 3)
+  c.fillRect(e.mouse.x - 1, e.mouse.y - 1, 3, 3)
 }
 
-const update = function() {
-
-  settingsContainer.handleUpdate(this)
-  keyM.handleUpdate(this)
+const update = function (e) {
+  settingsContainer.handleUpdate(e)
+  keyM.handleUpdate(e)
 }
 
 const keyUp = (e, key, evt) => {

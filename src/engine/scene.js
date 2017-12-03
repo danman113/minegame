@@ -36,10 +36,10 @@ class SceneManager {
     }
     this.currentScene = scene
     this.engine.keyEvents = scene.keyEvents
-    this.engine.onClick = scene.onClick
-    this.engine.draw = scene.render
-    this.engine.update = scene.update
-    this.engine.keyUp = scene.keyUp
+    this.engine.onClick = scene.onClick.bind(this)
+    this.engine.draw = scene.render.bind(this)
+    this.engine.update = scene.update.bind(this)
+    this.engine.keyUp = scene.keyUp.bind(this)
     if (!silent) {
       scene.onEnter(this.engine, oldScene, this)
     }
@@ -55,4 +55,4 @@ class SceneManager {
   }
 }
 
-export {Scene, SceneManager}
+export { Scene, SceneManager }

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="2017.11.22" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="32" tileheight="32" infinite="1" nextobjectid="20">
+ <layer name="Tile Layer 1" width="16" height="16" locked="1">
+  <data encoding="csv"/>
+ </layer>
+ <objectgroup name="geometry" locked="1">
+  <object id="1" name="0" x="0" y="0">
+   <point/>
+  </object>
+  <object id="3" x="128" y="96">
+   <polygon points="0,0 0,-192 128,-192 128,0"/>
+  </object>
+  <object id="4" x="128" y="-96">
+   <polygon points="0,0 -256,0 -256,-96 0,-96"/>
+  </object>
+  <object id="5" x="-128" y="-96">
+   <polygon points="0,0 0,192 -96,192 -96,0"/>
+  </object>
+  <object id="7" x="0" y="224">
+   <polygon points="0,0 128,0 128,64 -128,64 -128,0"/>
+  </object>
+  <object id="9" x="256" y="352">
+   <polygon points="0,0 192,-256 192,0"/>
+  </object>
+  <object id="10" x="-256" y="352">
+   <polygon points="0,0 -192,-224 -192,0"/>
+  </object>
+  <object id="12" x="-32" y="544">
+   <polygon points="0,0 32,-96 64,0"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="mobs" visible="0" locked="1">
+  <object id="16" x="96" y="-256">
+   <properties>
+    <property name="mob" value="player"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="17" x="192" y="-352">
+   <properties>
+    <property name="mob" value="basic"/>
+    <property name="spawnTime" type="int" value="10"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="18" x="-128" y="-384">
+   <properties>
+    <property name="mob" value="basic"/>
+    <property name="spawnTime" type="int" value="5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="19" x="-192" y="-256">
+   <properties>
+    <property name="mob" value="basic"/>
+    <property name="spawnTime" type="int" value="5"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup name="navmesh"/>
+</map>

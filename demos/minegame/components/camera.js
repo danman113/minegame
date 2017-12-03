@@ -8,6 +8,7 @@ export default class Camera {
     this.mobs = []
     this.projectiles = []
     this.geometry = []
+    this.naveMesh = []
   }
 
   render (c, e) {
@@ -56,5 +57,10 @@ export default class Camera {
         projectile.update(projectile, e, this, delta)
       }
     }
+  }
+
+  screenShake (amount) {
+    this.position.x += (Math.random() - 0.5) * amount
+    this.position.y += (Math.random() - 0.5) * amount
   }
 }

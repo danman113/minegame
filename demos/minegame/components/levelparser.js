@@ -1,4 +1,6 @@
 import { pt, Polygon } from 'math'
+import Player from './player'
+import { BasicEnemy } from './mob'
 import Geometry from './geometry'
 
 const parseGeometry = obj => {
@@ -27,8 +29,26 @@ const parseGeometry = obj => {
   }
 }
 
+const parseMobs = obj => {
+  if (obj.properties) {
+    console.log('===============')
+    console.log(obj.properties.mob)
+    switch (obj.properties.mob) {
+    case 'player':
+      return new Player(obj.x, obj.y)
+    case 'basic':
+      return new BasicEnemy(obj.x, obj.y, obj.properties.spawnTime || 0)
+    default:
+    }
+    console.log('adfsfd')
+    console.log(obj)
+    // texture = obj.properties.texture
+  }
+}
+
 export const loadTiled = json => {
   let geometry = []
+  let mobs = []
   for (let layer of json.layers) {
     switch (layer.name) {
     case 'geometry':
@@ -40,9 +60,19 @@ export const loadTiled = json => {
         }
       }
       break
+    case 'mobs':
+      console.log(layer)
+      for (let obj of layer.objects) {
+        let mob = parseMobs(obj)
+        if (mob) {
+          mobs.push(mob)
+        }
+      }
+      break
     }
   }
   return {
-    geometry
+    geometry,
+    mobs
   }
 }

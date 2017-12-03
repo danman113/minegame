@@ -53,18 +53,18 @@ keyM.addEdge(settingsButton, {
 
 startContainer.addChildren(startButton, settingsButton)
 
-const render = function (c) {
-  c.clearRect(0, 0, this.width, this.height)
+const render = (e, c) => {
+  c.clearRect(0, 0, e.width, e.height)
 
   startContainer.render(c)
 
   c.fillStyle = '#f00'
-  c.fillRect(this.mouse.x - 1, this.mouse.y - 1, 3, 3)
+  c.fillRect(e.mouse.x - 1, e.mouse.y - 1, 3, 3)
 }
 
-const update = function () {
-  startContainer.handleUpdate(this)
-  keyM.handleUpdate(this)
+const update = function (e) {
+  startContainer.handleUpdate(e)
+  keyM.handleUpdate(e)
 }
 
 const keyUp = (e, key, evt) => {

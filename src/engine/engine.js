@@ -59,7 +59,7 @@ class Engine {
   // Starts the event loop
   run (delta) {
     this.update(this, delta)
-    this.draw(this.context)
+    this.draw(this, this.context)
     window.requestAnimationFrame(delta => this.run(delta))
   }
 
@@ -128,7 +128,7 @@ class Engine {
       }
     }, false)
 
-    this.run()
+    this.run(0)
   }
 
   set width (w) {

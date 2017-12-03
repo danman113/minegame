@@ -101,11 +101,11 @@ export default class Button extends Container {
     this.strokeColor = strokeColor
     this.textAlign = textAlign
     this.verticalAlign = verticalAlign
-    this.renderDefault = renderDefault.bind(this)
-    this.renderHover = renderHover.bind(this)
-    this.renderDown = renderDown.bind(this)
+    this.renderDefault = renderDefault
+    this.renderHover = renderHover
+    this.renderDown = renderDown
     this.update = u
-    this.onClick = onClick.bind(this)
+    this.onClick = onClick
     this.state = 0
   }
 
