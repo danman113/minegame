@@ -3,6 +3,12 @@ const webpack = require('webpack');
 const fs = require('fs')
 
 const demos = fs.readdirSync(path.resolve(__dirname, 'demos'))
+for (let i = demos.length - 1; i >= 0; i--) {
+  let filename = demos[i]
+  if (filename.charAt(0) === '.') {
+    demos.splice(i, 1)
+  }
+}
 const entries = {}
 demos.map(key => entries[key] = './demos/' + key + '/index.js')
 entries.out = './src/main.js'

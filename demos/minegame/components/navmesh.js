@@ -1,4 +1,4 @@
-import { pt, Ray, sum, sub, unit, distance, Segment } from 'math'
+import { pt, Ray, sum, sub, unit, distance, Segment, Circle } from 'math'
 import PriorityQueue from 'priorityqueuejs'
 export class NavPoint {
   constructor (pos = pt(0, 0)) {
@@ -62,7 +62,7 @@ export default class NavMesh {
         let i = 0
         for (let neighbor of smallest.point.neighbors) {
           i++
-          if (i > 8) break
+          if (i > 6) break
           var edge = {
             cost: smallest.cost + neighbor.cost,
             point: neighbor.point,
@@ -80,6 +80,17 @@ export default class NavMesh {
   }
 
   computeNavmeshNeighbors (geometry) {
+    for (let i = this.points.length - 1; i >= 0; i--) {
+      const nav = this.points[i]
+      let circle = new Circle(nav.position, 25)
+      for (let geom of geometry) {
+        if (circle.intersectsPoly(geom.polygon)) {
+          this.points.splice(i, 1)
+          break
+        }
+      }
+    }
+
     for (let nav of this.points) {
       for (let nextNav of this.points) {
         if (nav === nextNav) continue
