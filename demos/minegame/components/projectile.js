@@ -1,4 +1,4 @@
-import { Circle, pt, distance, ZERO, unit, scalar } from 'math'
+import { Circle, pt, distance, ZERO, unit, scalar, clamp } from 'math'
 
 export class Projectile {
   constructor ({
@@ -22,16 +22,6 @@ export class Projectile {
       this.collider.radius, 0, Math.PI * 2
     )
     c.fill()
-    if (this.active) {
-      c.fillStyle = '#f22'
-      c.beginPath()
-      c.arc(
-        this.collider.position.x + camera.position.x,
-        this.collider.position.y + camera.position.y,
-        this.collider.radius / 2, 0, Math.PI * 2
-      )
-      c.fill()
-    }
   }
 
   update (_proj, _e, camera, _d) {
@@ -116,7 +106,6 @@ export class BasicMine extends Projectile {
       const proj = camera.projectiles[i]
       if (proj === target) {
         console.log('BOOOM')
-        camera.projectiles.splice(i, 1)
         camera.screenShake(20)
         found = true
       }
@@ -126,6 +115,7 @@ export class BasicMine extends Projectile {
       const projs = camera.projectiles[i]
       if (this === projs) {
         camera.projectiles.splice(i, 1)
+        camera.projectiles.push(new Explosion(this.collider.position))
         return
       }
     }
@@ -197,5 +187,81 @@ export class BasicMine extends Projectile {
       )
       c.fill()
     }
+  }
+}
+
+export class Explosion extends Projectile {
+  constructor (
+    pos = pt(0, 0),
+    maxRadius = 50
+  ) {
+    super({
+      collider: new Circle(pos, 20),
+      acceleration: 0
+    })
+    this.maxRadius = maxRadius
+    this.maxLife = 20
+    this.currentLife = 0
+    this.active = true
+  }
+
+  update (_proj, _e, camera, _d) {
+    this.collider = new Circle(this.collider.position, clamp((this.collider.radius + 3), 0, this.maxRadius))
+    if (this.collider.radius >= this.maxRadius) {
+      this.active = false
+    }
+    if (!this.active) {
+      this.currentLife++
+      if (this.currentLife > this.maxLife) {
+        let index = camera.projectiles.indexOf(this)
+        camera.projectiles.splice(index, 1)
+      }
+      return
+    }
+    for (let i = camera.mobs.length - 1; i >= 0; i--) {
+      const mob = camera.mobs[i]
+      if (this.collider.intersectsCircle(mob.collider)) {
+        camera.mobs.splice(i, 1)
+      }
+    }
+    for (let i = camera.projectiles.length - 1; i >= 0; i--) {
+      const proj = camera.projectiles[i]
+      if (proj === this) continue
+      if (this.collider.intersectsCircle(proj.collider)) {
+        camera.projectiles.splice(i, 1)
+      }
+    }
+  }
+
+  onCollide (target, camera) {
+    if (!this.active) return
+    let found = false
+    for (let i = 0; i < camera.mobs.length && !found; i++) {
+      const mob = camera.mobs[i]
+      if (mob === target) {
+        console.log('BOOOM')
+        camera.mobs.splice(i, 1)
+        found = true
+      }
+    }
+    for (let i = 0; i < camera.projectiles.length && !found; i++) {
+      const proj = camera.projectiles[i]
+      if (proj === target) {
+        console.log('BOOOM')
+        found = true
+      }
+    }
+  }
+
+  render (c, camera, _e) {
+    console.log('Explosion')
+    c.fillStyle = `rgba(255, ${Math.floor(255 - (Math.random() * 100))}, ${(Math.floor(Math.random() * 50))},${1 - (this.currentLife / this.maxLife)})`
+    c.beginPath()
+    c.arc(
+      this.collider.position.x + camera.position.x,
+      this.collider.position.y + camera.position.y,
+      this.collider.radius, 0, Math.PI * 2
+    )
+    c.fill()
   }
 }

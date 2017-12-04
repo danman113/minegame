@@ -65,7 +65,9 @@ export class BasicEnemy extends Mob {
   setPath (src, dest, camera) {
     if (!this.path || this.path.age > 5) {
       this.path = camera.navMesh.search(src, dest)
-      this.path.age = 0
+      if (this.path) {
+        this.path.age = 0
+      }
     } else {
 
     }

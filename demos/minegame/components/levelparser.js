@@ -45,7 +45,6 @@ const parseMobs = obj => {
 }
 
 const parseNavMesh = obj => {
-  console.log(obj.x, obj.y)
   return new NavPoint(obj)
 }
 

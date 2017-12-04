@@ -125,10 +125,14 @@
                         }],
                  "properties":
                     {
+                     "strokeColor":"yellow",
+                     "strokeLength":20,
                      "texture":"wall"
                     },
                  "propertytypes":
                     {
+                     "strokeColor":"string",
+                     "strokeLength":"int",
                      "texture":"string"
                     },
                  "rotation":0,

@@ -29,36 +29,6 @@ export default class Stage {
       }
       // Draw the point
       c.fillRect(this.camera.position.x + nav.position.x, this.camera.position.y + nav.position.y, 5, 5)
-      // for (let nav of this.camera.navMesh.points) {
-      //   if (nav.position.y !== 32) {
-      //     continue
-      //   }
-      //   for (let nextNav of this.camera.navMesh.points) {
-      //     if (nav === nextNav) continue
-      //     let seg = new Segment(
-      //       (nav.position),
-      //       (nextNav.position)
-      //     )
-      //     let seg2 = new Segment(
-      //       sum(this.camera.position, nav.position),
-      //       sum(this.camera.position, nextNav.position)
-      //     )
-      //     let inter = false
-      //     for (let geom of this.camera.geometry) {
-      //       inter = geom.polygon.intersectsSegment(seg)
-      //       if (inter) break
-      //     }
-      //     drawRay(c, seg2, 'blue')
-      //     if (inter) {
-      //       c.fillStyle = 'green'
-      //       let p = sum(inter, this.camera.position)
-      //       c.fillRect(p.x - 5, p.y - 5, 11, 11)
-      //     } else {
-      //       c.fillStyle = 'yellow'
-      //       c.fillRect(seg2.p1.x - 5, seg2.p1.y - 5, 11, 11)
-      //     }
-      //   }
-      // }
       if (!global.debug) continue
       c.fillStyle = 'white'
       for (let neighbor of nav.neighbors) {
@@ -81,6 +51,7 @@ export default class Stage {
       }
     }
 
+    c.lineWidth = 3
     c.fillStyle = '#d1e207'
     c.fillRect(e.width - 120, 20, 100 * (this.charge / this.maxCharge), 50)
 
