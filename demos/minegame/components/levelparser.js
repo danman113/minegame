@@ -17,16 +17,12 @@ const parseGeometry = obj => {
     if (obj.rotation) {
       newpoly.rotateDeg(obj, obj.rotation)
     }
-    let texture = 'terrain'
-    if (obj.properties) {
-      texture = obj.properties.texture
-    }
+
     return new Geometry({
       ...obj.properties,
       polygon: newpoly,
       rotation: obj.rotation,
       visible: obj.visible,
-      texture: texture,
     })
   }
 }

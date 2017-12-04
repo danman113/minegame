@@ -6,6 +6,7 @@ export default class Camera {
     this.position = initialPosition
     this.height = 400
     this.width = 400
+    this.tileSize = 500
     this.mobs = []
     this.projectiles = []
     this.geometry = []
@@ -15,6 +16,21 @@ export default class Camera {
   render (c, e) {
     this.width = e.width
     this.height = e.height
+
+    // Drag Ground
+    let xOffset = -Math.abs((this.position.x - 0xFFFFFFF) % this.tileSize)
+    let yOffset = -Math.abs((this.position.y - 0xFFFFFFF) % this.tileSize)
+    let x = Math.ceil(this.width / this.tileSize) + 1
+    let y = Math.ceil(this.height / this.tileSize) + 1
+    for (let i = 0; i < x * y; i++) {
+      let xi = i % x
+      let yi = Math.floor(i / y)
+      c.drawImage(
+        e.state.imageLoader.images['floor'],
+        xOffset + xi * this.tileSize, yOffset + yi * this.tileSize,
+        this.tileSize, this.tileSize
+      )
+    }
 
     for (let projectile of this.projectiles) {
       projectile.render(c, this, e)
@@ -30,9 +46,11 @@ export default class Camera {
   addMob (...mobs) {
     this.mobs.push(...mobs)
   }
+
   addProjectile (...projectiles) {
     this.projectiles.push(...projectiles)
   }
+
   addGeometry (...geometry) {
     for (let geo of geometry) {
       let center = geo.polygon.center()
@@ -55,15 +73,13 @@ export default class Camera {
   }
 
   centerOn (position) {
-    this.position.x = -position.x + (this.width / 2)
-    this.position.y = -position.y + (this.height / 2)
+    let desired = pt((-position.x + (this.width / 2)), (-position.y + (this.height / 2)))
+    let delta = sub(desired, this.position)
+    this.position.x += delta.x / 15
+    this.position.y += delta.y / 15
   }
 
   update (e, delta, ...rest) {
-    // for (let i = 0; i < 20; i++) {
-    // this.navMesh.path = this.navMesh.search(this.navMesh.points[0], this.navMesh.points[this.navMesh.size - 2])
-    // }
-    // console.log(this.navMesh.path)
     for (let geom of this.geometry) {
       if (geom.update) {
         geom.update(geom, e, this, delta, ...rest)

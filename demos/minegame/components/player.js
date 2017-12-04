@@ -28,22 +28,25 @@ export default class Player extends Mob {
 
   update (mob, e, camera, d) {
     if (actionInKeys(SPRINT, e.keys)) {
-      this.speed = 4
+      this.speed = 5
     } else {
-      this.speed = 2
+      this.speed = 3
     }
+    let dx = 0
+    let dy = 0
     if (actionInKeys(UP, e.keys)) {
-      this.translate(0, -1 * d * this.speed, camera)
+      dy = -1
     }
     if (actionInKeys(DOWN, e.keys)) {
-      this.translate(0, 1 * d * this.speed, camera)
+      dy = 1
     }
     if (actionInKeys(LEFT, e.keys)) {
-      this.translate(-1 * d * this.speed, 0, camera)
+      dx = -1
     }
     if (actionInKeys(RIGHT, e.keys)) {
-      this.translate(1 * d * this.speed, 0, camera)
+      dx = 1
     }
+    this.translate(dx * d * this.speed, dy * d * this.speed, camera)
   }
 
   render (c, camera, e) {

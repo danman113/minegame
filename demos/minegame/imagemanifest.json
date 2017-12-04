@@ -1,5 +1,4 @@
 {
-  "mine": "assets/testmine.png",
   "basicMineInactive": "assets/basic_mine.png",
   "basicMineActive": "assets/basic_mine_activated.png",
   "frostMineInactive": "assets/frost_mine.png",
@@ -8,9 +7,11 @@
   "incendiaryMineActive": "assets/incendiary_mine_activated.png",
   "basicEnemy": "assets/enemy_basic.png",
   "player": "assets/player_char.png",
-  "terrain": "assets/floor_texture_1.png",
+  "floor": "assets/floor_texture_1.png",
   "floor2": "assets/floor_texture_2.png",
   "wall": "assets/wall_texture.png",
   "ice": "assets/terrain_frozen_overlay.png",
-  "test": "assets/test.jpg"
+  "logo": "assets/mine_games_logo.png",
+  "crosshair": "assets/crosshairs.png",
+  "boostBar": "assets/boost_bar.png"
 }

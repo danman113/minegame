@@ -1,5 +1,7 @@
 import { Circle, pt, distance, ZERO, unit, scalar, clamp } from 'math'
 
+const SCREEN_SHAKE = 50
+
 export class Projectile {
   constructor ({
     collider,
@@ -98,7 +100,7 @@ export class BasicMine extends Projectile {
       if (mob === target) {
         console.log('BOOOM')
         camera.mobs.splice(i, 1)
-        camera.screenShake(20)
+        camera.screenShake(SCREEN_SHAKE)
         found = true
       }
     }
@@ -106,7 +108,7 @@ export class BasicMine extends Projectile {
       const proj = camera.projectiles[i]
       if (proj === target) {
         console.log('BOOOM')
-        camera.screenShake(20)
+        camera.screenShake(SCREEN_SHAKE)
         found = true
       }
     }

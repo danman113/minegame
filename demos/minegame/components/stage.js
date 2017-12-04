@@ -53,13 +53,30 @@ export default class Stage {
 
     c.lineWidth = 3
     c.fillStyle = '#d1e207'
-    c.fillRect(e.width - 120, 20, 100 * (this.charge / this.maxCharge), 50)
+    let barWidth = 250
+    c.fillRect(e.width - (barWidth + 20), 20, barWidth * (this.charge / this.maxCharge), 75)
 
-    c.strokeStyle = '#eee'
-    c.strokeRect(e.width - 120, 20, 100, 50)
+    c.drawImage(
+      e.state.imageLoader.images['boostBar'],
+      e.width - (barWidth + 20),
+      20,
+      barWidth,
+      75
+    )
+
+    // c.strokeStyle = '#eee'
+    // c.strokeRect(e.width - 120, 20, 100, 50)
 
     c.fillStyle = '#f00'
-    c.fillRect(e.mouse.x - 1, e.mouse.y - 1, 3, 3)
+    let crossHairSize = 50
+    let half = Math.floor(crossHairSize / 2)
+    c.drawImage(
+      e.state.imageLoader.images['crosshair'],
+      e.mouse.x - half,
+      e.mouse.y - half,
+      crossHairSize,
+      crossHairSize
+    )
   }
 
   totalDelta = 0
