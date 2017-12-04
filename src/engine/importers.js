@@ -60,7 +60,7 @@ const readJson = (fileEvent, callback) => {
 const readPlaintext = (fileEvent, callback) => {
   let files = fileEvent.target.files
   for (let file of files) {
-      /* global FileReader */
+    /* global FileReader */
     let reader = new FileReader()
 
     reader.onload = function (e) {
