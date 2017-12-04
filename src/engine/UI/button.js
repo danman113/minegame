@@ -50,11 +50,42 @@ const defaultButtonRender = function (c) {
   this.renderChildren(c)
 }
 
+const imageButtonRender = function (c, e, img) {
+  const rect = this.dimensions.AABB()
+  c.fillStyle = this.strokeColor
+  if (this.state === 1) {
+    c.drawImage(e.state.imageLoader.images[img.imageHover], this.globalPosition.x - 50, this.globalPosition.y, rect.width + 50, rect.height)
+  } else if (this.state === 2) {
+    c.drawImage(e.state.imageLoader.images[img.imageDown], this.globalPosition.x, this.globalPosition.y, rect.width, rect.height)
+  } else {
+    c.drawImage(e.state.imageLoader.images[img.image], this.globalPosition.x, this.globalPosition.y, rect.width, rect.height)
+  }
+  c.fillStyle = this.fillColor
+  // c.fillRect(this.globalPosition.x, this.globalPosition.y, rect.width, rect.height * 0.75)
+  c.fillStyle = this.textColor
+  c.font = this.fontSize + 'px ' + this.font
+  const width = c.measureText(this.text)
+  let x = 0
+  let y = 0
+  if (this.textAlign === 'center') {
+    x = this.globalPosition.x + rect.width / 2 - Math.min(width.width / 2, rect.width / 2)
+  } else {
+    x = this.globalPosition.x
+  }
+  if (this.verticalAlign === 'center') {
+    y = this.globalPosition.y + (rect.height * 1) / 2 + this.fontSize / 4
+  } else {
+    y = this.globalPosition.y + this.fontSize
+  }
+  c.fillText(this.text, x, y, rect.width)
+  this.renderChildren(c)
+}
+
 export default class Button extends Container {
   static states = ['default', 'hover', 'down']
   constructor ({
     text = '',
-    font = 'sans-serif',
+    font = 'MTV2C, sans-serif',
     fontSize = 14,
     textColor = '#fff',
     fillColor = '#2E9AFE',
@@ -63,7 +94,7 @@ export default class Button extends Container {
     verticalAlign = 'center',
     update = noop,
     onClick = _ => console.log('click'),
-    render = c => {
+    render = (c, _e) => {
       if (this.state === 1) {
         this.renderHover(c)
       } else if (this.state === 2) {
@@ -129,5 +160,32 @@ export default class Button extends Container {
 
   _onChildAdd () {
     this._addClickHandler()
+  }
+}
+
+export class ImageButton extends Button {
+  constructor ({
+    image = 'buttonStatic',
+    imageHover = 'buttonHover',
+    imageDown = 'buttonClicked',
+    ...rest
+  }) {
+    super({...rest})
+    this.renderDown = imageButtonRender
+    this.renderHover = imageButtonRender
+    this.renderDefault = imageButtonRender
+    this.image = image
+    this.imageHover = imageHover
+    this.imageDown = imageDown
+    const r = (c, e) => {
+      if (this.state === 1) {
+        this.renderHover(c, e, this)
+      } else if (this.state === 2) {
+        this.renderDown(c, e, this)
+      } else {
+        this.renderDefault(c, e, this)
+      }
+    }
+    this.render = r
   }
 }

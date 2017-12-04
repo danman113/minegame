@@ -1033,11 +1033,13 @@
                  "properties":
                     {
                      "mob":"basic",
+                     "round":1,
                      "spawnTime":5
                     },
                  "propertytypes":
                     {
                      "mob":"string",
+                     "round":"int",
                      "spawnTime":"int"
                     },
                  "rotation":0,

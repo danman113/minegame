@@ -13,5 +13,8 @@
   "ice": "assets/terrain_frozen_overlay.png",
   "logo": "assets/mine_games_logo.png",
   "crosshair": "assets/crosshairs.png",
-  "boostBar": "assets/boost_bar.png"
+  "boostBar": "assets/boost_bar.png",
+  "buttonStatic": "assets/button_static.png",
+  "buttonHover": "assets/button_hover.png",
+  "buttonClicked": "assets/button_clicked.png"
 }

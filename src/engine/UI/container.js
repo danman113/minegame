@@ -5,7 +5,7 @@ class Container extends UIElement {
   constructor (
     {
       dimensions = rectToPolygon(0, 0, 100, 100),
-      render = c => this.renderChildren(c),
+      render = (c, e) => this.renderChildren(c, e),
       ...rest
     }
   ) {

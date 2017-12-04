@@ -13,6 +13,19 @@ export default class Stage {
   }) {
     this.loadLevel(level)
     this.onMount = onMount
+    this.scene = null
+  }
+
+  testObjective (_e) {
+    console.log(this.rounds)
+    if (this.camera.mobs.length === 1 && this.camera.mobs[0].type === 'Player' && this.eventManager.events.length <= 0) {
+      this.round++
+      if (this.rounds[this.round].length <= 0) {
+        this.scene.goto('levelSelect')
+      } else {
+        alert('Next Round')
+      }
+    }
   }
 
   render = (e, c) => {
@@ -22,6 +35,7 @@ export default class Stage {
 
     let playerNav = this.camera.navMesh.getNearestPoint(this.player.position)
     for (let nav of this.camera.navMesh.points) {
+      if (!this.debug) break
       if (nav === playerNav) {
         c.fillStyle = 'white'
       } else {
@@ -81,11 +95,15 @@ export default class Stage {
 
   totalDelta = 0
   update = (e, delta) => {
+    this.e = e
     let roundTime = (Date.now() - this.roundStart) / 1000
     let d = (delta - this.totalDelta) / (1000 / 60)
     if (d > 5) d = 1
     this.totalDelta = delta
+    this.eventManager.events = this.rounds[this.round]
     this.eventManager.update(roundTime, this.camera)
+
+    this.testObjective(e)
 
     let p = this.camera.navMesh.getNearestPoint(this.player.position)
     this.camera.navMesh.path = this.camera.navMesh.search(this.camera.navMesh.points[0], p)
@@ -125,6 +143,8 @@ export default class Stage {
     [keys.ONE]: _ => { this.selectedMob = this.camera.mobs[0] },
     [keys.TWO]: _ => { this.selectedMob = this.camera.mobs[1] },
     [keys.THREE]: _ => { this.selectedMob = this.camera.mobs[2] },
+    [keys.ESC]: _ => { this.scene.goto('pause') },
+    [keys.ENTER]: _ => { this.scene.goto('pause') },
     [keys.R]: _ => { global.debug = !global.debug }
   }
 
@@ -143,6 +163,8 @@ export default class Stage {
     this.charge = 0
     this.maxCharge = 60
     this.totalDelta = 0
+    this.rounds = [[], [], [], [], [], [], []]
+    this.round = 0
     this.roundStart = Date.now()
     this.eventManager = new EventManager()
     let lvl = loadTiled(level)
@@ -153,18 +175,16 @@ export default class Stage {
       if (mob.type === 'Player') {
         this.player = mob
       }
-      if (mob.spawnTime) {
-        this.eventManager.addEvent(new Event(mob.spawnTime, _ => {
-          this.camera.addMob(mob)
-        }))
-      } else {
+      let rnd = mob.round || 0
+      this.rounds[rnd].push(new Event(mob.spawnTime || 0, _ => {
         this.camera.addMob(mob)
-      }
+      }))
     }
     this.selectedMob = this.player
   }
 
   start (scene) {
+    this.scene = scene
     this.mount(scene)
   }
 }

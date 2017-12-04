@@ -33,7 +33,7 @@ const parseMobs = obj => {
     case 'player':
       return new Player(obj.x, obj.y)
     case 'basic':
-      return new BasicEnemy(obj.x, obj.y, obj.properties.spawnTime || 0)
+      return new BasicEnemy(obj.x, obj.y, obj.properties.spawnTime || 0, obj.properties.round || 0)
     default:
     }
     // texture = obj.properties.texture

@@ -19,7 +19,7 @@ export default class Camera {
   render (c, e) {
     this.width = e.width
     this.height = e.height
-    this.viewDistance = Math.max(this.width, this.height)
+    this.viewDistance = Math.max(this.width, this.height) + 250
 
     // Drag Ground
     let xOffset = -Math.abs((this.position.x - 0xFFFFFFF) % this.tileSize)

@@ -54,10 +54,11 @@ export class Mob {
 
 export class BasicEnemy extends Mob {
   type = 'BasicEnemy'
-  constructor (x, y, spawnTime = 0) {
+  constructor (x, y, spawnTime = 0, round = 0) {
     super(new Circle(pt(x, y), 20))
     this.spawnTime = spawnTime
     this.targetVector = null
+    this.round = round
     this.path = null
     this.speed = 3
   }

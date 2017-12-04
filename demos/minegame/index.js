@@ -6,6 +6,8 @@ import loading from './loading'
 import start from './start'
 import settings from './settings'
 import game from './game'
+import levelSelect from './levelselect'
+import pause from './pause'
 
 if (isNode()) {
   global.document = new DocumentMock()
@@ -21,7 +23,9 @@ let scenes = {
   loading,
   start,
   settings,
-  game
+  game,
+  levelSelect,
+  pause
 }
 
 console.log('Loaded scenes')

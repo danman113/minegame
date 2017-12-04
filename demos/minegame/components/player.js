@@ -24,6 +24,7 @@ export default class Player extends Mob {
   constructor (x, y) {
     super(new Circle(pt(x, y), 25))
     this.speed = 2
+    this.alive = true
   }
 
   update (mob, e, camera, d) {

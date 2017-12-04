@@ -1,9 +1,9 @@
 import { Scene } from 'engine/scene'
 import { rectToPolygon, pt } from 'math'
-import { Button, Container, KeyBoardButtonManager, ImageButton } from 'engine/UI'
+import { Button, Container, KeyBoardButtonManager } from 'engine/UI'
 import * as keys from 'engine/keys'
 
-let start = new Scene()
+let pause = new Scene()
 
 const centerButton = (margins) => {
   return function (e) {
@@ -12,46 +12,52 @@ const centerButton = (margins) => {
   }
 }
 
-let startContainer = new Container({
+let pauseContainer = new Container({
   dimensions: rectToPolygon(0, 0, 900, 500),
   position: pt(0, 0),
 })
 
-let startButton = new ImageButton({
+let pauseButton = new Button({
   position: pt(40, 250),
-  text: 'Start Game',
+  text: 'Resume',
   update: centerButton(0.25),
   fontSize: 50,
-  onClick: _ => start.goto('levelSelect'),
+  onClick: _ => setTimeout(_ => pause.goto('game', true), 20),
   dimensions: rectToPolygon(0, 0, 500, 150),
 })
 
-let settingsButton = new ImageButton({
+let settingsButton = new Button({
   position: pt(40, 450),
-  text: 'Settings',
+  text: 'Main Menu',
   update: centerButton(0.25),
-  onClick: _ => start.goto('settings'),
+  onClick: _ => setTimeout(_ => pause.goto('start'), 200),
   fontSize: 50,
   dimensions: rectToPolygon(0, 0, 500, 150),
 })
 
 let keyM = new KeyBoardButtonManager({})
 
-keyM.addEdge(startButton, {
-  [keys.KEY_UP]: settingsButton,
-  [keys.KEY_DOWN]: settingsButton,
-  [keys.ENTER]: btn => btn.onClick(),
-})
+pause.onEnter = _ => {
+  pauseContainer.children = []
+  keyM.children = []
+  keyM.selected = null
 
-keyM.addEdge(settingsButton, {
-  [keys.KEY_UP]: startButton,
-  [keys.KEY_DOWN]: startButton,
-  [keys.ENTER]: btn => btn.onClick(),
-})
+  keyM.addEdge(pauseButton, {
+    [keys.KEY_UP]: settingsButton,
+    [keys.KEY_DOWN]: settingsButton,
+    [keys.ENTER]: btn => btn.onClick(),
+  })
 
-// keyM.select(startButton)
+  keyM.addEdge(settingsButton, {
+    [keys.KEY_UP]: pauseButton,
+    [keys.KEY_DOWN]: pauseButton,
+    [keys.ENTER]: btn => btn.onClick(),
+  })
 
-startContainer.addChildren(startButton, settingsButton)
+  // keyM.select(pauseButton)
+
+  pauseContainer.addChildren(pauseButton, settingsButton)
+}
 
 const render = (e, c) => {
   c.clearRect(0, 0, e.width, e.height)
@@ -70,14 +76,14 @@ const render = (e, c) => {
     }
   }
 
-  startContainer.render(c, e)
+  pauseContainer.render(c, e)
 
   c.fillStyle = '#f00'
   c.fillRect(e.mouse.x - 1, e.mouse.y - 1, 3, 3)
 }
 
 const update = function (e) {
-  startContainer.handleUpdate(e)
+  pauseContainer.handleUpdate(e)
   keyM.handleUpdate(e)
 }
 
@@ -88,8 +94,8 @@ const keyUp = (e, key, evt) => {
   }
 }
 
-start.render = render
-start.update = update
-start.onClick = e => startContainer.handleClick(e)
-start.keyUp = keyUp
-export default start
+pause.render = render
+pause.update = update
+pause.onClick = e => pauseContainer.handleClick(e)
+pause.keyUp = keyUp
+export default pause

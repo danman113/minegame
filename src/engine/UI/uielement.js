@@ -8,7 +8,6 @@ export default class UIElement {
     render = noop,
     position = pt(0, 0),
     children = [],
-    polygon = new Polygon()
   }) {
     this.position = position
     this.render = render.bind(this)
@@ -33,9 +32,9 @@ export default class UIElement {
     }
   }
 
-  renderChildren (c) {
+  renderChildren (c, e) {
     for (let child of this.children) {
-      child.render(c)
+      child.render(c, e)
     }
   }
 
