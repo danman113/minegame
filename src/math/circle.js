@@ -15,6 +15,9 @@ export class Circle {
   }
 
   intersectsPoly (poly) {
+    if (poly.intersectsPt(this.position)) {
+      return true
+    }
     for (let i = 0, j = 1; i < poly.verticies.length; i++, j = ((j + 1) % (poly.verticies.length))) {
       const p0 = poly.verticies[i]
       const p1 = poly.verticies[j]

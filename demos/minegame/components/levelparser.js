@@ -1,6 +1,7 @@
 import { pt, Polygon } from 'math'
 import Player from './player'
 import { BasicEnemy } from './mob'
+import { NavPoint } from './navmesh'
 import Geometry from './geometry'
 
 const parseGeometry = obj => {
@@ -31,8 +32,6 @@ const parseGeometry = obj => {
 
 const parseMobs = obj => {
   if (obj.properties) {
-    console.log('===============')
-    console.log(obj.properties.mob)
     switch (obj.properties.mob) {
     case 'player':
       return new Player(obj.x, obj.y)
@@ -40,15 +39,19 @@ const parseMobs = obj => {
       return new BasicEnemy(obj.x, obj.y, obj.properties.spawnTime || 0)
     default:
     }
-    console.log('adfsfd')
-    console.log(obj)
     // texture = obj.properties.texture
   }
+}
+
+const parseNavMesh = obj => {
+  console.log(obj.x, obj.y)
+  return new NavPoint(obj)
 }
 
 export const loadTiled = json => {
   let geometry = []
   let mobs = []
+  let navPoints = []
   for (let layer of json.layers) {
     switch (layer.name) {
     case 'geometry':
@@ -69,10 +72,19 @@ export const loadTiled = json => {
         }
       }
       break
+    case 'navmesh':
+      for (let obj of layer.objects) {
+        let navPoint = parseNavMesh(obj)
+        if (navPoint) {
+          navPoints.push(navPoint)
+        }
+      }
+      break
     }
   }
   return {
     geometry,
-    mobs
+    mobs,
+    navPoints
   }
 }

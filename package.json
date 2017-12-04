@@ -55,6 +55,7 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-node": "^5.2.1",
     "howler": "^2.0.5",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "priorityqueuejs": "^1.0.0"
   }
 }

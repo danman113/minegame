@@ -108,6 +108,7 @@ export class BasicMine extends Projectile {
       if (mob === target) {
         console.log('BOOOM')
         camera.mobs.splice(i, 1)
+        camera.screenShake(20)
         found = true
       }
     }
@@ -116,6 +117,7 @@ export class BasicMine extends Projectile {
       if (proj === target) {
         console.log('BOOOM')
         camera.projectiles.splice(i, 1)
+        camera.screenShake(20)
         found = true
       }
     }

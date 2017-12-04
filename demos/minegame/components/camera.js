@@ -1,4 +1,5 @@
-import { pt } from 'math'
+import { pt, sub, unit, scalar, Ray, Segment, sum } from 'math'
+import NavMesh, { NavPoint } from './navmesh'
 
 export default class Camera {
   constructor (initialPosition = pt(0, 0)) {
@@ -8,7 +9,7 @@ export default class Camera {
     this.mobs = []
     this.projectiles = []
     this.geometry = []
-    this.naveMesh = []
+    this.navMesh = new NavMesh()
   }
 
   render (c, e) {
@@ -33,6 +34,23 @@ export default class Camera {
     this.projectiles.push(...projectiles)
   }
   addGeometry (...geometry) {
+    for (let geo of geometry) {
+      let center = geo.polygon.center()
+      for (let vertex of geo.polygon.verticies) {
+        let direction = scalar(unit(sub(vertex, center)), 75)
+        const point = pt(vertex.x + direction.x, vertex.y + direction.y)
+        let inter = false
+        for (let geo2 of geometry) {
+          if (geo2.polygon.intersectsPt(point)) {
+            inter = true
+            break
+          }
+        }
+        if (inter) continue
+        let np = new NavPoint(point)
+        this.navMesh.addPoints(np)
+      }
+    }
     this.geometry.push(...geometry)
   }
 
@@ -41,20 +59,24 @@ export default class Camera {
     this.position.y = -position.y + (this.height / 2)
   }
 
-  update (e, delta) {
+  update (e, delta, ...rest) {
+    // for (let i = 0; i < 20; i++) {
+    // this.navMesh.path = this.navMesh.search(this.navMesh.points[0], this.navMesh.points[this.navMesh.size - 2])
+    // }
+    // console.log(this.navMesh.path)
     for (let geom of this.geometry) {
       if (geom.update) {
-        geom.update(geom, e, this, delta)
+        geom.update(geom, e, this, delta, ...rest)
       }
     }
     for (let mob of this.mobs) {
       if (mob.update) {
-        mob.update(mob, e, this, delta)
+        mob.update(mob, e, this, delta, ...rest)
       }
     }
     for (let projectile of this.projectiles) {
       if (projectile.update) {
-        projectile.update(projectile, e, this, delta)
+        projectile.update(projectile, e, this, delta, ...rest)
       }
     }
   }

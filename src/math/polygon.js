@@ -6,9 +6,12 @@ class Polygon {
   constructor (...points) {
     this.verticies = [...points]
     this.size = this.verticies.length
+    this._AABB = null
+    this._AABB_DIRTY = true
   }
 
   translate (x, y) {
+    this._AABB_DIRTY = true
     for (let vertex of this.verticies) {
       vertex.x += x
       vertex.y += y
@@ -16,6 +19,7 @@ class Polygon {
   }
 
   rotate (pt, rad) {
+    this._AABB_DIRTY = true
     for (let vertex of this.verticies) {
       const x = vertex.x - pt.x
       const y = vertex.y - pt.y
@@ -58,6 +62,9 @@ class Polygon {
   }
 
   AABB () {
+    if (this._AABB_DIRTY && this._AABB) {
+      return this._AABB
+    }
     let min = this.minPoints()
     let max = this.maxPoints()
     return new Rectangle(min.x, min.y, max.x - min.x, max.y - min.y)
@@ -149,6 +156,20 @@ class Polygon {
       /* eslint-enable no-unused-vars */
     }
     return c
+  }
+
+  intersectsSegment (seg) {
+    for (let i = 0, j = 1, size = this.size; i < size; i++, j = (i + 1) % size) {
+      const p0 = this.verticies[i]
+      const p1 = this.verticies[j]
+      const p2 = seg.p0
+      const p3 = seg.p1
+      const intersectsPt = segmentIntersectsSegment(p0, p1, p2, p3)
+      if (intersectsPt) {
+        return intersectsPt
+      }
+    }
+    return this.intersectsPt(seg.p0)
   }
 
   // Fix later using SAT

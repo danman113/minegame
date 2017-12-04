@@ -13,7 +13,7 @@ setTimeout(function () {
   // console.log(nextStage, game)
   currentStage.loadLevel(Level2)
   game.goto('start')
-}, 5000)
+}, 500)
 
 currentStage.start(game)
 // nextStage.start(game)
