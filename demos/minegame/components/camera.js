@@ -1,4 +1,4 @@
-import { pt, sub, unit, scalar, Ray, Segment, sum } from 'math'
+import { pt, sub, unit, scalar, Ray, Segment, sum, Rectangle, distance } from 'math'
 import NavMesh, { NavPoint } from './navmesh'
 
 export default class Camera {
@@ -6,37 +6,50 @@ export default class Camera {
     this.position = initialPosition
     this.height = 400
     this.width = 400
-    this.tileSize = 500
+    this.tileSize = 512
+    this.shakeDuration = 0
+    this.shakeAmount = 0
     this.mobs = []
     this.projectiles = []
     this.geometry = []
     this.navMesh = new NavMesh()
+    global.camera = this
   }
 
   render (c, e) {
     this.width = e.width
     this.height = e.height
+    this.viewDistance = Math.max(this.width, this.height)
 
     // Drag Ground
     let xOffset = -Math.abs((this.position.x - 0xFFFFFFF) % this.tileSize)
     let yOffset = -Math.abs((this.position.y - 0xFFFFFFF) % this.tileSize)
     let x = Math.ceil(this.width / this.tileSize) + 1
     let y = Math.ceil(this.height / this.tileSize) + 1
-    for (let i = 0; i < x * y; i++) {
-      let xi = i % x
-      let yi = Math.floor(i / y)
-      c.drawImage(
-        e.state.imageLoader.images['floor'],
-        xOffset + xi * this.tileSize, yOffset + yi * this.tileSize,
-        this.tileSize, this.tileSize
-      )
+    for (let i = 0; i < x; i++) {
+      for (let j = 0; j < y; j++) {
+        c.drawImage(
+          e.state.imageLoader.images['floor'],
+          xOffset + i * this.tileSize, yOffset + j * this.tileSize,
+          this.tileSize, this.tileSize
+        )
+      }
     }
 
     for (let projectile of this.projectiles) {
       projectile.render(c, this, e)
     }
     for (let geom of this.geometry) {
-      geom.render(c, this, e)
+      let center = pt(
+        -this.position.x + this.width / 2,
+        -this.position.y + this.height / 2
+      )
+      if (
+        distance(center, geom.polygon.center()) < this.viewDistance
+      ) {
+        geom.render(c, this, e)
+      } else {
+      }
     }
     for (let mob of this.mobs) {
       mob.render(c, this, e)
@@ -80,6 +93,10 @@ export default class Camera {
   }
 
   update (e, delta, ...rest) {
+    if (this.shakeDuration) {
+      this._screenShake()
+      this.shakeDuration--
+    }
     for (let geom of this.geometry) {
       if (geom.update) {
         geom.update(geom, e, this, delta, ...rest)
@@ -97,8 +114,13 @@ export default class Camera {
     }
   }
 
-  screenShake (amount) {
-    this.position.x += (Math.random() - 0.5) * amount
-    this.position.y += (Math.random() - 0.5) * amount
+  _screenShake () {
+    this.position.x += (Math.random() - 0.5) * this.shakeAmount
+    this.position.y += (Math.random() - 0.5) * this.shakeAmount
+  }
+
+  screenShake (amount, duration = 3) {
+    this.shakeDuration = Math.max(duration, this.shakeDuration)
+    this.shakeAmount = amount
   }
 }

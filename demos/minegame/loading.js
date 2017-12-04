@@ -64,8 +64,8 @@ const update = (_e) => {
   }
 }
 
-const keyUp = (e, key, evt) => {
-  console.log(e, key, evt)
+const keyUp = (_e, _key, _evt) => {
+  // console.log(e, key, evt)
 }
 
 loading.render = render

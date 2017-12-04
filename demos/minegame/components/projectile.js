@@ -3,6 +3,7 @@ import { Circle, pt, distance, ZERO, unit, scalar, clamp } from 'math'
 const SCREEN_SHAKE = 50
 
 export class Projectile {
+  type = 'Projectile'
   constructor ({
     collider,
     velocity = 2,
@@ -26,19 +27,19 @@ export class Projectile {
     c.fill()
   }
 
-  update (_proj, _e, camera, _d) {
-    this.translate(1, 1, camera)
+  update (_proj, e, camera, _d) {
+    this.translate(1, 1, camera, e)
   }
 
-  onCollide (mob, camera) {
-    console.log(mob, 'BOOOM', camera)
+  onCollide (_mob, _camera) {
+    // console.log(mob, 'BOOOM', camera)
   }
 
   _translate (x, y) {
     this.collider.translate(x, y)
   }
 
-  translate (x, y, camera) {
+  translate (x, y, camera, e) {
     let { mobs, geometry, projectiles } = camera
     this._translate(x, y)
     for (let inter of mobs) {
@@ -56,7 +57,7 @@ export class Projectile {
 
     for (let projectile of projectiles) {
       if (projectile !== this && this.collider.intersectsCircle(projectile.collider)) {
-        projectile.onCollide(this, camera)
+        projectile.onCollide(this, camera, e)
       }
     }
     return true
@@ -64,6 +65,7 @@ export class Projectile {
 }
 
 export class BasicMine extends Projectile {
+  type = 'BasicMine'
   constructor (
     pos = pt(0, 0),
     target = pt(2, 4),
@@ -79,7 +81,7 @@ export class BasicMine extends Projectile {
     this.velocityVector = scalar(unit(target), velocity)
   }
 
-  update (_proj, _e, camera, _d) {
+  update (_proj, e, camera, _d) {
     if (distance(ZERO, this.velocityVector) > 0.01) {
       this.velocityVector.x *= this.acceleration
       this.velocityVector.y *= this.acceleration
@@ -89,30 +91,29 @@ export class BasicMine extends Projectile {
     if (distance(ZERO, this.velocityVector) < 1) {
       this.active = true
     }
-    this.translate(this.velocityVector.x, this.velocityVector.y, camera)
+    this.translate(this.velocityVector.x, this.velocityVector.y, camera, e)
   }
 
-  onCollide (target, camera) {
+  onCollide (target, camera, e) {
     let found = false
-    if (!this.active) return
+    if (!this.active && target.type !== 'Explosion') return
     for (let i = 0; i < camera.mobs.length && !found; i++) {
       const mob = camera.mobs[i]
       if (mob === target) {
-        console.log('BOOOM')
         camera.mobs.splice(i, 1)
         camera.screenShake(SCREEN_SHAKE)
+        e.state.audioLoader.assets['boom'].play()
         found = true
       }
     }
     for (let i = 0; i < camera.projectiles.length && !found; i++) {
       const proj = camera.projectiles[i]
       if (proj === target) {
-        console.log('BOOOM')
         camera.screenShake(SCREEN_SHAKE)
+        e.state.audioLoader.assets['boom'].play()
         found = true
       }
     }
-    console.log('deleting mine')
     for (let i = 0; i < camera.projectiles.length; i++) {
       const projs = camera.projectiles[i]
       if (this === projs) {
@@ -123,13 +124,13 @@ export class BasicMine extends Projectile {
     }
   }
 
-  translate (x, y, camera) {
+  translate (x, y, camera, e) {
     let { mobs, geometry, projectiles } = camera
     this._translate(x, y)
     for (let inter of mobs) {
       if (this.collider.intersectsCircle(inter.collider) && this.active) {
         this._translate(-x, -y)
-        this.onCollide(inter, camera)
+        this.onCollide(inter, camera, e)
         return false
       }
     }
@@ -144,7 +145,7 @@ export class BasicMine extends Projectile {
 
     for (let projectile of projectiles) {
       if (projectile !== this && this.collider.intersectsCircle(projectile.collider)) {
-        projectile.onCollide(this, camera)
+        projectile.onCollide(this, camera, e)
       }
     }
     return true
@@ -193,6 +194,7 @@ export class BasicMine extends Projectile {
 }
 
 export class Explosion extends Projectile {
+  type = 'Explosion'
   constructor (
     pos = pt(0, 0),
     maxRadius = 50
@@ -202,12 +204,12 @@ export class Explosion extends Projectile {
       acceleration: 0
     })
     this.maxRadius = maxRadius
-    this.maxLife = 20
+    this.maxLife = 30
     this.currentLife = 0
     this.active = true
   }
 
-  update (_proj, _e, camera, _d) {
+  update (_proj, e, camera, _d) {
     this.collider = new Circle(this.collider.position, clamp((this.collider.radius + 3), 0, this.maxRadius))
     if (this.collider.radius >= this.maxRadius) {
       this.active = false
@@ -230,7 +232,13 @@ export class Explosion extends Projectile {
       const proj = camera.projectiles[i]
       if (proj === this) continue
       if (this.collider.intersectsCircle(proj.collider)) {
-        camera.projectiles.splice(i, 1)
+        if (proj.type === 'BasicMine') {
+          proj.onCollide(this, camera, e)
+        } else if (proj.type === 'Explosion') {
+
+        } else {
+          camera.projectiles.splice(i, 1)
+        }
       }
     }
   }
@@ -241,22 +249,13 @@ export class Explosion extends Projectile {
     for (let i = 0; i < camera.mobs.length && !found; i++) {
       const mob = camera.mobs[i]
       if (mob === target) {
-        console.log('BOOOM')
         camera.mobs.splice(i, 1)
-        found = true
-      }
-    }
-    for (let i = 0; i < camera.projectiles.length && !found; i++) {
-      const proj = camera.projectiles[i]
-      if (proj === target) {
-        console.log('BOOOM')
         found = true
       }
     }
   }
 
   render (c, camera, _e) {
-    console.log('Explosion')
     c.fillStyle = `rgba(255, ${Math.floor(255 - (Math.random() * 100))}, ${(Math.floor(Math.random() * 50))},${1 - (this.currentLife / this.maxLife)})`
     c.beginPath()
     c.arc(

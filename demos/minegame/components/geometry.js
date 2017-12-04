@@ -24,10 +24,10 @@ const drawTexturedPolygon = (c, camera, poly, texture, e, geo) => {
   let imageHeight = geo.tileSize * (images[texture].height / images[texture].width)
   let x = Math.ceil(box.width / imageWidth)
   let y = Math.ceil(box.height / imageHeight)
-  for (let i = 0; i < x * y; i++) {
-    let ix = i % x
-    let iy = Math.floor(i / y)
-    c.drawImage(images[texture], box.x + ix * imageWidth, box.y + iy * imageHeight, imageWidth, imageHeight)
+  for (let i = 0; i < x; i++) {
+    for (let j = 0; j < y; j++) {
+      c.drawImage(images[texture], Math.floor(box.x + i * imageWidth), Math.floor(box.y + j * imageHeight), imageWidth, imageHeight)
+    }
   }
 
   c.fill()
@@ -45,7 +45,7 @@ export default class Geometry {
     texture = 'wall',
     strokeLength = 0,
     strokeColor = null,
-    tileSize = 250
+    tileSize = 512
   }) {
     this.position = polygon.verticies[0]
     this.polygon = polygon

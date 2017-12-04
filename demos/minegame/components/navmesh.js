@@ -82,7 +82,7 @@ export default class NavMesh {
   computeNavmeshNeighbors (geometry) {
     for (let i = this.points.length - 1; i >= 0; i--) {
       const nav = this.points[i]
-      let circle = new Circle(nav.position, 25)
+      let circle = new Circle(nav.position, 30)
       for (let geom of geometry) {
         if (circle.intersectsPoly(geom.polygon)) {
           this.points.splice(i, 1)
@@ -108,6 +108,7 @@ export default class NavMesh {
         }
       }
       nav.neighbors.sort((a, b) => a.cost - b.cost)
+      nav.neighbors.splice(8, 20)
     }
     console.log('navmeshComplete')
     console.log(this.points)

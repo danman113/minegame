@@ -26,7 +26,7 @@ export class Mob {
     this.position.y += y
   }
 
-  translate (x, y, camera) {
+  translate (x, y, camera, e) {
     let { mobs, geometry, projectiles } = camera
     this._translate(x, y)
     for (let inter of mobs) {
@@ -44,7 +44,7 @@ export class Mob {
 
     for (let projectile of projectiles) {
       if (this.collider.intersectsCircle(projectile.collider)) {
-        projectile.onCollide(this, camera)
+        projectile.onCollide(this, camera, e)
       }
     }
 
@@ -98,7 +98,7 @@ export class BasicEnemy extends Mob {
     }
     let coords = moveTo(this, nextPt.position)
     this.targetVector = coords
-    let pathWorked = this.translate(coords.x * d * this.speed, coords.y * d * this.speed, camera)
+    let pathWorked = this.translate(coords.x * d * this.speed, coords.y * d * this.speed, camera, e)
     if (pathWorked) {
       if (pathWorked.type !== 'Player') this.setPath(nearestPt, nearestPlayerPt, camera)
     }
@@ -143,7 +143,7 @@ export class BasicEnemy extends Mob {
     }
   }
 
-  translate (x, y, camera) {
+  translate (x, y, camera, e) {
     let { mobs, geometry, projectiles } = camera
     this._translate(x, y)
     let secondTranlate = pt(0, 0)
@@ -166,7 +166,7 @@ export class BasicEnemy extends Mob {
 
     for (let projectile of projectiles) {
       if (this.collider.intersectsCircle(projectile.collider)) {
-        projectile.onCollide(this, camera)
+        projectile.onCollide(this, camera, e)
       }
     }
 

@@ -46,7 +46,7 @@ export default class Player extends Mob {
     if (actionInKeys(RIGHT, e.keys)) {
       dx = 1
     }
-    this.translate(dx * d * this.speed, dy * d * this.speed, camera)
+    this.translate(dx * d * this.speed, dy * d * this.speed, camera, e)
   }
 
   render (c, camera, e) {
