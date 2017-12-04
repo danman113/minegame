@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="2017.11.22" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="32" tileheight="32" infinite="1" nextobjectid="103">
+ <layer name="Tile Layer 1" width="16" height="16" locked="1">
+  <data encoding="csv"/>
+ </layer>
+ <objectgroup name="geometry">
+  <object id="97" name="CUSTOM WALL" x="-192" y="64">
+   <properties>
+    <property name="makenavmesh" type="bool" value="false"/>
+    <property name="texture" value="ice"/>
+    <property name="visible" type="bool" value="false"/>
+   </properties>
+   <polygon points="0,0 32,-96 64,0"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="mobs">
+  <object id="101" name="PLAYER SPAWN" x="0" y="-64">
+   <properties>
+    <property name="details" value="ONLY PUT ONE OF THESE PER LEVEL"/>
+    <property name="mob" value="player"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="102" name="BASIC MOB" x="-352" y="-64">
+   <properties>
+    <property name="mob" value="basic"/>
+    <property name="spawnTime" type="int" value="5"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup name="navmesh"/>
+ <objectgroup name="Templates">
+  <object id="44" name="PLAYER SPAWN" x="-416" y="-160">
+   <properties>
+    <property name="details" value="ONLY PUT ONE OF THESE PER LEVEL"/>
+    <property name="mob" value="player"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="47" name="CUSTOM WALL" x="-192" y="-96">
+   <properties>
+    <property name="makenavmesh" type="bool" value="false"/>
+    <property name="texture" value="ice"/>
+    <property name="visible" type="bool" value="false"/>
+   </properties>
+   <polygon points="0,0 32,-96 64,0"/>
+  </object>
+  <object id="53" name="BASIC MOB" x="-288" y="-160">
+   <properties>
+    <property name="mob" value="basic"/>
+    <property name="spawnTime" type="int" value="5"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
+</map>

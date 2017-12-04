@@ -22,6 +22,7 @@ const parseGeometry = obj => {
       texture = obj.properties.texture
     }
     return new Geometry({
+      ...obj.properties,
       polygon: newpoly,
       rotation: obj.rotation,
       visible: obj.visible,

@@ -67,10 +67,10 @@ export class BasicEnemy extends Mob {
     let nearestPlayerPt = camera.navMesh.getNearestPoint(stage.player.position)
     if (!this.path) this.path = camera.navMesh.search(nearestPt, nearestPlayerPt)
     let nextPt = null
-    if (this.path.length > 0 && distance(this.path[0].point.position, this.position) < 10) {
+    if (this.path && this.path.length > 0 && distance(this.path[0].point.position, this.position) < 10) {
       this.path.splice(0, 1)
     }
-    if (this.path.length > 0) {
+    if (this.path && this.path.length > 0) {
       nextPt = this.path[0].point
     } else {
       nextPt = stage.player
@@ -79,10 +79,7 @@ export class BasicEnemy extends Mob {
     this.targetVector = coords
     let pathWorked = this.translate(coords.x * d * this.speed, coords.y * d * this.speed, camera)
     if (pathWorked) {
-      // console.log('cant move')
-      // let nearestPt = camera.navMesh.getNearestPoint(this.position)
       if (pathWorked.type !== 'Player') this.path = camera.navMesh.search(nearestPt, nearestPlayerPt)
-      // this.translate(coords.x * d * -5, coords.y * d * -5, camera)
     }
   }
 

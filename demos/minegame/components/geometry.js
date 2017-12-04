@@ -33,17 +33,18 @@ export default class Geometry {
     polygon = new Polygon(pt(0, 0), pt(0, 1), pt(1, 1)),
     visible = true,
     rotation = 0,
-    texture = 'terrain'
+    texture = 'wall',
   }) {
     this.position = polygon.verticies[0]
     this.polygon = polygon
-    this.visible = visible
     this.rotation = rotation
+    this.visible = visible
     console.log(texture)
     this.texture = texture
   }
 
   render (c, camera, e) {
+    if (!this.visible) return
     this.polygon.translate(camera.position.x, camera.position.y)
 
     if (this.texture) {

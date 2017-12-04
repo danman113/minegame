@@ -59,7 +59,10 @@ export default class NavMesh {
         return returnList
       } else {
         // console.log('looking through neighbors', smallest.point.neighbors)
+        let i = 0
         for (let neighbor of smallest.point.neighbors) {
+          i++
+          if (i > 8) break
           var edge = {
             cost: smallest.cost + neighbor.cost,
             point: neighbor.point,

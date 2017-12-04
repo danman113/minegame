@@ -159,9 +159,7 @@ export default class Stage {
     this.eventManager = new EventManager()
     let lvl = loadTiled(level)
     this.camera.addGeometry(...lvl.geometry)
-    console.log(...lvl.navPoints)
     this.camera.navMesh.addPoints(...lvl.navPoints)
-    global.camera = this.camera
     this.camera.navMesh.computeNavmeshNeighbors(this.camera.geometry)
     for (let mob of lvl.mobs) {
       if (mob.type === 'Player') {

@@ -2,7 +2,7 @@ import { Scene } from 'engine/scene'
 import Stage from './components/stage'
 import TestLevel from './assets/testlevel.json'
 import Level2 from './assets/level2.json'
-import { readPlaintext, makeFileImporter } from 'engine/importers'
+import { makeFileImporter } from 'engine/importers'
 
 let game = new Scene()
 
