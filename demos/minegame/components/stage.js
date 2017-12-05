@@ -22,6 +22,7 @@ export default class Stage {
       this.roundStart = Date.now()
       if (this.rounds[this.round].length <= 0) {
         this.winner = true
+        this.e.state.audioLoader.assets['win'].play()
       } else {
       }
     }

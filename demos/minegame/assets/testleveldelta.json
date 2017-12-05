@@ -9,7 +9,7 @@
          "startx":0,
          "starty":0,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":0,
          "x":0,
          "y":0
@@ -125,10 +125,14 @@
                         }],
                  "properties":
                     {
+                     "strokeColor":"yellow",
+                     "strokeLength":20,
                      "texture":"wall"
                     },
                  "propertytypes":
                     {
+                     "strokeColor":"string",
+                     "strokeLength":"int",
                      "texture":"string"
                     },
                  "rotation":0,
@@ -322,17 +326,6 @@
                  "y":-800
                 }, 
                 {
-                 "height":0,
-                 "id":56,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":352,
-                 "y":-512
-                }, 
-                {
                  "height":384,
                  "id":59,
                  "name":"",
@@ -438,7 +431,7 @@
                     },
                  "rotation":0,
                  "type":"",
-                 "visible":true,
+                 "visible":false,
                  "width":0,
                  "x":-160,
                  "y":-160
@@ -1027,8 +1020,52 @@
                 }, 
                 {
                  "height":0,
-                 "id":75,
+                 "id":50,
                  "name":"BASIC MOB",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "spawnTime":5
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":608,
+                 "y":448
+                }, 
+                {
+                 "height":0,
+                 "id":46,
+                 "name":"BASIC MOB",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "spawnTime":5
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":768,
+                 "y":-128
+                }, 
+                {
+                 "height":0,
+                 "id":73,
+                 "name":"BASIC MOB 2",
                  "point":true,
                  "properties":
                     {
@@ -1046,30 +1083,822 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":800,
+                 "x":-928,
                  "y":-160
                 }, 
                 {
                  "height":0,
-                 "id":76,
-                 "name":"BASIC MOB",
+                 "id":74,
+                 "name":"BASIC MOB 2",
                  "point":true,
                  "properties":
                     {
                      "mob":"basic",
+                     "round":1,
                      "spawnTime":5
                     },
                  "propertytypes":
                     {
                      "mob":"string",
+                     "round":"int",
                      "spawnTime":"int"
                     },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":640,
+                 "x":-832,
+                 "y":96
+                }, 
+                {
+                 "height":0,
+                 "id":75,
+                 "name":"BASIC MOB 2",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":1,
+                     "spawnTime":5
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"int",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-512,
+                 "y":544
+                }, 
+                {
+                 "height":0,
+                 "id":76,
+                 "name":"BASIC MOB 2",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":1,
+                     "spawnTime":5
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"int",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-32,
+                 "y":544
+                }, 
+                {
+                 "height":0,
+                 "id":78,
+                 "name":"BASIC MOB 2",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":1,
+                     "spawnTime":5
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"int",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":672,
+                 "y":352
+                }, 
+                {
+                 "height":0,
+                 "id":79,
+                 "name":"BASIC MOB 2",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":1,
+                     "spawnTime":5
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"int",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":736,
+                 "y":32
+                }, 
+                {
+                 "height":0,
+                 "id":83,
+                 "name":"BASIC MOB 2",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":1,
+                     "spawnTime":20
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"int",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":96,
+                 "y":-128
+                }, 
+                {
+                 "height":0,
+                 "id":84,
+                 "name":"BASIC MOB 2",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":1,
+                     "spawnTime":20
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"int",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":32,
+                 "y":-128
+                }, 
+                {
+                 "height":0,
+                 "id":85,
+                 "name":"BASIC MOB 2",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":1,
+                     "spawnTime":20
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"int",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":32,
+                 "y":0
+                }, 
+                {
+                 "height":0,
+                 "id":86,
+                 "name":"BASIC MOB 2",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":1,
+                     "spawnTime":20
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"int",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":128,
+                 "y":0
+                }, 
+                {
+                 "height":0,
+                 "id":87,
+                 "name":"BASIC MOB 2",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":1,
+                     "spawnTime":20
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"int",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-608,
+                 "y":-384
+                }, 
+                {
+                 "height":0,
+                 "id":88,
+                 "name":"BASIC MOB 2",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":2,
+                     "spawnTime":5
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"int",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-640,
+                 "y":-288
+                }, 
+                {
+                 "height":0,
+                 "id":89,
+                 "name":"BASIC MOB 2",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":2,
+                     "spawnTime":5
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"int",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-736,
+                 "y":-128
+                }, 
+                {
+                 "height":0,
+                 "id":90,
+                 "name":"BASIC MOB 2",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":2,
+                     "spawnTime":5
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"int",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-704,
+                 "y":160
+                }, 
+                {
+                 "height":0,
+                 "id":91,
+                 "name":"BASIC MOB 2",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":2,
+                     "spawnTime":5
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"int",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-544,
                  "y":416
+                }, 
+                {
+                 "height":0,
+                 "id":92,
+                 "name":"BASIC MOB 2",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":2,
+                     "spawnTime":5
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"int",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":32,
+                 "y":608
+                }, 
+                {
+                 "height":0,
+                 "id":93,
+                 "name":"BASIC MOB 2",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":2,
+                     "spawnTime":5
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"int",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":736,
+                 "y":160
+                }, 
+                {
+                 "height":0,
+                 "id":94,
+                 "name":"BASIC MOB 2",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":2,
+                     "spawnTime":5
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"int",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":736,
+                 "y":352
+                }, 
+                {
+                 "height":0,
+                 "id":96,
+                 "name":"BASIC MOB 2",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":2,
+                     "spawnTime":20
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"int",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":736,
+                 "y":-320
+                }, 
+                {
+                 "height":0,
+                 "id":97,
+                 "name":"BASIC MOB 2",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":2,
+                     "spawnTime":20
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"int",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-320,
+                 "y":-288
+                }, 
+                {
+                 "height":0,
+                 "id":98,
+                 "name":"BASIC MOB 2",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":2,
+                     "spawnTime":20
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"int",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-288,
+                 "y":128
+                }, 
+                {
+                 "height":0,
+                 "id":101,
+                 "name":"BASIC MOB 2",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":2,
+                     "spawnTime":20
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"int",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":416,
+                 "y":-288
+                }, 
+                {
+                 "height":0,
+                 "id":102,
+                 "name":"BASIC MOB 2",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":2,
+                     "spawnTime":20
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"int",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":384,
+                 "y":128
+                }, 
+                {
+                 "height":0,
+                 "id":103,
+                 "name":"BASIC MOB 2",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":2,
+                     "spawnTime":20
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"int",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":64,
+                 "y":320
+                }, 
+                {
+                 "height":0,
+                 "id":104,
+                 "name":"BASIC MOB 2",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":2,
+                     "spawnTime":20
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"int",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-608,
+                 "y":-64
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":false,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "name":"navmesh",
+         "objects":[
+                {
+                 "height":0,
+                 "id":26,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":96,
+                 "y":256
+                }, 
+                {
+                 "height":0,
+                 "id":27,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-704,
+                 "y":-128
+                }, 
+                {
+                 "height":0,
+                 "id":28,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":736,
+                 "y":352
+                }, 
+                {
+                 "height":0,
+                 "id":29,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":0,
+                 "y":480
+                }, 
+                {
+                 "height":0,
+                 "id":30,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-576,
+                 "y":320
+                }, 
+                {
+                 "height":0,
+                 "id":31,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":128,
+                 "y":576
+                }, 
+                {
+                 "height":0,
+                 "id":32,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-256,
+                 "y":-224
+                }, 
+                {
+                 "height":0,
+                 "id":33,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":288,
+                 "y":-224
+                }, 
+                {
+                 "height":0,
+                 "id":34,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":96,
+                 "y":-288
+                }, 
+                {
+                 "height":0,
+                 "id":35,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-256,
+                 "y":64
+                }, 
+                {
+                 "height":0,
+                 "id":37,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":416,
+                 "y":128
+                }, 
+                {
+                 "height":0,
+                 "id":38,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-640,
+                 "y":128
+                }, 
+                {
+                 "height":0,
+                 "id":39,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-864,
+                 "y":0
+                }, 
+                {
+                 "height":0,
+                 "id":40,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":448,
+                 "y":-160
+                }, 
+                {
+                 "height":0,
+                 "id":41,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":768,
+                 "y":-192
+                }, 
+                {
+                 "height":0,
+                 "id":42,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-576,
+                 "y":-320
+                }, 
+                {
+                 "height":0,
+                 "id":113,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":128,
+                 "y":-96
+                }, 
+                {
+                 "height":0,
+                 "id":114,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":64,
+                 "y":-640
+                }, 
+                {
+                 "height":0,
+                 "id":115,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-96,
+                 "y":-64
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1079,25 +1908,55 @@
         }, 
         {
          "draworder":"topdown",
-         "name":"navmesh",
-         "objects":[],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":false,
-         "x":0,
-         "y":0
-        }, 
-        {
-         "draworder":"topdown",
          "name":"Templates",
-         "objects":[],
+         "objects":[
+                {
+                 "height":18.8438,
+                 "id":48,
+                 "name":"",
+                 "rotation":0,
+                 "text":
+                    {
+                     "text":"Hello World",
+                     "wrap":true
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":89.5469,
+                 "x":-896,
+                 "y":-288
+                }, 
+                {
+                 "height":0,
+                 "id":105,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":64,
+                 "y":-64
+                }, 
+                {
+                 "height":0,
+                 "id":106,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":64,
+                 "y":-672
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":false,
          "x":0,
          "y":0
         }],
- "nextobjectid":77,
+ "nextobjectid":116,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"2017.11.22",

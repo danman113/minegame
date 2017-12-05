@@ -16,5 +16,9 @@
   "boostBar": "assets/boost_bar.png",
   "buttonStatic": "assets/button_static.png",
   "buttonHover": "assets/button_hover.png",
-  "buttonClicked": "assets/button_clicked.png"
+  "buttonClicked": "assets/button_clicked.png",
+  "tut_enemy": "assets/tut_enemy.png",
+  "tut_boost": "assets/tut_left.png",
+  "tut_ricochet": "assets/tut_ricochet.png",
+  "tut_wasd": "assets/tut_wasd.png"
 }

@@ -7,6 +7,9 @@ import RioLevel3 from './assets/riolevel3hallway.json'
 import HaoLevel1 from './assets/haolevel1.json'
 import HaoLevel2 from './assets/haolevel2.json'
 import RioLevel4 from './assets/riolevel4.json'
+import RioLevel5 from './assets/riolevel5.json'
+import delta from './assets/testleveldelta.json'
+import tut from './assets/tutorial.json'
 import { makeFileImporter } from 'engine/importers'
 
 let game = new Scene()
@@ -16,17 +19,21 @@ const getLevel = levelStr => {
   console.log(levelStr)
   switch (levelStr) {
   case 'test':
-    return TestLevel
+    return tut
   case 'level1':
     return RioLevel4
   case 'level2':
-    return RioLevel
-  case 'level3':
-    return RioLevel3
-  case 'level4':
     return HaoLevel1
-  case 'level5':
+  case 'level3':
     return HaoLevel2
+  case 'level4':
+    return delta
+  case 'level5':
+    return RioLevel3
+  case 'level6':
+    return RioLevel5
+  case 'level7':
+    return RioLevel
   default:
     alert('Level Not Loaded')
     return TestLevel
@@ -46,14 +53,6 @@ game.onEnter = _ => {
   console.log(currentStage)
   currentStage.start(game)
   currentStage.loadLevel(getLevel(game.state.currentLevel))
-  makeFileImporter(document.getElementById('import'), (err, json) => {
-    console.log('READING FILE')
-    if (!err) {
-      currentStage.loadLevel(json)
-    } else {
-      alert('COULD NOT READ FILE!' + err)
-    }
-  })
 }
 
 //

@@ -21,12 +21,14 @@ let levelSelectContainer = new Container({
 })
 
 const levels = {
-  test: 'Test Level',
+  test: 'Tutorial',
   level1: 'Level 1',
   level2: 'Level 2',
   level3: 'Level 3',
   level4: 'Level 4',
   level5: 'Level 5',
+  level6: 'Level 6',
+  level7: 'Level 7',
 }
 
 let keyM = new KeyBoardButtonManager({})
@@ -34,11 +36,12 @@ let keyM = new KeyBoardButtonManager({})
 let i = 0
 let height = 100
 let padding = 25
+let rows = 4
 for (let cl in levels) {
   let btn = new ImageButton({
-    position: pt(40, 100 + i * height + i * padding),
+    position: pt(40 + Math.floor(i / rows) * 400, 100 + (i % rows) * height + (i % rows) * padding),
     text: levels[cl],
-    update: centerButton(0.1),
+    // update: centerButton(0.1),
     fontSize: 50,
     onClick: _ => {
       game.state.currentLevel = cl

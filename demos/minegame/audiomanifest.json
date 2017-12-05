@@ -1,5 +1,6 @@
 {
   "button": "assets/button58.mp3",
   "boom": "assets/boom_small2.mp3",
-  "spawn": "assets/spawn.mp3"
+  "spawn": "assets/spawn.mp3",
+  "win": "assets/win.mp3"
 }
