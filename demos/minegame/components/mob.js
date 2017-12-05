@@ -36,7 +36,7 @@ export class Mob {
       }
     }
     for (let geom of geometry) {
-      if (this.collider.intersectsPoly(geom.polygon)) {
+      if (this.collider.intersectsPoly(geom.polygon) && !geom.noclip) {
         this._translate(-x, -y)
         return geom
       }
@@ -159,7 +159,7 @@ export class BasicEnemy extends Mob {
       }
     }
     for (let geom of geometry) {
-      if (this.collider.intersectsPoly(geom.polygon)) {
+      if (this.collider.intersectsPoly(geom.polygon) && !geom.noclip) {
         this._translate(-x, -y)
         this._translate(-secondTranlate.x, -secondTranlate.y)
         return geom

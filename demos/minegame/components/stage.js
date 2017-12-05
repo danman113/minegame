@@ -33,6 +33,7 @@ export default class Stage {
   rgba = 23
   render = (e, c) => {
     this.animCount++
+    global.debug = false
     c.clearRect(0, 0, e.width, e.height)
     global.player = this.player
     this.camera.render(c, e)
@@ -69,7 +70,7 @@ export default class Stage {
       }
     }
 
-    if (!this.player.alive) {
+    if (!this.player.alive && !this.winner) {
       c.font = '52px MTV2C'
       if (this.animCount % 3 === 0) {
         this.rgb = Math.floor(255 - (Math.random() * 100))
@@ -91,7 +92,7 @@ export default class Stage {
       c.fillText('Mission Complete', e.width / 2 - w.width / 2, e.height / 2)
     }
 
-    if ((Date.now() - this.roundStart) < 1000 * 3 && !this.winner) {
+    if ((Date.now() - this.roundStart) < 1000 * 3 && !this.winner && this.player.alive) {
       c.font = '52px MTV2C'
       if (this.animCount % 3 === 0) {
         this.rgb = Math.floor(255 - (Math.random() * 100))
@@ -158,6 +159,11 @@ export default class Stage {
       this.player.deadCounter++
       if (this.player.deadCounter > 60) {
         this.scene.goto('levelSelect')
+      }
+    } else {
+      console.log(this.camera.mobs.indexOf(this.player))
+      if (this.camera.mobs.indexOf(this.player) < 0) {
+        this.player.alive = false
       }
     }
 

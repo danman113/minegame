@@ -45,7 +45,8 @@ export default class Geometry {
     texture = 'wall',
     strokeLength = 0,
     strokeColor = null,
-    tileSize = 512
+    tileSize = 512,
+    noclip = false
   }) {
     this.position = polygon.verticies[0]
     this.polygon = polygon
@@ -55,6 +56,7 @@ export default class Geometry {
     this.strokeColor = strokeColor
     this.texture = texture
     this.tileSize = tileSize
+    this.noclip = noclip
   }
 
   render (c, camera, e) {

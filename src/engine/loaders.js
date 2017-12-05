@@ -47,7 +47,8 @@ export class AudioLoader {
         src = manifest[name]
       }
       const asset = new Howl({
-        src: src
+        src: src,
+        volume: 0.5
       })
       asset.loaded = false
       this.assets[name] = asset
