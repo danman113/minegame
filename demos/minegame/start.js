@@ -72,6 +72,12 @@ const render = (e, c) => {
 
   startContainer.render(c, e)
 
+  c.font = '75px MTV2C'
+  c.fillStyle = `white`
+  let text = 'Mine Games'
+  let w = c.measureText(text)
+  c.fillText(text, e.width / 2 - w.width / 2, 150)
+
   c.fillStyle = '#f00'
   c.fillRect(e.mouse.x - 1, e.mouse.y - 1, 3, 3)
 }

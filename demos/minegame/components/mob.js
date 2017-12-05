@@ -151,6 +151,7 @@ export class BasicEnemy extends Mob {
     for (let inter of mobs) {
       if (inter !== this && this.collider.intersectsCircle(inter.collider) && inter.type === 'Player') {
         this._translate(-x, -y)
+        inter.alive = false
         return inter
       } else if (inter !== this && this.collider.intersectsCircle(inter.collider) && inter.type !== 'Player') {
         secondTranlate = scalar(unit(sub(inter.position, this.position)), -2)

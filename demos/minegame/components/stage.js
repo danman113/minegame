@@ -17,20 +17,23 @@ export default class Stage {
   }
 
   testObjective (_e) {
-    console.log(this.rounds)
-    if (this.camera.mobs.length === 1 && this.camera.mobs[0].type === 'Player' && this.eventManager.events.length <= 0) {
+    if (this.camera.mobs.length === 1 && this.camera.mobs[0].type === 'Player' && this.eventManager.events.length <= 0 && !this.winner) {
       this.round++
+      this.roundStart = Date.now()
       if (this.rounds[this.round].length <= 0) {
-        this.scene.goto('levelSelect')
+        this.winner = true
       } else {
-        alert('Next Round')
       }
     }
   }
 
+  animCount = 0
+  rgb = 23
+  rgba = 23
   render = (e, c) => {
+    this.animCount++
     c.clearRect(0, 0, e.width, e.height)
-
+    global.player = this.player
     this.camera.render(c, e)
 
     let playerNav = this.camera.navMesh.getNearestPoint(this.player.position)
@@ -65,8 +68,45 @@ export default class Stage {
       }
     }
 
+    if (!this.player.alive) {
+      c.font = '52px MTV2C'
+      if (this.animCount % 3 === 0) {
+        this.rgb = Math.floor(255 - (Math.random() * 100))
+        this.rgba = (Math.floor(Math.random() * 50))
+      }
+      c.fillStyle = `rgba(255, ${this.rgb}, ${this.rgba}, 1)`
+      let w = c.measureText('Mission Failure')
+      c.fillText('Mission Failure', e.width / 2 - w.width / 2, e.height / 2)
+    }
+
+    if (this.winner) {
+      c.font = '52px MTV2C'
+      if (this.animCount % 3 === 0) {
+        this.rgb = Math.floor(255 - (Math.random() * 100))
+        this.rgba = (Math.floor(Math.random() * 50))
+      }
+      c.fillStyle = `rgba(255, ${this.rgb}, ${this.rgba}, 1)`
+      let w = c.measureText('Mission Complete')
+      c.fillText('Mission Complete', e.width / 2 - w.width / 2, e.height / 2)
+    }
+
+    if ((Date.now() - this.roundStart) < 1000 * 3 && !this.winner) {
+      c.font = '52px MTV2C'
+      if (this.animCount % 3 === 0) {
+        this.rgb = Math.floor(255 - (Math.random() * 100))
+        this.rgba = (Math.floor(Math.random() * 50))
+      }
+      c.fillStyle = `rgba(255, ${this.rgb}, ${this.rgba}, 1)`
+      let text = 'Round Complete'
+      if (this.round === 0) {
+        text = 'Mission Start'
+      }
+      let w = c.measureText(text)
+      c.fillText(text, e.width / 2 - w.width / 2, e.height / 2)
+    }
+
     c.lineWidth = 3
-    c.fillStyle = '#d1e207'
+    c.fillStyle = '#f4ad42'
     let barWidth = 250
     c.fillRect(e.width - (barWidth + 20), 20, barWidth * (this.charge / this.maxCharge), 75)
 
@@ -102,6 +142,30 @@ export default class Stage {
     this.totalDelta = delta
     this.eventManager.events = this.rounds[this.round]
     this.eventManager.update(roundTime, this.camera)
+
+    if (!this.player.alive) {
+      for (let i = 0; i < this.camera.mobs.length; i++) {
+        let mob = this.camera.mobs[i]
+        if (mob.type === 'Player') {
+          console.log('FOUND PLAYER')
+          this.camera.mobs.splice(i, 1)
+          break
+        }
+      }
+      this.player._translate(-0xFFFFFFF, 0)
+      this.selectedMob = this.camera.mobs[0]
+      this.player.deadCounter++
+      if (this.player.deadCounter > 60) {
+        this.scene.goto('levelSelect')
+      }
+    }
+
+    if (this.winner) {
+      this.winTime++
+      if (this.winTime > 60 * 3) {
+        this.scene.goto('levelSelect')
+      }
+    }
 
     this.testObjective(e)
 
@@ -163,8 +227,10 @@ export default class Stage {
     this.charge = 0
     this.maxCharge = 60
     this.totalDelta = 0
-    this.rounds = [[], [], [], [], [], [], []]
+    this.rounds = [[], [], [], [], [], [], [], [], [], [], []]
     this.round = 0
+    this.winner = false
+    this.winTime = 0
     this.roundStart = Date.now()
     this.eventManager = new EventManager()
     let lvl = loadTiled(level)
@@ -178,6 +244,7 @@ export default class Stage {
       let rnd = mob.round || 0
       this.rounds[rnd].push(new Event(mob.spawnTime || 0, _ => {
         this.camera.addMob(mob)
+        this.e.state.audioLoader.assets['spawn'].play()
       }))
     }
     this.selectedMob = this.player

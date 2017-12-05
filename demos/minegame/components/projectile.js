@@ -97,9 +97,13 @@ export class BasicMine extends Projectile {
   onCollide (target, camera, e) {
     let found = false
     if (!this.active && target.type !== 'Explosion') return
+    target.alive = false
     for (let i = 0; i < camera.mobs.length && !found; i++) {
       const mob = camera.mobs[i]
       if (mob === target) {
+        camera.mobs[i].alive = false
+        console.log(target.alive)
+        // if (camera.mobs[i].type === 'Player') throw new Error('ads')
         camera.mobs.splice(i, 1)
         camera.screenShake(SCREEN_SHAKE)
         e.state.audioLoader.assets['boom'].play()
@@ -225,6 +229,7 @@ export class Explosion extends Projectile {
     for (let i = camera.mobs.length - 1; i >= 0; i--) {
       const mob = camera.mobs[i]
       if (this.collider.intersectsCircle(mob.collider)) {
+        // if (camera.mobs[i].type === 'Player') throw new Error('ads')
         camera.mobs.splice(i, 1)
       }
     }
@@ -245,10 +250,14 @@ export class Explosion extends Projectile {
 
   onCollide (target, camera) {
     if (!this.active) return
+    target.alive = false
     let found = false
     for (let i = 0; i < camera.mobs.length && !found; i++) {
       const mob = camera.mobs[i]
       if (mob === target) {
+        camera.mobs[i].alive = false
+        console.log(target.alive)
+        // if (camera.mobs[i].type === 'Player') throw new Error('ads')
         camera.mobs.splice(i, 1)
         found = true
       }

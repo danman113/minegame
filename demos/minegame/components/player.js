@@ -25,9 +25,12 @@ export default class Player extends Mob {
     super(new Circle(pt(x, y), 25))
     this.speed = 2
     this.alive = true
+    this.deadCounter = 0
   }
 
   update (mob, e, camera, d) {
+    if (!this.alive) {
+    }
     if (actionInKeys(SPRINT, e.keys)) {
       this.speed = 5
     } else {
@@ -52,6 +55,7 @@ export default class Player extends Mob {
 
   render (c, camera, e) {
     // Draw player image
+    if (!this.alive) return
     let images = e.state.imageLoader.images
     let x = this.collider.position.x + camera.position.x
     let y = this.collider.position.y + camera.position.y

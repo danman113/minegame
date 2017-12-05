@@ -56,7 +56,7 @@ const imageButtonRender = function (c, e, img) {
   if (this.state === 1) {
     c.drawImage(e.state.imageLoader.images[img.imageHover], this.globalPosition.x - 50, this.globalPosition.y, rect.width + 50, rect.height)
   } else if (this.state === 2) {
-    c.drawImage(e.state.imageLoader.images[img.imageDown], this.globalPosition.x, this.globalPosition.y, rect.width, rect.height)
+    c.drawImage(e.state.imageLoader.images[img.imageDown], this.globalPosition.x - 50, this.globalPosition.y, rect.width + 50, rect.height)
   } else {
     c.drawImage(e.state.imageLoader.images[img.image], this.globalPosition.x, this.globalPosition.y, rect.width, rect.height)
   }

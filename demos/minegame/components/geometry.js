@@ -32,7 +32,7 @@ const drawTexturedPolygon = (c, camera, poly, texture, e, geo) => {
 
   c.fill()
   if (global.debug || geo.strokeLength) {
-    c.stroke()
+    // c.stroke()
   }
   c.restore()
 }
