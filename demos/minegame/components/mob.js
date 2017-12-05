@@ -80,7 +80,7 @@ export class BasicEnemy extends Mob {
     let nearestPlayerPt = camera.navMesh.getNearestPoint(stage.player.position)
 
     // Get path
-    if (!this.path) this.setPath(nearestPt, nearestPlayerPt, camera)
+    if (!this.path) this.setPath(nearestPt, stage.player.alive ? nearestPlayerPt : null, camera)
 
     // Age path
     if (this.path && this.path.age >= 0) {
@@ -101,7 +101,7 @@ export class BasicEnemy extends Mob {
     this.targetVector = coords
     let pathWorked = this.translate(coords.x * d * this.speed, coords.y * d * this.speed, camera, e)
     if (pathWorked) {
-      if (pathWorked.type !== 'Player') this.setPath(nearestPt, nearestPlayerPt, camera)
+      if (pathWorked.type !== 'Player') this.setPath(nearestPt, stage.player.alive ? nearestPlayerPt : null, camera)
     }
   }
 

@@ -37,6 +37,7 @@ export default class NavMesh {
   }
 
   search (source, target) {
+    if (!source || !target) return []
     this.newPQ()
     let openSet = this.pq
     let closedSet = {}
