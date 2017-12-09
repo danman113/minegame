@@ -1,10 +1,10 @@
-import { clamp, sub, pt, Segment, sum, Ray, unit } from 'math'
+import { clamp, sub, pt, Segment, sum } from 'math'
 import * as keys from 'engine/keys'
 import Camera from './camera'
 import EventManager, { Event } from './eventmanager'
 import { BasicMine } from './projectile'
 import { loadTiled } from './levelparser'
-import { drawSegment, drawRay } from 'engine/renderer'
+import { drawSegment } from 'engine/renderer'
 
 export default class Stage {
   constructor ({
@@ -119,9 +119,6 @@ export default class Stage {
       barWidth,
       75
     )
-
-    // c.strokeStyle = '#eee'
-    // c.strokeRect(e.width - 120, 20, 100, 50)
 
     c.fillStyle = '#f00'
     let crossHairSize = 50

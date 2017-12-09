@@ -1,18 +1,12 @@
 import { Scene } from 'engine/scene'
 import { rectToPolygon, pt } from 'math'
-import { Button, Container, KeyBoardButtonManager, ImageButton } from 'engine/UI'
+import { Container, KeyBoardButtonManager, ImageButton } from 'engine/UI'
 import * as keys from 'engine/keys'
 import game from './game'
 
 let levelSelect = new Scene()
 levelSelect.onEnter = _ => {
   // alert(game.state.currentLevel)
-}
-
-const centerButton = (margins) => {
-  return function (e) {
-    this.position.x = e.width * margins
-  }
 }
 
 let levelSelectContainer = new Container({
@@ -41,7 +35,6 @@ for (let cl in levels) {
   let btn = new ImageButton({
     position: pt(40 + Math.floor(i / rows) * 400, 100 + (i % rows) * height + (i % rows) * padding),
     text: levels[cl],
-    // update: centerButton(0.1),
     fontSize: 50,
     onClick: _ => {
       game.state.currentLevel = cl

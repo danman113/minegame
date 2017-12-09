@@ -1,6 +1,6 @@
 import { Scene } from 'engine/scene'
 import { rectToPolygon, pt } from 'math'
-import { Button, Container, KeyBoardButtonManager, ImageButton } from 'engine/UI'
+import { Container, KeyBoardButtonManager, ImageButton } from 'engine/UI'
 import * as keys from 'engine/keys'
 
 let start = new Scene()

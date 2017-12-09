@@ -1,7 +1,6 @@
 import { Scene } from 'engine/scene'
 import Stage from './components/stage'
 import TestLevel from './assets/testlevel.json'
-import Level2 from './assets/level2.json'
 import RioLevel from './assets/riolevel2.json'
 import RioLevel3 from './assets/riolevel3hallway.json'
 import HaoLevel1 from './assets/riolevel6.json'
@@ -10,7 +9,6 @@ import RioLevel4 from './assets/riolevel4.json'
 import RioLevel5 from './assets/riolevel5.json'
 import delta from './assets/testleveldelta.json'
 import tut from './assets/tutorial.json'
-import { makeFileImporter } from 'engine/importers'
 
 let game = new Scene()
 game.state.currentLevel = 'test'

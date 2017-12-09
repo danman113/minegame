@@ -1,6 +1,6 @@
 import { Scene } from '../../src/engine/scene'
 import { rectToPolygon, pt } from '../../src/math'
-import { Button, Container, KeyBoardButtonManager, ImageButton } from '../../src/engine/UI'
+import { Container, KeyBoardButtonManager, ImageButton } from '../../src/engine/UI'
 import * as keys from 'engine/keys'
 
 let settings = new Scene()
@@ -11,9 +11,6 @@ settings.state.controls = {
   RIGHT: [keys.KEY_RIGHT, keys.D],
   SPRINT: [keys.SHIFT]
 }
-
-let sounds = 100
-let music = 100
 
 const centerButton = (margins, _offset = 0) => {
   return function (e) {

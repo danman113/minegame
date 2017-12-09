@@ -1,4 +1,4 @@
-import { pt, Ray, sum, sub, unit, distance, Segment, Circle } from 'math'
+import { pt, distance, Segment, Circle } from 'math'
 import PriorityQueue from 'priorityqueuejs'
 export class NavPoint {
   constructor (pos = pt(0, 0)) {

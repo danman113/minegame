@@ -1,4 +1,4 @@
-import { pt, sub, unit, scalar, Ray, Segment, sum, Rectangle, distance } from 'math'
+import { pt, sub, unit, scalar, distance } from 'math'
 import NavMesh, { NavPoint } from './navmesh'
 
 export default class Camera {
