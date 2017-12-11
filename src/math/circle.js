@@ -14,6 +14,14 @@ export class Circle {
     return false
   }
 
+  intersectsPt (pt) {
+    let dist = distance(this.position, pt)
+    if (dist < this.radius) {
+      return true
+    }
+    return false
+  }
+
   intersectsPoly (poly) {
     if (poly.intersectsPt(this.position)) {
       return true

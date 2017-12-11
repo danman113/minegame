@@ -3,8 +3,6 @@ import PriorityQueue from 'priorityqueuejs'
 export class NavPoint {
   constructor (pos = pt(0, 0)) {
     this.position = pos
-    // if (this.position.x === 0) this.position.x = 0.0001
-    // if (this.position.y === 0) this.position.y = 0.0001
     this.neighbors = []
     this.label = -1
   }
@@ -113,7 +111,6 @@ export default class NavMesh {
     }
     console.log('navmeshComplete')
     console.log(this.points)
-    this.path = this.search(this.points[0], this.points[this.size - 2])
   }
 
   getNearestPoint (pt) {

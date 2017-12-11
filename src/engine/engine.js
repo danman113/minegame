@@ -95,6 +95,7 @@ class Engine {
     console.log(this.canvas)
 
     window.addEventListener('mouseup', e => {
+      this.onClick(this)
       if (e.which === 1) {
         this.mouse.left = false
       } else if (e.which === 3) {
@@ -105,7 +106,6 @@ class Engine {
       if (!this.mouse.left && !this.mouse.right && !this.mouse.middle) {
         this.mouse.down = false
       }
-      this.onClick(this)
     })
 
     window.addEventListener('keydown', e => {
