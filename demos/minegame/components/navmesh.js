@@ -35,47 +35,35 @@ export default class NavMesh {
   }
 
   search (source, target) {
+    console.log(this.size)
     if (!source || !target) return []
-    this.newPQ()
-    let openSet = this.pq
-    let closedSet = {}
-    openSet.enq({cost: 0, point: source, parent: null})
-    // console.log(`searching for ${source.label} -> ${target.label}`)
-    // Iterate through the empty set
-    while (!openSet.isEmpty()) {
-      const smallest = openSet.deq()
-      // openSet.forEach(console.log)
-      // console.log(`Now looking at `, smallest.cost)
-      if (smallest.point === target) {
-        // Return path to node
-        // console.log('target found!')
-        closedSet[smallest.point.label] = smallest
-        let returnList = []
-        for (let node = closedSet[target.label]; true; node = closedSet[node.parent.point.label]) {
+    let frontier = new PriorityQueue((a, b) => -(a.cost - b.cost))
+    // List of cost. Also used for the closed set
+    let costSet = {}
+    costSet[source.label] = 0
+    frontier.enq({cost: 0, point: source, parent: null})
+    while (!frontier.isEmpty()) {
+      const current = frontier.deq()
+      if (current.point === target) {
+        let returnList = [current]
+        for (let node = current.parent; node !== null; node = node.parent) {
           returnList.unshift(node)
-          if (node.parent === null) break
         }
         return returnList
-      } else {
-        // console.log('looking through neighbors', smallest.point.neighbors)
-        let i = 0
-        for (let neighbor of smallest.point.neighbors) {
-          i++
-          if (i > 6) break
-          var edge = {
-            cost: smallest.cost + neighbor.cost,
-            point: neighbor.point,
-            parent: smallest
-          }
-          // console.log(`Adding node with cost ${edge.cost}`, edge)
-          if (closedSet[edge.point.label]) {
-            continue
-          }
-          openSet.enq(edge)
+      }
+      for (let next of current.point.neighbors) {
+        let newCost = costSet[current.point.label] + next.cost
+        if (!(next.point.label in costSet) || newCost < costSet[next.point.label]) {
+          costSet[next.point.label] = newCost
+          frontier.enq({
+            cost: newCost + distance(target.position, next.point.position),
+            point: next.point,
+            parent: current
+          })
         }
-        closedSet[smallest.point.label] = smallest
       }
     }
+    return []
   }
 
   computeNavmeshNeighbors (geometry) {

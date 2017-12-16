@@ -66,6 +66,9 @@ export class BasicEnemy extends Mob {
   setPath (src, dest, camera) {
     if (!this.path || this.path.age > 5) {
       this.path = camera.navMesh.search(src, dest)
+      if (this.path.length === 0) {
+        console.log('This one is stuck', this)
+      }
       if (this.path) {
         this.path.age = 0
       }

@@ -33,7 +33,7 @@ export default class Stage {
   rgba = 23
   render = (e, c) => {
     this.animCount++
-    global.debug = false
+    // global.debug = false
     c.clearRect(0, 0, e.width, e.height)
     global.player = this.player
     this.camera.render(c, e)
@@ -158,7 +158,6 @@ export default class Stage {
         this.scene.goto('levelSelect')
       }
     } else {
-      console.log(this.camera.mobs.indexOf(this.player))
       if (this.camera.mobs.indexOf(this.player) < 0) {
         this.player.alive = false
       }

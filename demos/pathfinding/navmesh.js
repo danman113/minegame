@@ -168,12 +168,12 @@ export class MineNavMesh extends NavMesh {
         closedSet[smallest.point.label] = smallest
       }
     }
+    return []
   }
 
   generate (geometry) {
     this.generatePoints(geometry)
     this.generateNeighbors(geometry)
-    this.generatePath()
   }
 
   getNearestPoint (pt) {
@@ -219,6 +219,37 @@ export class AStarNavMesh extends MineNavMesh {
           })
         }
       }
+    }
+    return []
+  }
+}
+
+export class GridStarNavMesh extends AStarNavMesh {
+  generatePoints (geometry) {
+    let topLeft = null
+    let bottomRight = null
+    for (let geo of geometry) {
+      let box = geo.AABB()
+      if (!topLeft) {
+        topLeft = pt(box.position.x, box.position.y)
+      } else {
+        // If box.position < topLeft, topleft = box.position
+      }
+      if (!bottomRight) {
+        bottomRight = pt(box.position.x + box.width, box.position.y + box.height)
+      } else {
+        // If box.position + w + h > topRight, topRight =  box.position + w + h
+      }
+    }
+    // Now that we have AABB, add points in there
+
+    // Cull the points
+  }
+
+  generateNeighbors (_geometry) {
+    for (let _point of this.points) {
+      // For points in radius
+      //  IF there is no obstruction between the points, add the point to neighbors
     }
   }
 }

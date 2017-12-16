@@ -102,7 +102,6 @@ export class BasicMine extends Projectile {
       const mob = camera.mobs[i]
       if (mob === target) {
         camera.mobs[i].alive = false
-        console.log(target.alive)
         // if (camera.mobs[i].type === 'Player') throw new Error('ads')
         camera.mobs.splice(i, 1)
         camera.screenShake(SCREEN_SHAKE)
