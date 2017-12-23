@@ -74,7 +74,7 @@ engine.keyEvents[KEYS.TWO] = _ => lastDeg = 120
 engine.keyEvents[KEYS.NINE] = _ => lastDeg = 90
 
 const update = function (delta) {
-  
+
   if (KEYS.Q in this.keys) {
     firstDeg += 1
     lastDeg += 1
@@ -93,11 +93,11 @@ const update = function (delta) {
       lastDeg--
     }
   }
-  
+
   collisionQueue = []
   rayQueue = []
   const offset = 0.2
-  
+
   reAngleVisibility(degToRad(firstDeg), degToRad(lastDeg), pt(this.mouse.x, this.mouse.y))
   for (let poly of polyQueue) {
     for (let vertex of poly.verticies) {
@@ -112,7 +112,8 @@ const update = function (delta) {
       rayQueue.push(r0, r1, r2)
     }
   }
-  
+
+  // Pretty sure this makes polygon ccw, look into this for generative polygons
   rayQueue.sort((a, b) => {
     return angle2(a.p0, a.p1) - angle2(b.p0, b.p1)
   })
@@ -145,15 +146,15 @@ const draw = function (c) {
     const col = new Polygon(...collisionQueue)
     drawPolygon(c, col, 'white')
   }
-  
+
   for (let i = 1; i < polyQueue.length; i++) {
     let poly = polyQueue[i]
-    if (poly == visibilityPolygon)
+    if (poly === visibilityPolygon)
       continue
     drawPolygon(c, poly, 'green')
   }
 
-  if(showRays) {
+  if (showRays) {
     for (let ray of rayQueue) {
       drawRay(c, ray)
     }

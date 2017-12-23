@@ -29,8 +29,6 @@ export default class Player extends Mob {
   }
 
   update (mob, e, camera, d) {
-    if (!this.alive) {
-    }
     if (actionInKeys(SPRINT, e.keys)) {
       this.speed = 5
     } else {
@@ -50,7 +48,11 @@ export default class Player extends Mob {
     if (actionInKeys(RIGHT, e.keys)) {
       dx = 1
     }
-    this.translate(dx * d * this.speed, dy * d * this.speed, camera, e)
+    if (!global.godmode) {
+      this.translate(dx * d * this.speed, dy * d * this.speed, camera, e)
+    } else {
+      this._translate(dx * d * this.speed, dy * d * this.speed, camera, e)
+    }
   }
 
   render (c, camera, e) {

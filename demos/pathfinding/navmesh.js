@@ -225,31 +225,96 @@ export class AStarNavMesh extends MineNavMesh {
 }
 
 export class GridStarNavMesh extends AStarNavMesh {
+  gapSize = 70
+  topLeft = null
+  topRight = null
   generatePoints (geometry) {
+    // Get AABB of a list of polygons
     let topLeft = null
     let bottomRight = null
     for (let geo of geometry) {
       let box = geo.AABB()
       if (!topLeft) {
-        topLeft = pt(box.position.x, box.position.y)
+        topLeft = pt(box.x, box.y)
       } else {
-        // If box.position < topLeft, topleft = box.position
+        if (box.x < topLeft.x) {
+          topLeft.x = box.x
+        }
+        if (box.y < topLeft.y) {
+          topLeft.y = box.y
+        }
       }
       if (!bottomRight) {
-        bottomRight = pt(box.position.x + box.width, box.position.y + box.height)
+        bottomRight = pt(box.x + box.width, box.y + box.height)
       } else {
-        // If box.position + w + h > topRight, topRight =  box.position + w + h
+        if (box.x + box.width > bottomRight.x) {
+          bottomRight.x = box.x + box.width
+        }
+        if (box.y + box.height > bottomRight.y) {
+          bottomRight.y = box.y + box.height
+        }
       }
     }
-    // Now that we have AABB, add points in there
+    // Subtract some so we get a wrapping graph
+    topLeft = sub(topLeft, pt(this.gapSize, this.gapSize))
+    this.topLeft = topLeft
+    this.bottomRight = bottomRight
 
-    // Cull the points
+    // Add a point in a grid pattern
+    let x = Math.ceil((bottomRight.x - topLeft.x) / this.gapSize) + 1
+    let y = Math.ceil((bottomRight.y - topLeft.y) / this.gapSize) + 1
+    for (let i = 0; i < y; i++) {
+      for (let j = 0; j < x; j++) {
+        let newPoint = pt(
+          topLeft.x + j * this.gapSize + (i % 2) * (this.gapSize / 2),
+          topLeft.y + i * this.gapSize
+        )
+        this.addPoints(new NavPoint(newPoint))
+      }
+    }
   }
 
-  generateNeighbors (_geometry) {
-    for (let _point of this.points) {
-      // For points in radius
-      //  IF there is no obstruction between the points, add the point to neighbors
+  generateNeighbors (geometry) {
+    // Use the grid pattern to find good neighbors
+    let x = Math.ceil((this.bottomRight.x - this.topLeft.x) / this.gapSize) + 1
+    let y = Math.ceil((this.bottomRight.y - this.topLeft.y) / this.gapSize) + 1
+    for (let z = this.points.length - 1; z >= 0; z--) {
+      let nav = this.points[z]
+      let i = Math.floor(z / x)
+      let j = z % x
+
+      // add all valid neighbors to point
+      let neighbors = [[i - 1, j], [i + 1, j], [i, j - 1], [i, j + 1]]
+      for (let neighbor of neighbors) {
+        if (neighbor[0] >= 0 && neighbor[0] < y && neighbor[1] >= 0 && neighbor[1] < x) {
+          let index = neighbor[0] * x + neighbor[1]
+          let potentialNeighbor = this.points[index]
+          let seg = new Segment(
+            nav.position,
+            potentialNeighbor.position
+          )
+          let inter = null
+          for (let geom of geometry) {
+            inter = geom.intersectsSegment(seg)
+            if (inter) break
+          }
+          if (!inter) {
+            nav.addNeighbors(potentialNeighbor)
+          }
+        }
+      }
+    }
+
+    // Cull unneded points (needed here to make neighbor generation easy)
+    for (let z = this.points.length - 1; z >= 0; z--) {
+      let inter = false
+      for (let geom of geometry) {
+        if (geom.intersectsPt(this.points[z].position)) {
+          inter = true
+          break
+        }
+      }
+      if (inter) this.points.splice(z, 1)
     }
   }
 }

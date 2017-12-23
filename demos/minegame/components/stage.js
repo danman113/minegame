@@ -33,40 +33,43 @@ export default class Stage {
   rgba = 23
   render = (e, c) => {
     this.animCount++
-    // global.debug = false
     c.clearRect(0, 0, e.width, e.height)
     global.player = this.player
     this.camera.render(c, e)
 
-    let playerNav = this.camera.navMesh.getNearestPoint(this.player.position)
-    for (let nav of this.camera.navMesh.points) {
-      if (!this.debug) break
-      if (nav === playerNav) {
-        c.fillStyle = 'white'
-      } else {
-        c.fillStyle = 'red'
-      }
-      // Draw the point
-      c.fillRect(this.camera.position.x + nav.position.x, this.camera.position.y + nav.position.y, 5, 5)
-      if (!global.debug) continue
-      c.fillStyle = 'white'
-      for (let neighbor of nav.neighbors) {
-        let seg = new Segment(sum(nav.position, this.camera.position), sum(neighbor.point.position, this.camera.position))
-        drawSegment(c, seg)
-      }
-      let path = this.camera.navMesh.path
-      if (path) {
-        for (let i = 0, j = 1; i < path.length - 1; i++, j = (j + 1) % (path.length)) {
-          let p0 = path[i]
-          let p1 = path[j]
-          let seg = new Segment(sum(p0.point.position, this.camera.position), sum(p1.point.position, this.camera.position))
-          drawSegment(c, seg, 'yellow')
+    if (global.debug) {
+      let playerNav = this.camera.navMesh.getNearestPoint(this.player.position)
+      for (let nav of this.camera.navMesh.points) {
+        if (nav === playerNav) {
+          c.fillStyle = 'white'
+        } else {
+          c.fillStyle = 'red'
         }
-        c.fillStyle = 'green'
-        let pt = sum(path[0].point.position, this.camera.position)
-        c.fillRect(pt.x - 6, pt.y - 6, 13, 13)
-        let pt2 = sum(path[path.length - 1].point.position, this.camera.position)
-        c.fillRect(pt2.x - 6, pt2.y - 6, 13, 13)
+        // Draw the point
+        c.fillRect(this.camera.position.x + nav.position.x, this.camera.position.y + nav.position.y, 5, 5)
+        // Draw neighors
+        // for (let neighbor of nav.neighbors) {
+        //   let seg = new Segment(sum(nav.position, this.camera.position), sum(neighbor.point.position, this.camera.position))
+        //   drawSegment(c, seg)
+        // }
+      }
+
+      // Draw all mob paths
+      for (let mob of this.camera.mobs) {
+        let path = mob.path
+        if (path && path.length > 0) {
+          for (let i = 0, j = 1; i < path.length - 1; i++, j = (j + 1) % (path.length)) {
+            let p0 = path[i]
+            let p1 = path[j]
+            let seg = new Segment(sum(p0.point.position, this.camera.position), sum(p1.point.position, this.camera.position))
+            drawSegment(c, seg, 'yellow')
+          }
+          c.fillStyle = 'green'
+          let pt1 = sum(path[0].point.position, this.camera.position)
+          c.fillRect(pt1.x - 6, pt1.y - 6, 13, 13)
+          let pt2 = sum(path[path.length - 1].point.position, this.camera.position)
+          c.fillRect(pt2.x - 6, pt2.y - 6, 13, 13)
+        }
       }
     }
 
@@ -146,7 +149,6 @@ export default class Stage {
       for (let i = 0; i < this.camera.mobs.length; i++) {
         let mob = this.camera.mobs[i]
         if (mob.type === 'Player') {
-          console.log('FOUND PLAYER')
           this.camera.mobs.splice(i, 1)
           break
         }
@@ -172,8 +174,8 @@ export default class Stage {
 
     this.testObjective(e)
 
-    let p = this.camera.navMesh.getNearestPoint(this.player.position)
-    this.camera.navMesh.path = this.camera.navMesh.search(this.camera.navMesh.points[0], p)
+    // let p = this.camera.navMesh.getNearestPoint(this.player.position)
+    // this.camera.navMesh.path = this.camera.navMesh.search(this.camera.navMesh.points[0], p)
 
     // Charge
     this.camera.update(e, d, this)

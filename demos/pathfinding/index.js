@@ -1,6 +1,6 @@
 import { isNode, DocumentMock, WindowMock } from 'engine/isomorphic-helpers'
 import { drawPolygon } from 'engine/renderer'
-import NavMesh, { MineNavMesh, AStarNavMesh } from './navmesh'
+import NavMesh, { MineNavMesh, AStarNavMesh, GridStarNavMesh } from './navmesh'
 import * as keys from 'engine/keys'
 import Engine from 'engine'
 import { Polygon, pt } from 'math'
@@ -84,6 +84,13 @@ const keyEvents = {
   [keys.THREE]: _ => {
     timeit('Astar Navmesh', _ => {
       navmesh = new AStarNavMesh()
+      navmesh.generate(geometry)
+    })
+    console.log(navmesh)
+  },
+  [keys.FOUR]: _ => {
+    timeit('Grid Navmesh', _ => {
+      navmesh = new GridStarNavMesh()
       navmesh.generate(geometry)
     })
     console.log(navmesh)

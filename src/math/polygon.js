@@ -49,25 +49,34 @@ class Polygon {
 
   // Returns both the min x and y value of polygon
   minPoints () {
-    let x = this.verticies.reduce((a, b) => pt(Math.min(a.x, b.x), 0), pt(Infinity, Infinity))
-    let y = this.verticies.reduce((a, b) => pt(0, Math.min(a.y, b.y)), pt(Infinity, Infinity))
-    return pt(x.x, y.y)
+    let minX = Infinity
+    let minY = Infinity
+    for (let i = this.verticies.length - 1; i >= 0; i--) {
+      minX = Math.min(this.verticies[i].x, minX)
+      minY = Math.min(this.verticies[i].y, minY)
+    }
+    return pt(minX, minY)
   }
 
   // Returns both the minimum and maximum elements of a polygon
   maxPoints () {
-    let x = this.verticies.reduce((a, b) => pt(Math.max(a.x, b.x), 0), pt(-Infinity, -Infinity))
-    let y = this.verticies.reduce((a, b) => pt(0, Math.max(a.y, b.y)), pt(-Infinity, -Infinity))
-    return pt(x.x, y.y)
+    let maxX = -Infinity
+    let maxY = -Infinity
+    for (let i = this.verticies.length - 1; i >= 0; i--) {
+      maxX = Math.max(this.verticies[i].x, maxX)
+      maxY = Math.max(this.verticies[i].y, maxY)
+    }
+    return pt(maxX, maxY)
   }
 
   AABB () {
-    if (this._AABB_DIRTY && this._AABB) {
+    if (!this._AABB_DIRTY && this._AABB) {
       return this._AABB
     }
     let min = this.minPoints()
     let max = this.maxPoints()
-    return new Rectangle(min.x, min.y, max.x - min.x, max.y - min.y)
+    this._AABB = new Rectangle(min.x, min.y, max.x - min.x, max.y - min.y)
+    return this._AABB
   }
 
   // Returns the verticies of polygon as if it were located at (0, 0)

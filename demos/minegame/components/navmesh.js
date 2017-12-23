@@ -35,7 +35,6 @@ export default class NavMesh {
   }
 
   search (source, target) {
-    console.log(this.size)
     if (!source || !target) return []
     let frontier = new PriorityQueue((a, b) => -(a.cost - b.cost))
     // List of cost. Also used for the closed set

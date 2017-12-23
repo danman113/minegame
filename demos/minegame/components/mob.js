@@ -64,47 +64,61 @@ export class BasicEnemy extends Mob {
   }
 
   setPath (src, dest, camera) {
-    if (!this.path || this.path.age > 5) {
-      this.path = camera.navMesh.search(src, dest)
-      if (this.path.length === 0) {
-        console.log('This one is stuck', this)
-      }
-      if (this.path) {
-        this.path.age = 0
-      }
-    } else {
-
-    }
+    let nearestPt = camera.navMesh.getNearestPoint(src)
+    let nearestDestPt = camera.navMesh.getNearestPoint(dest)
+    this.path = camera.navMesh.search(nearestPt, nearestDestPt)
+    this.path.push({point: {position: dest}})
+    // console.log(this.path)
+    //
+    // if (!this.path || this.path.age > 5) {
+    //   this.path = camera.navMesh.search(src, dest)
+    //   if (this.path.length === 0) {
+    //     console.log('This one is stuck', this)
+    //   }
+    //   if (this.path) {
+    //     this.path.age = 0
+    //   }
+    // } else {
+    //
+    // }
   }
 
   update (mob, e, camera, d, stage) {
-    // Get points next to target
-    let nearestPt = camera.navMesh.getNearestPoint(this.position)
-    let nearestPlayerPt = camera.navMesh.getNearestPoint(stage.player.position)
-
-    // Get path
-    if (!this.path) this.setPath(nearestPt, stage.player.alive ? nearestPlayerPt : null, camera)
-
-    // Age path
-    if (this.path && this.path.age >= 0) {
-      this.path.age++
-    }
+    // Get path from me to player. If player is ded, some random path.
+    this.setPath(this.position, stage.player.alive ? stage.player.position : camera.navMesh.points[0].position, camera)
 
     // Figure out the next point on the path
     let nextPt = null
-    if (this.path && this.path.length > 0 && distance(this.path[0].point.position, this.position) < 10) {
-      this.path.splice(0, 1)
-    }
-    if (this.path && this.path.length > 0) {
-      nextPt = this.path[0].point
+    if (this.path.length > 1) {
+      let firstPoint = this.path[0].point.position
+      let secondPoint = this.path[1].point.position
+      if (
+        (distance(firstPoint, this.position) < 10 ||
+        distance(firstPoint, secondPoint) > distance(this.position, secondPoint))
+      ) {
+        this.path.splice(0, 1)
+        firstPoint = this.path[0].point.position
+        if (this.path.length > 1) {
+          secondPoint = this.path[1].point.position
+        }
+      }
+
+      if (this.path.length > 1 && distance(firstPoint, this.position) > distance(secondPoint, this.position)) {
+        nextPt = this.path[1].point
+      } else {
+        nextPt = this.path[0].point
+      }
     } else {
-      nextPt = stage.player
+      nextPt = this.path[0].point
     }
     let coords = moveTo(this, nextPt.position)
     this.targetVector = coords
-    let pathWorked = this.translate(coords.x * d * this.speed, coords.y * d * this.speed, camera, e)
-    if (pathWorked) {
-      if (pathWorked.type !== 'Player') this.setPath(nearestPt, stage.player.alive ? nearestPlayerPt : null, camera)
+    let cantMove = this.translate(coords.x * d * this.speed, coords.y * d * this.speed, camera, e)
+    if (cantMove) {
+      let nearestPt = camera.navMesh.getNearestPoint(this.position)
+      let coords = moveTo(this, nearestPt.position)
+      this.targetVector = coords
+      this.translate(coords.x * d * this.speed, coords.y * d * this.speed, camera, e)
     }
   }
 
@@ -154,7 +168,9 @@ export class BasicEnemy extends Mob {
     for (let inter of mobs) {
       if (inter !== this && this.collider.intersectsCircle(inter.collider) && inter.type === 'Player') {
         this._translate(-x, -y)
-        inter.alive = false
+        if (!global.godmode) {
+          inter.alive = false
+        }
         return inter
       } else if (inter !== this && this.collider.intersectsCircle(inter.collider) && inter.type !== 'Player') {
         secondTranlate = scalar(unit(sub(inter.position, this.position)), -2)
