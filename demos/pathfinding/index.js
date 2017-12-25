@@ -57,7 +57,20 @@ const render = (e, c) => {
 const update = (_e) => {}
 
 const click = e => {
-  points.push(pt(e.mouse.x, e.mouse.y))
+  let nearestPoint = null
+  if (navmesh) {
+    nearestPoint = navmesh.getNearestPoint(e.mouse)
+  }
+
+  if (keys.CTRL in e.keys) {
+    navmesh.dest = nearestPoint
+    navmesh.path = navmesh.search(navmesh.src, navmesh.dest)
+  } else if (keys.SHIFT in e.keys) {
+    navmesh.src = nearestPoint
+    navmesh.path = navmesh.search(navmesh.src, navmesh.dest)
+  } else {
+    points.push(pt(e.mouse.x, e.mouse.y))
+  }
 }
 
 const keyEvents = {

@@ -1,5 +1,6 @@
 import { pt, distance, scalar, sum, unit, sub, Segment, Circle } from 'math'
 import { drawSegment } from 'engine/renderer'
+import { memoize } from 'engine/utils'
 import PriorityQueue from 'priorityqueuejs'
 
 export class NavPoint {
@@ -21,6 +22,8 @@ export default class NavMesh {
   constructor () {
     this.points = []
     this.path = []
+    this.src = null
+    this.dest = null
     this.size = 0
   }
 
@@ -30,6 +33,10 @@ export default class NavMesh {
 
   search () {
     return []
+  }
+
+  getNearestPoint () {
+    return null
   }
 
   getSize () {
@@ -52,6 +59,15 @@ export default class NavMesh {
       for (let neighbor of point.neighbors) {
         const seg = new Segment(point.position, neighbor.point.position)
         drawSegment(c, seg)
+      }
+    }
+
+    for (let point of this.points) {
+      if (settings.points) {
+        c.fillStyle = 'blue'
+        c.fillRect(point.position.x - 5, point.position.y - 5, 11, 11)
+      }
+      for (let neighbor of point.neighbors) {
         let circle = new Circle(e.mouse, 50)
         let p0 = point
         let p1 = neighbor.point
@@ -66,23 +82,29 @@ export default class NavMesh {
       }
     }
 
-    for (let point of this.points) {
-      if (settings.points) {
-        c.fillStyle = 'blue'
-        c.fillRect(point.position.x - 5, point.position.y - 5, 11, 11)
-      }
-    }
-
     for (let i = 0, j = 1; j < this.path.length; i++, j++) {
       let p0 = this.path[i].point
       let p1 = this.path[j].point
       const seg = new Segment(p0.position, p1.position)
       drawSegment(c, seg, 'yellow', 'green')
     }
+    if (this.src) {
+      c.fillStyle = 'green'
+      c.fillRect(this.src.position.x - 5, this.src.position.y - 5, 11, 11)
+    }
+    if (this.dest) {
+      c.fillStyle = 'green'
+      c.fillRect(this.dest.position.x - 5, this.dest.position.y - 5, 11, 11)
+    }
   }
 }
 
 export class MineNavMesh extends NavMesh {
+  constructor (...args) {
+    super(...args)
+    this.search = memoize(this.search, (src, dest) => src.label + '_' + dest.label)
+  }
+
   generatePoints (geometry) {
     for (let geo of geometry) {
       let center = geo.center()
@@ -123,10 +145,6 @@ export class MineNavMesh extends NavMesh {
       nav.neighbors.sort((a, b) => a.cost - b.cost)
       // nav.neighbors.splice(8, 20)
     }
-  }
-
-  generatePath () {
-    this.path = this.search(this.points[0], this.points[this.points.length - 1])
   }
 
   newPQ () {
@@ -174,6 +192,8 @@ export class MineNavMesh extends NavMesh {
   generate (geometry) {
     this.generatePoints(geometry)
     this.generateNeighbors(geometry)
+    this.src = this.points[0]
+    this.dest = this.points[this.points.length - 1]
   }
 
   getNearestPoint (pt) {
