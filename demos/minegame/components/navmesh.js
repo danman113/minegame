@@ -1,5 +1,7 @@
 import { pt, distance, Segment, Circle } from 'math'
 import PriorityQueue from 'priorityqueuejs'
+import { memoize } from 'engine/utils'
+
 export class NavPoint {
   constructor (pos = pt(0, 0)) {
     this.position = pos
@@ -20,6 +22,7 @@ export default class NavMesh {
     this.points = []
     this.addPoints(...points)
     this.newPQ()
+    this.search = memoize(this.search, (src, dest) => src.label + '_' + dest.label)
     this.size = 0
   }
 
