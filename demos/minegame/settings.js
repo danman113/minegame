@@ -12,10 +12,15 @@ settings.state.controls = {
   SPRINT: [keys.SHIFT]
 }
 
+settings.state.FOV = 250
+settings.state.stretchTexture = false
+settings.state.music = 100
+settings.state.sound = 100
+
 const centerButton = (margins, _offset = 0) => {
-  return function (e) {
-    this.position.x = e.width * margins
-    this.dimensions = rectToPolygon(0, 0, e.width * (1 - margins * 2), this.dimensions.verticies[2].y)
+  return function (e, btn) {
+    btn.position.x = e.width * margins
+    btn.dimensions = rectToPolygon(0, 0, e.width * (1 - margins * 2), btn.dimensions.verticies[2].y)
   }
 }
 
@@ -24,31 +29,59 @@ let settingsContainer = new Container({
   position: pt(0, 0),
 })
 
+let i = 1
+const height = 125
+const width = 500
+const fontSize = 35
+const offset = -100
+
 let musicButton = new ImageButton({
-  position: pt(40, 250),
+  position: pt(40, (i++) * (height + 25) + offset),
   text: 'Music',
-  update: centerButton(0.25),
-  fontSize: 50,
-  onClick: _ => alert('In progress'),
-  dimensions: rectToPolygon(0, 0, 500, 150),
+  update: (e, scene, btn) => {
+    centerButton(0.25)(e, btn)
+    btn.text = 'Music Volume: ' + (settings.state.music)
+  },
+  fontSize: fontSize,
+  onClick: _ => {
+    settings.state.music = (settings.state.music + 10) % 110
+  },
+  dimensions: rectToPolygon(0, 0, width, height),
 })
 
 let soundButton = new ImageButton({
-  position: pt(40, 450),
+  position: pt(40, (i++) * (height + 25) + offset),
   text: 'Sounds',
-  onClick: _ => alert('In progress'),
-  update: centerButton(0.25),
-  fontSize: 50,
-  dimensions: rectToPolygon(0, 0, 500, 150),
+  onClick: _ => {
+    settings.state.sound = (settings.state.sound + 10) % 110
+  },
+  update: (e, scene, btn) => {
+    centerButton(0.25)(e, btn)
+    btn.text = 'Sound Volume: ' + (settings.state.sound)
+  },
+  fontSize: fontSize,
+  dimensions: rectToPolygon(0, 0, width, height),
+})
+
+let textureStretch = new ImageButton({
+  position: pt(40, (i++) * (height + 25) + offset),
+  text: 'Texture Stretch',
+  onClick: _ => { settings.state.stretchTexture = !settings.state.stretchTexture },
+  update: (e, scene, btn) => {
+    centerButton(0.25)(e, btn)
+    btn.text = 'Texture Stretch: ' + (settings.state.stretchTexture ? 'On' : 'Off')
+  },
+  fontSize: fontSize,
+  dimensions: rectToPolygon(0, 0, width, height),
 })
 
 let backButton = new ImageButton({
-  position: pt(40, 650),
+  position: pt(40, (i++) * (height + 25) + offset),
   text: 'Back',
-  update: centerButton(0.25),
+  update: (e, scene, btn) => { centerButton(0.25)(e, btn) },
   onClick: _ => settings.goto('start'),
-  fontSize: 50,
-  dimensions: rectToPolygon(0, 0, 500, 150),
+  fontSize: fontSize,
+  dimensions: rectToPolygon(0, 0, width, height),
 })
 
 let keyM = new KeyBoardButtonManager({})
@@ -61,17 +94,23 @@ keyM.addEdge(musicButton, {
 
 keyM.addEdge(soundButton, {
   [keys.KEY_UP]: musicButton,
+  [keys.KEY_DOWN]: textureStretch,
+  [keys.ENTER]: btn => btn.onClick(),
+})
+
+keyM.addEdge(textureStretch, {
+  [keys.KEY_UP]: soundButton,
   [keys.KEY_DOWN]: backButton,
   [keys.ENTER]: btn => btn.onClick(),
 })
 
 keyM.addEdge(backButton, {
-  [keys.KEY_UP]: soundButton,
+  [keys.KEY_UP]: textureStretch,
   [keys.KEY_DOWN]: musicButton,
   [keys.ENTER]: btn => btn.onClick(),
 })
 
-settingsContainer.addChildren(musicButton, soundButton, backButton)
+settingsContainer.addChildren(musicButton, soundButton, textureStretch, backButton)
 
 const render = function (e, c) {
   c.clearRect(0, 0, e.width, e.height)
@@ -97,7 +136,7 @@ const render = function (e, c) {
 }
 
 const update = function (e) {
-  settingsContainer.handleUpdate(e)
+  settingsContainer.handleUpdate(e, settings)
   keyM.handleUpdate(e)
 }
 

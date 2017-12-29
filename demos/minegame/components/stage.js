@@ -63,12 +63,19 @@ export default class Stage {
             let p1 = path[j]
             let seg = new Segment(sum(p0.point.position, this.camera.position), sum(p1.point.position, this.camera.position))
             drawSegment(c, seg, 'yellow')
+            if (i === 0) {
+              let seg2 = new Segment(sum(mob.position, this.camera.position), sum(p0.point.position, this.camera.position))
+              drawSegment(c, seg2, 'yellow')
+            }
           }
           c.fillStyle = 'green'
           let pt1 = sum(path[0].point.position, this.camera.position)
           c.fillRect(pt1.x - 6, pt1.y - 6, 13, 13)
           let pt2 = sum(path[path.length - 1].point.position, this.camera.position)
           c.fillRect(pt2.x - 6, pt2.y - 6, 13, 13)
+          let closestToMob = this.camera.navMesh.getNearestPoint(mob.position)
+          let toClosest = new Segment(sum(mob.position, this.camera.position), sum(closestToMob.position, this.camera.position))
+          drawSegment(c, toClosest, 'red')
         }
       }
     }
@@ -200,7 +207,6 @@ export default class Stage {
     let x = e.mouse.x + -this.camera.position.x
     let y = e.mouse.y + -this.camera.position.y
     this.throwMine(x, y)
-    console.log(x, y)
     this.charge = 0
   }
 
@@ -218,7 +224,6 @@ export default class Stage {
   }
 
   mount (scene) {
-    console.log(this)
     scene.render = this.render.bind(this)
     scene.update = this.update.bind(this)
     scene.onClick = this.onClick.bind(this)

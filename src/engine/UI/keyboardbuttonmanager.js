@@ -33,7 +33,7 @@ export default class KeyBoardButtonManager {
     }
   }
 
-  handleUpdate (e) {
+  handleUpdate (_e) {
     for (let btn of this.children) {
       if (btn.state === 1) {
         this.select(btn)
@@ -46,7 +46,7 @@ export default class KeyBoardButtonManager {
     }
   }
 
-  handleKey (e, key, evt) {
+  handleKey (e, key, _evt) {
     this.callDirection(key)
   }
 }

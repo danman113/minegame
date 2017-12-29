@@ -1,5 +1,6 @@
 import { pt, sub, unit, scalar, distance } from 'math'
 import NavMesh, { NavPoint } from './navmesh'
+import settings from '../settings'
 
 export default class Camera {
   constructor (initialPosition = pt(0, 0)) {
@@ -19,7 +20,7 @@ export default class Camera {
   render (c, e) {
     this.width = e.width
     this.height = e.height
-    this.viewDistance = Math.max(this.width, this.height) + 500
+    this.viewDistance = Math.max(this.width, this.height) + settings.state.FOV
 
     // Drag Ground
     let xOffset = -Math.abs((this.position.x - 0xFFFFFFF) % this.tileSize)

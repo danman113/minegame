@@ -1,5 +1,6 @@
 import { pt, Polygon } from 'math'
 import { drawPolygon } from 'engine/renderer'
+import settings from '../settings'
 
 const drawTexturedPolygon = (c, camera, poly, texture, e, geo) => {
   // c.fillStyle = color
@@ -20,13 +21,17 @@ const drawTexturedPolygon = (c, camera, poly, texture, e, geo) => {
   c.clip()
   let box = poly.AABB()
   c.fillStyle = 'rgba(255, 255, 255, 0.00)'
-  let imageWidth = geo.tileSize * (images[texture].height / images[texture].width)
-  let imageHeight = geo.tileSize * (images[texture].height / images[texture].width)
-  let x = Math.ceil(box.width / imageWidth)
-  let y = Math.ceil(box.height / imageHeight)
-  for (let i = 0; i < x; i++) {
-    for (let j = 0; j < y; j++) {
-      c.drawImage(images[texture], Math.floor(box.x + i * imageWidth), Math.floor(box.y + j * imageHeight), imageWidth, imageHeight)
+  if (geo.stretch || settings.state.textureStretch) {
+    c.drawImage(images[texture], box.x, box.y, box.width, box.height)
+  } else {
+    let imageWidth = geo.tileSize * (images[texture].height / images[texture].width)
+    let imageHeight = geo.tileSize * (images[texture].height / images[texture].width)
+    let x = Math.ceil(box.width / imageWidth)
+    let y = Math.ceil(box.height / imageHeight)
+    for (let i = 0; i < x; i++) {
+      for (let j = 0; j < y; j++) {
+        c.drawImage(images[texture], Math.floor(box.x + i * imageWidth), Math.floor(box.y + j * imageHeight), imageWidth, imageHeight)
+      }
     }
   }
 
@@ -46,7 +51,7 @@ export default class Geometry {
     strokeLength = 0,
     strokeColor = null,
     tileSize = 512,
-    noclip = false
+    stretch = false
   }) {
     this.position = polygon.verticies[0]
     this.polygon = polygon
@@ -56,7 +61,7 @@ export default class Geometry {
     this.strokeColor = strokeColor
     this.texture = texture
     this.tileSize = tileSize
-    this.noclip = noclip
+    this.stretch = stretch
   }
 
   render (c, camera, e) {
