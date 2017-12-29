@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="2017.11.22" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="32" tileheight="32" infinite="1" nextobjectid="299">
+ <layer name="Tile Layer 1" width="0" height="0" visible="0">
+  <data encoding="csv"/>
+ </layer>
+ <objectgroup name="geometry">
+  <object id="176" x="-1056" y="576">
+   <properties>
+    <property name="texture" value="wall"/>
+   </properties>
+   <polygon points="0,0 -32,0 -32,-1344 0,-1344"/>
+  </object>
+  <object id="177" x="640" y="576">
+   <properties>
+    <property name="texture" value="wall"/>
+   </properties>
+   <polygon points="0,0 32,0 32,-1344 0,-1344"/>
+  </object>
+  <object id="181" x="32" y="-96">
+   <properties>
+    <property name="texture" value="wall"/>
+   </properties>
+   <polygon points="0,0 40,-64 120,-64 160,0 120,64 40,64"/>
+  </object>
+  <object id="182" x="-640" y="-96">
+   <properties>
+    <property name="texture" value="wall"/>
+   </properties>
+   <polygon points="0,0 40,-64 120,-64 160,0 120,64 40,64"/>
+  </object>
+  <object id="183" x="-160" y="-256">
+   <properties>
+    <property name="texture" value="wall"/>
+   </properties>
+   <polygon points="0,0 73.1429,-16 0,-32 -109.714,-32 -182.857,-16 -109.714,0"/>
+  </object>
+  <object id="184" x="-160" y="96">
+   <properties>
+    <property name="texture" value="wall"/>
+   </properties>
+   <polygon points="0,0 73.1429,-16 0,-32 -109.714,-32 -182.857,-16 -109.714,0"/>
+  </object>
+  <object id="185" x="-736" y="-544">
+   <properties>
+    <property name="texture" value="wall"/>
+   </properties>
+   <polygon points="0,0 264,-32 792,-32 1056,0 792,32 264,32"/>
+  </object>
+  <object id="187" x="-736" y="352">
+   <properties>
+    <property name="texture" value="wall"/>
+   </properties>
+   <polygon points="0,0 264,-32 792,-32 1056,0 792,32 264,32"/>
+  </object>
+  <object id="193" x="-672" y="-384">
+   <properties>
+    <property name="texture" value="wall"/>
+   </properties>
+   <polygon points="0,0 -32,0 -64,224"/>
+  </object>
+  <object id="195" x="-672" y="-416">
+   <properties>
+    <property name="texture" value="wall"/>
+   </properties>
+   <polygon points="0,0 192,0 0,32"/>
+  </object>
+  <object id="199" x="-704" y="192">
+   <polygon points="0,0 32,0 -32,-224"/>
+  </object>
+  <object id="200" x="-672" y="224">
+   <polygon points="0,0 0,-32 192,0"/>
+  </object>
+  <object id="202" x="224" y="-384">
+   <polygon points="0,0 32,0 64,224"/>
+  </object>
+  <object id="203" x="224" y="-416">
+   <polygon points="0,0 0,32 -192,0"/>
+  </object>
+  <object id="204" x="224" y="192">
+   <polygon points="0,0 0,32 -192,32"/>
+  </object>
+  <object id="206" x="256" y="192">
+   <polygon points="0,0 -32,0 32,-224"/>
+  </object>
+  <object id="207" x="224" y="-384">
+   <polygon points="0,0 32,0 64,-64 0,-32"/>
+  </object>
+  <object id="208" x="-704" y="-384">
+   <polygon points="0,0 -32,-64 32,-32 32,0"/>
+  </object>
+  <object id="209" x="-704" y="192">
+   <polygon points="0,0 -32,64 32,32 32,0"/>
+  </object>
+  <object id="210" x="224" y="192">
+   <polygon points="0,0 0,32 64,64 32,0"/>
+  </object>
+  <object id="215" x="-288" y="-96">
+   <polygon points="0,0 40,-24 40,24"/>
+  </object>
+  <object id="216" x="-248" y="-120">
+   <polygon points="0,0 24,-40 48,0"/>
+  </object>
+  <object id="217" x="-248" y="-72">
+   <polygon points="0,0 24,40 48,0"/>
+  </object>
+  <object id="218" x="-200" y="-120">
+   <polygon points="0,0 0,48 40,24"/>
+  </object>
+  <object id="222" x="-1056" y="-768">
+   <polygon points="0,0 0,32 1696,32 1696,0"/>
+  </object>
+  <object id="223" x="-1056" y="544">
+   <polygon points="0,0 0,32 1696,32 1696,0"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="mobs">
+  <object id="58" name="PLAYER SPAWN" x="-224" y="-192">
+   <properties>
+    <property name="mob" value="player"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="59" name="round 1" x="-800" y="-448">
+   <properties>
+    <property name="mob" value="basic"/>
+    <property name="round" value="1"/>
+    <property name="spawnTime" type="int" value="5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="116" name="BASIC MOB" x="384" y="-448">
+   <properties>
+    <property name="mob" value="basic"/>
+    <property name="round" value="0"/>
+    <property name="spawnTime" type="int" value="5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="117" name="round 1" x="384" y="288">
+   <properties>
+    <property name="mob" value="basic"/>
+    <property name="round" value="1"/>
+    <property name="spawnTime" type="int" value="5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="118" name="BASIC MOB" x="-800" y="288">
+   <properties>
+    <property name="mob" value="basic"/>
+    <property name="round" value="0"/>
+    <property name="spawnTime" type="int" value="5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="124" name="round 2" x="-800" y="320">
+   <properties>
+    <property name="mob" value="basic"/>
+    <property name="round" value="2"/>
+    <property name="spawnTime" type="int" value="15"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="125" name="BASIC MOB" x="-832" y="-480">
+   <properties>
+    <property name="mob" value="basic"/>
+    <property name="round" value="1"/>
+    <property name="spawnTime" type="int" value="10"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="126" name="BASIC MOB" x="416" y="-480">
+   <properties>
+    <property name="mob" value="basic"/>
+    <property name="round" value="1"/>
+    <property name="spawnTime" type="int" value="10"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="129" name="BASIC MOB" x="-832" y="320">
+   <properties>
+    <property name="mob" value="basic"/>
+    <property name="round" value="1"/>
+    <property name="spawnTime" type="int" value="10"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="130" name="BASIC MOB" x="416" y="320">
+   <properties>
+    <property name="mob" value="basic"/>
+    <property name="round" value="1"/>
+    <property name="spawnTime" type="int" value="10"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="131" name="BASIC MOB" x="-832" y="288">
+   <properties>
+    <property name="mob" value="basic"/>
+    <property name="round" value="2"/>
+    <property name="spawnTime" type="int" value="20"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="132" name="BASIC MOB" x="416" y="288">
+   <properties>
+    <property name="mob" value="basic"/>
+    <property name="round" value="2"/>
+    <property name="spawnTime" type="int" value="20"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="232" name="round 1" x="-800" y="288">
+   <properties>
+    <property name="mob" value="basic"/>
+    <property name="round" value="1"/>
+    <property name="spawnTime" type="int" value="5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="233" name="BASIC MOB" x="384" y="288">
+   <properties>
+    <property name="mob" value="basic"/>
+    <property name="round" value="0"/>
+    <property name="spawnTime" type="int" value="5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="234" name="round 1" x="384" y="-448">
+   <properties>
+    <property name="mob" value="basic"/>
+    <property name="round" value="1"/>
+    <property name="spawnTime" type="int" value="5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="235" name="BASIC MOB" x="-800" y="-448">
+   <properties>
+    <property name="mob" value="basic"/>
+    <property name="round" value="0"/>
+    <property name="spawnTime" type="int" value="5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="236" name="round 2" x="-800" y="288">
+   <properties>
+    <property name="mob" value="basic"/>
+    <property name="round" value="2"/>
+    <property name="spawnTime" type="int" value="5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="237" name="round 2" x="-800" y="-448">
+   <properties>
+    <property name="mob" value="basic"/>
+    <property name="round" value="2"/>
+    <property name="spawnTime" type="int" value="5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="238" name="round 2" x="384" y="288">
+   <properties>
+    <property name="mob" value="basic"/>
+    <property name="round" value="2"/>
+    <property name="spawnTime" type="int" value="5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="239" name="round 2" x="384" y="-448">
+   <properties>
+    <property name="mob" value="basic"/>
+    <property name="round" value="2"/>
+    <property name="spawnTime" type="int" value="5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="240" name="round 2" x="-832" y="320">
+   <properties>
+    <property name="mob" value="basic"/>
+    <property name="round" value="2"/>
+    <property name="spawnTime" type="int" value="10"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="241" name="round 2" x="416" y="320">
+   <properties>
+    <property name="mob" value="basic"/>
+    <property name="round" value="2"/>
+    <property name="spawnTime" type="int" value="10"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="242" name="round 2" x="-832" y="-480">
+   <properties>
+    <property name="mob" value="basic"/>
+    <property name="round" value="2"/>
+    <property name="spawnTime" type="int" value="10"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="243" name="round 2" x="416" y="-480">
+   <properties>
+    <property name="mob" value="basic"/>
+    <property name="round" value="2"/>
+    <property name="spawnTime" type="int" value="10"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="244" name="round 2" x="-800" y="-480">
+   <properties>
+    <property name="mob" value="basic"/>
+    <property name="round" value="2"/>
+    <property name="spawnTime" type="int" value="15"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="245" name="round 2" x="384" y="-480">
+   <properties>
+    <property name="mob" value="basic"/>
+    <property name="round" value="2"/>
+    <property name="spawnTime" type="int" value="15"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="246" name="round 2" x="384" y="320">
+   <properties>
+    <property name="mob" value="basic"/>
+    <property name="round" value="2"/>
+    <property name="spawnTime" type="int" value="15"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup name="navmesh">
+  <object id="227" x="-768" y="-160">
+   <point/>
+  </object>
+  <object id="230" x="-800" y="320">
+   <point/>
+  </object>
+  <object id="231" x="-480" y="256">
+   <point/>
+  </object>
+  <object id="251" x="352" y="320">
+   <point/>
+  </object>
+  <object id="252" x="-480" y="-448">
+   <point/>
+  </object>
+  <object id="253" x="-800" y="-512">
+   <point/>
+  </object>
+  <object id="254" x="352" y="-512">
+   <point/>
+  </object>
+  <object id="255" x="320" y="-160">
+   <point/>
+  </object>
+  <object id="260" x="-768" y="-32">
+   <point/>
+  </object>
+  <object id="261" x="320" y="-32">
+   <point/>
+  </object>
+  <object id="262" x="32" y="-448">
+   <point/>
+  </object>
+  <object id="263" x="32" y="256">
+   <point/>
+  </object>
+  <object id="268" x="224" y="-160">
+   <point/>
+  </object>
+  <object id="269" x="192" y="-288">
+   <point/>
+  </object>
+  <object id="270" x="96" y="-320">
+   <point/>
+  </object>
+  <object id="271" x="320" y="-320">
+   <point/>
+  </object>
+  <object id="272" x="256" y="-480">
+   <point/>
+  </object>
+  <object id="273" x="352" y="128">
+   <point/>
+  </object>
+  <object id="274" x="352" y="224">
+   <point/>
+  </object>
+  <object id="275" x="192" y="288">
+   <point/>
+  </object>
+  <object id="276" x="160" y="160">
+   <point/>
+  </object>
+  <object id="277" x="192" y="64">
+   <point/>
+  </object>
+  <object id="278" x="64" y="160">
+   <point/>
+  </object>
+  <object id="279" x="-608" y="128">
+   <point/>
+  </object>
+  <object id="280" x="-544" y="160">
+   <point/>
+  </object>
+  <object id="281" x="-672" y="32">
+   <point/>
+  </object>
+  <object id="282" x="-800" y="64">
+   <point/>
+  </object>
+  <object id="283" x="-800" y="160">
+   <point/>
+  </object>
+  <object id="284" x="-640" y="288">
+   <point/>
+  </object>
+  <object id="285" x="-672" y="-640">
+   <point/>
+  </object>
+  <object id="286" x="-320" y="-640">
+   <point/>
+  </object>
+  <object id="287" x="32" y="-672">
+   <point/>
+  </object>
+  <object id="288" x="384" y="-640">
+   <point/>
+  </object>
+  <object id="289" x="480" y="-320">
+   <point/>
+  </object>
+  <object id="290" x="512" y="-288">
+   <point/>
+  </object>
+  <object id="291" x="512" y="128">
+   <point/>
+  </object>
+  <object id="292" x="512" y="352">
+   <point/>
+  </object>
+  <object id="293" x="224" y="512">
+   <point/>
+  </object>
+  <object id="294" x="-320" y="480">
+   <point/>
+  </object>
+  <object id="295" x="-704" y="480">
+   <point/>
+  </object>
+  <object id="296" x="-960" y="-352">
+   <point/>
+  </object>
+  <object id="297" x="-928" y="-64">
+   <point/>
+  </object>
+  <object id="298" x="-928" y="256">
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup name="Templates" visible="0">
+  <object id="44" name="PLAYER SPAWN" x="-416" y="-160">
+   <properties>
+    <property name="mob" value="player"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="46" name="BASIC MOB" x="-288" y="-160">
+   <properties>
+    <property name="mob" value="basic"/>
+    <property name="spawnTime" type="int" value="5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="47" name="CUSTOM WALL" x="-192" y="-160">
+   <properties>
+    <property name="texture" value="ice"/>
+   </properties>
+   <polygon points="0,0 32,-96 64,0"/>
+  </object>
+ </objectgroup>
+</map>
