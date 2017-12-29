@@ -104,6 +104,12 @@ keyM.addEdge(textureStretch, {
   [keys.ENTER]: btn => btn.onClick(),
 })
 
+keyM.addEdge(textureStretch, {
+  [keys.KEY_UP]: soundButton,
+  [keys.KEY_DOWN]: backButton,
+  [keys.ENTER]: btn => btn.onClick(),
+})
+
 keyM.addEdge(backButton, {
   [keys.KEY_UP]: textureStretch,
   [keys.KEY_DOWN]: musicButton,
