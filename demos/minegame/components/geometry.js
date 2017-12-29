@@ -78,3 +78,12 @@ export default class Geometry {
     this.polygon.translate(-camera.position.x, -camera.position.y)
   }
 }
+
+export const segmentIntersectsGeometry = (seg, geometry) => {
+  let inter = null
+  for (let i = 0, size = geometry.length; i < size; i++) {
+    inter = geometry[i].polygon.intersectsSegment(seg)
+    if (inter) break
+  }
+  return inter
+}

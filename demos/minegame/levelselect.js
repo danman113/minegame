@@ -15,7 +15,7 @@ let levelSelectContainer = new Container({
 })
 
 const levels = {
-  test: 'Tutorial',
+  tutorial: 'Tutorial',
   level1: 'Level 1',
   level2: 'Level 2',
   level3: 'Level 3',

@@ -1,4 +1,5 @@
-import { pt, Circle, unit, sub, distance, scalar } from 'math'
+import { pt, Circle, unit, sub, distance, scalar, Segment } from 'math'
+import { segmentIntersectsGeometry } from './geometry'
 import { moveTo } from './ai'
 
 export class Mob {
@@ -67,10 +68,9 @@ export class BasicEnemy extends Mob {
   setPath (src, dest, camera) {
     let nearestPt = camera.navMesh.getNearestPoint(src)
     let nearestDestPt = camera.navMesh.getNearestPoint(dest)
-    this.path = camera.navMesh.search(nearestPt, nearestDestPt)
+    this.path = camera.navMesh.search(nearestPt, nearestDestPt).slice()
     this.path.push({point: {position: dest}})
     // console.log(this.path)
-    //
     // if (!this.path || this.path.age > 5) {
     //   this.path = camera.navMesh.search(src, dest)
     //   if (this.path.length === 0) {
@@ -95,9 +95,12 @@ export class BasicEnemy extends Mob {
     if (this.path.length > 1) {
       let firstPoint = this.path[0].point.position
       let secondPoint = this.path[1].point.position
+      let seg = new Segment(firstPoint, secondPoint)
+
+      // Get rid of first point if the second is closer
       if (
-        (distance(firstPoint, this.position) < 10 ||
-        distance(firstPoint, secondPoint) > distance(this.position, secondPoint))
+        distance(firstPoint, this.position) < 10 ||
+        (distance(firstPoint, secondPoint) > distance(this.position, secondPoint) && !segmentIntersectsGeometry(seg, camera.geometry))
       ) {
         this.path.splice(0, 1)
         firstPoint = this.path[0].point.position

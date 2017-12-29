@@ -1,14 +1,14 @@
 import { Scene } from 'engine/scene'
 import Stage from './components/stage'
-import TestLevel from './assets/testlevel.json'
-import RioLevel from './assets/riolevel2.json'
-import RioLevel3 from './assets/riolevel3hallway.json'
-import HaoLevel1 from './assets/riolevel6.json'
-import HaoLevel2 from './assets/haolevel2.json'
-import RioLevel4 from './assets/riolevel4.json'
-import RioLevel5 from './assets/riolevel5.json'
-import delta from './assets/testleveldelta.json'
-import tut from './assets/tutorial.json'
+import TestLevel from './assets/levels/testlevel.json'
+import RioLevel from './assets/levels/riolevel2.json'
+import RioLevel3 from './assets/levels/riolevel3hallway.json'
+import HaoLevel1 from './assets/levels/riolevel6.json'
+import HaoLevel2 from './assets/levels/haolevel2.json'
+import RioLevel4 from './assets/levels/riolevel4.json'
+import RioLevel5 from './assets/levels/riolevel5.json'
+import delta from './assets/levels/testleveldelta.json'
+import tutorial from './assets/levels/tutorial.json'
 
 let game = new Scene()
 game.state.currentLevel = 'test'
@@ -16,8 +16,8 @@ game.state.currentLevel = 'test'
 const getLevel = levelStr => {
   console.log(levelStr)
   switch (levelStr) {
-  case 'test':
-    return tut
+  case 'tutorial':
+    return tutorial
   case 'level1':
     return RioLevel4
   case 'level2':

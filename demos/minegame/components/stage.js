@@ -58,7 +58,7 @@ export default class Stage {
       for (let mob of this.camera.mobs) {
         let path = mob.path
         if (path && path.length > 0) {
-          for (let i = 0, j = 1; i < path.length - 1; i++, j = (j + 1) % (path.length)) {
+          for (let i = 0, j = 1; j < path.length; i++, j++) {
             let p0 = path[i]
             let p1 = path[j]
             let seg = new Segment(sum(p0.point.position, this.camera.position), sum(p1.point.position, this.camera.position))
@@ -220,7 +220,8 @@ export default class Stage {
     [keys.THREE]: _ => { this.selectedMob = this.camera.mobs[2] },
     [keys.ESC]: _ => { this.scene.goto('pause') },
     [keys.ENTER]: _ => { this.scene.goto('pause') },
-    [keys.R]: _ => { global.debug = !global.debug }
+    [keys.R]: _ => { global.debug = !global.debug },
+    [keys.G]: _ => { global.godmode = !global.godmode }
   }
 
   mount (scene) {

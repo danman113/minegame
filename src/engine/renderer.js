@@ -1,3 +1,5 @@
+import { Segment } from 'math'
+
 const drawPolygon = (c, poly, color = '#f00', bg = '#00a', showBox = false) => {
   if (showBox) {
     c.fillStyle = bg
@@ -25,6 +27,15 @@ const drawPolygon = (c, poly, color = '#f00', bg = '#00a', showBox = false) => {
   }
 }
 
+const drawPolyLine = (c, polyLine, color = '#fff', bg = '#f00') => {
+  for (let i = 0, j = 1; j < polyLine.length; i++, j++) {
+    let p0 = polyLine[i]
+    let p1 = polyLine[j]
+    let seg = new Segment(p0.point.position, p1.point.position)
+    drawSegment(c, seg, color, bg)
+  }
+}
+
 const drawLine = (c, line, color = '#fff', bg = '#f00') => {
   // Before
   c.strokeStyle = bg
@@ -49,8 +60,9 @@ const drawLine = (c, line, color = '#fff', bg = '#f00') => {
   c.stroke()
 }
 
-const drawSegment = (c, seg, color = '#fff', fill = '#f00') => {
+const drawSegment = (c, seg, color = '#fff', fill = '#f00', width = 3) => {
   c.strokeStyle = color
+  c.lineWidth = width
   c.beginPath()
   c.moveTo(seg.p0.x, seg.p0.y)
   c.lineTo(seg.p1.x, seg.p1.y)
@@ -84,4 +96,4 @@ const drawBox = (c, box, color = '#fff', _fill = '#f00') => {
   c.fillRect(box.x, box.y, box.width, box.height)
 }
 
-export { drawPolygon, drawLine, drawSegment, drawRay, drawBox }
+export { drawPolygon, drawPolyLine, drawLine, drawSegment, drawRay, drawBox }

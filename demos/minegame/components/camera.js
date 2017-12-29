@@ -120,7 +120,7 @@ export default class Camera {
     this.position.y += (Math.random() - 0.5) * this.shakeAmount
   }
 
-  screenShake (amount, duration = 3) {
+  screenShake (amount, duration = 5) {
     this.shakeDuration = Math.max(duration, this.shakeDuration)
     this.shakeAmount = amount
   }
