@@ -122,7 +122,7 @@ export default class Button extends Container {
       } else {
         this.state = 0
       }
-      oldUpdate(e, scene)
+      oldUpdate(e, scene, this)
     }
     this.text = text
     this.font = font

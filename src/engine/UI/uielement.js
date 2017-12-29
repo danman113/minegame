@@ -41,7 +41,7 @@ export default class UIElement {
   handleUpdate (e, scene) {
     this.update(e, scene)
     for (let child of this.children) {
-      child.update(e, scene)
+      child.update(e, scene, child)
     }
   }
 
