@@ -336,13 +336,13 @@
   <object id="230" x="-800" y="320">
    <point/>
   </object>
-  <object id="231" x="-480" y="256">
+  <object id="231" x="-448" y="288">
    <point/>
   </object>
   <object id="251" x="352" y="320">
    <point/>
   </object>
-  <object id="252" x="-480" y="-448">
+  <object id="252" x="-448" y="-448">
    <point/>
   </object>
   <object id="253" x="-800" y="-512">
@@ -360,10 +360,10 @@
   <object id="261" x="320" y="-32">
    <point/>
   </object>
-  <object id="262" x="32" y="-448">
+  <object id="262" x="0" y="-448">
    <point/>
   </object>
-  <object id="263" x="32" y="256">
+  <object id="263" x="0" y="288">
    <point/>
   </object>
   <object id="268" x="224" y="-160">

@@ -1,13 +1,13 @@
 import { Scene } from 'engine/scene'
 import Stage from './components/stage'
 import TestLevel from './assets/levels/testlevel.json'
-import RioLevel from './assets/levels/riolevel2.json'
-import RioLevel3 from './assets/levels/riolevel3hallway.json'
-import HaoLevel1 from './assets/levels/riolevel6.json'
-import HaoLevel2 from './assets/levels/haolevel2.json'
-import RioLevel4 from './assets/levels/riolevel4.json'
-import RioLevel5 from './assets/levels/riolevel5.json'
-import delta from './assets/levels/testleveldelta.json'
+import Level1 from './assets/levels/level1.json'
+import Level2 from './assets/levels/level2.json'
+import Level3 from './assets/levels/level3.json'
+import Level4 from './assets/levels/level4.json'
+import Level5 from './assets/levels/level5.json'
+import Level6 from './assets/levels/level6.json'
+import Level7 from './assets/levels/level7.json'
 import tutorial from './assets/levels/tutorial.json'
 
 let game = new Scene()
@@ -19,19 +19,19 @@ const getLevel = levelStr => {
   case 'tutorial':
     return tutorial
   case 'level1':
-    return RioLevel4
+    return Level1
   case 'level2':
-    return HaoLevel1
+    return Level2
   case 'level3':
-    return HaoLevel2
+    return Level3
   case 'level4':
-    return delta
+    return Level4
   case 'level5':
-    return RioLevel3
+    return Level5
   case 'level6':
-    return RioLevel5
+    return Level6
   case 'level7':
-    return RioLevel
+    return Level7
   default:
     alert('Level Not Loaded')
     return TestLevel

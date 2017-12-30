@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<template>
- <object>
-  <properties>
-   <property name="spawnTime" type="int" value="23"/>
-  </properties>
-  <point/>
- </object>
-</template>

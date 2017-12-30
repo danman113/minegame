@@ -9,7 +9,7 @@
          "startx":0,
          "starty":0,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":0,
          "x":0,
          "y":0
@@ -33,11 +33,11 @@
                         }, 
                         {
                          "x":-32,
-                         "y":-1376
+                         "y":-1344
                         }, 
                         {
                          "x":0,
-                         "y":-1376
+                         "y":-1344
                         }],
                  "properties":
                     {
@@ -51,8 +51,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":-672,
-                 "y":544
+                 "x":-1056,
+                 "y":576
                 }, 
                 {
                  "height":0,
@@ -69,11 +69,11 @@
                         }, 
                         {
                          "x":32,
-                         "y":-1376
+                         "y":-1344
                         }, 
                         {
                          "x":0,
-                         "y":-1376
+                         "y":-1344
                         }],
                  "properties":
                     {
@@ -87,8 +87,688 @@
                  "type":"",
                  "visible":true,
                  "width":0,
+                 "x":640,
+                 "y":576
+                }, 
+                {
+                 "height":0,
+                 "id":181,
+                 "name":"",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":40,
+                         "y":-64
+                        }, 
+                        {
+                         "x":120,
+                         "y":-64
+                        }, 
+                        {
+                         "x":160,
+                         "y":0
+                        }, 
+                        {
+                         "x":120,
+                         "y":64
+                        }, 
+                        {
+                         "x":40,
+                         "y":64
+                        }],
+                 "properties":
+                    {
+                     "texture":"wall"
+                    },
+                 "propertytypes":
+                    {
+                     "texture":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":32,
+                 "y":-96
+                }, 
+                {
+                 "height":0,
+                 "id":182,
+                 "name":"",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":40,
+                         "y":-64
+                        }, 
+                        {
+                         "x":120,
+                         "y":-64
+                        }, 
+                        {
+                         "x":160,
+                         "y":0
+                        }, 
+                        {
+                         "x":120,
+                         "y":64
+                        }, 
+                        {
+                         "x":40,
+                         "y":64
+                        }],
+                 "properties":
+                    {
+                     "texture":"wall"
+                    },
+                 "propertytypes":
+                    {
+                     "texture":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-640,
+                 "y":-96
+                }, 
+                {
+                 "height":0,
+                 "id":183,
+                 "name":"",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":73.1429,
+                         "y":-16
+                        }, 
+                        {
+                         "x":0,
+                         "y":-32
+                        }, 
+                        {
+                         "x":-109.714,
+                         "y":-32
+                        }, 
+                        {
+                         "x":-182.857,
+                         "y":-16
+                        }, 
+                        {
+                         "x":-109.714,
+                         "y":0
+                        }],
+                 "properties":
+                    {
+                     "texture":"wall"
+                    },
+                 "propertytypes":
+                    {
+                     "texture":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-160,
+                 "y":-256
+                }, 
+                {
+                 "height":0,
+                 "id":184,
+                 "name":"",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":73.1429,
+                         "y":-16
+                        }, 
+                        {
+                         "x":0,
+                         "y":-32
+                        }, 
+                        {
+                         "x":-109.714,
+                         "y":-32
+                        }, 
+                        {
+                         "x":-182.857,
+                         "y":-16
+                        }, 
+                        {
+                         "x":-109.714,
+                         "y":0
+                        }],
+                 "properties":
+                    {
+                     "texture":"wall"
+                    },
+                 "propertytypes":
+                    {
+                     "texture":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-160,
+                 "y":96
+                }, 
+                {
+                 "height":0,
+                 "id":185,
+                 "name":"",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":264,
+                         "y":-32
+                        }, 
+                        {
+                         "x":792,
+                         "y":-32
+                        }, 
+                        {
+                         "x":1056,
+                         "y":0
+                        }, 
+                        {
+                         "x":792,
+                         "y":32
+                        }, 
+                        {
+                         "x":264,
+                         "y":32
+                        }],
+                 "properties":
+                    {
+                     "texture":"wall"
+                    },
+                 "propertytypes":
+                    {
+                     "texture":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-736,
+                 "y":-544
+                }, 
+                {
+                 "height":0,
+                 "id":187,
+                 "name":"",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":264,
+                         "y":-32
+                        }, 
+                        {
+                         "x":792,
+                         "y":-32
+                        }, 
+                        {
+                         "x":1056,
+                         "y":0
+                        }, 
+                        {
+                         "x":792,
+                         "y":32
+                        }, 
+                        {
+                         "x":264,
+                         "y":32
+                        }],
+                 "properties":
+                    {
+                     "texture":"wall"
+                    },
+                 "propertytypes":
+                    {
+                     "texture":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-736,
+                 "y":352
+                }, 
+                {
+                 "height":0,
+                 "id":193,
+                 "name":"",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":-32,
+                         "y":0
+                        }, 
+                        {
+                         "x":-64,
+                         "y":224
+                        }],
+                 "properties":
+                    {
+                     "texture":"wall"
+                    },
+                 "propertytypes":
+                    {
+                     "texture":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-672,
+                 "y":-384
+                }, 
+                {
+                 "height":0,
+                 "id":195,
+                 "name":"",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":192,
+                         "y":0
+                        }, 
+                        {
+                         "x":0,
+                         "y":32
+                        }],
+                 "properties":
+                    {
+                     "texture":"wall"
+                    },
+                 "propertytypes":
+                    {
+                     "texture":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-672,
+                 "y":-416
+                }, 
+                {
+                 "height":0,
+                 "id":199,
+                 "name":"",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":32,
+                         "y":0
+                        }, 
+                        {
+                         "x":-32,
+                         "y":-224
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-704,
+                 "y":192
+                }, 
+                {
+                 "height":0,
+                 "id":200,
+                 "name":"",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":0,
+                         "y":-32
+                        }, 
+                        {
+                         "x":192,
+                         "y":0
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-672,
+                 "y":224
+                }, 
+                {
+                 "height":0,
+                 "id":202,
+                 "name":"",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":32,
+                         "y":0
+                        }, 
+                        {
+                         "x":64,
+                         "y":224
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
                  "x":224,
-                 "y":544
+                 "y":-384
+                }, 
+                {
+                 "height":0,
+                 "id":203,
+                 "name":"",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":0,
+                         "y":32
+                        }, 
+                        {
+                         "x":-192,
+                         "y":0
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":224,
+                 "y":-416
+                }, 
+                {
+                 "height":0,
+                 "id":204,
+                 "name":"",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":0,
+                         "y":32
+                        }, 
+                        {
+                         "x":-192,
+                         "y":32
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":224,
+                 "y":192
+                }, 
+                {
+                 "height":0,
+                 "id":206,
+                 "name":"",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":-32,
+                         "y":0
+                        }, 
+                        {
+                         "x":32,
+                         "y":-224
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":256,
+                 "y":192
+                }, 
+                {
+                 "height":0,
+                 "id":207,
+                 "name":"",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":32,
+                         "y":0
+                        }, 
+                        {
+                         "x":64,
+                         "y":-64
+                        }, 
+                        {
+                         "x":0,
+                         "y":-32
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":224,
+                 "y":-384
+                }, 
+                {
+                 "height":0,
+                 "id":208,
+                 "name":"",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":-32,
+                         "y":-64
+                        }, 
+                        {
+                         "x":32,
+                         "y":-32
+                        }, 
+                        {
+                         "x":32,
+                         "y":0
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-704,
+                 "y":-384
+                }, 
+                {
+                 "height":0,
+                 "id":209,
+                 "name":"",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":-32,
+                         "y":64
+                        }, 
+                        {
+                         "x":32,
+                         "y":32
+                        }, 
+                        {
+                         "x":32,
+                         "y":0
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-704,
+                 "y":192
+                }, 
+                {
+                 "height":0,
+                 "id":210,
+                 "name":"",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":0,
+                         "y":32
+                        }, 
+                        {
+                         "x":64,
+                         "y":64
+                        }, 
+                        {
+                         "x":32,
+                         "y":0
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":224,
+                 "y":192
+                }, 
+                {
+                 "height":0,
+                 "id":215,
+                 "name":"",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":40,
+                         "y":-24
+                        }, 
+                        {
+                         "x":40,
+                         "y":24
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-288,
+                 "y":-96
+                }, 
+                {
+                 "height":0,
+                 "id":216,
+                 "name":"",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":24,
+                         "y":-40
+                        }, 
+                        {
+                         "x":48,
+                         "y":0
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-248,
+                 "y":-120
+                }, 
+                {
+                 "height":0,
+                 "id":217,
+                 "name":"",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":24,
+                         "y":40
+                        }, 
+                        {
+                         "x":48,
+                         "y":0
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-248,
+                 "y":-72
+                }, 
+                {
+                 "height":0,
+                 "id":218,
+                 "name":"",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":0,
+                         "y":48
+                        }, 
+                        {
+                         "x":40,
+                         "y":24
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-200,
+                 "y":-120
                 }, 
                 {
                  "height":0,
@@ -104,27 +784,19 @@
                          "y":32
                         }, 
                         {
-                         "x":896,
+                         "x":1696,
                          "y":32
                         }, 
                         {
-                         "x":896,
+                         "x":1696,
                          "y":0
                         }],
-                 "properties":
-                    {
-                     "texture":"wall"
-                    },
-                 "propertytypes":
-                    {
-                     "texture":"string"
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":-672,
-                 "y":-832
+                 "x":-1056,
+                 "y":-768
                 }, 
                 {
                  "height":0,
@@ -140,315 +812,19 @@
                          "y":32
                         }, 
                         {
-                         "x":896,
+                         "x":1696,
                          "y":32
                         }, 
                         {
-                         "x":896,
+                         "x":1696,
                          "y":0
                         }],
-                 "properties":
-                    {
-                     "texture":"wall"
-                    },
-                 "propertytypes":
-                    {
-                     "texture":"string"
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":-672,
-                 "y":512
-                }, 
-                {
-                 "height":0,
-                 "id":250,
-                 "name":"",
-                 "polygon":[
-                        {
-                         "x":0,
-                         "y":0
-                        }, 
-                        {
-                         "x":64,
-                         "y":0
-                        }, 
-                        {
-                         "x":64,
-                         "y":448
-                        }, 
-                        {
-                         "x":0,
-                         "y":448
-                        }],
-                 "properties":
-                    {
-                     "texture":"wall"
-                    },
-                 "propertytypes":
-                    {
-                     "texture":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":-576,
-                 "y":-128
-                }, 
-                {
-                 "height":0,
-                 "id":251,
-                 "name":"",
-                 "polygon":[
-                        {
-                         "x":0,
-                         "y":0
-                        }, 
-                        {
-                         "x":0,
-                         "y":384
-                        }, 
-                        {
-                         "x":64,
-                         "y":384
-                        }, 
-                        {
-                         "x":64,
-                         "y":0
-                        }],
-                 "properties":
-                    {
-                     "texture":"wall"
-                    },
-                 "propertytypes":
-                    {
-                     "texture":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":-576,
-                 "y":-608
-                }, 
-                {
-                 "height":0,
-                 "id":252,
-                 "name":"",
-                 "polygon":[
-                        {
-                         "x":0,
-                         "y":0
-                        }, 
-                        {
-                         "x":64,
-                         "y":0
-                        }, 
-                        {
-                         "x":64,
-                         "y":768
-                        }, 
-                        {
-                         "x":0,
-                         "y":768
-                        }],
-                 "properties":
-                    {
-                     "texture":"wall"
-                    },
-                 "propertytypes":
-                    {
-                     "texture":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":-384,
-                 "y":-544
-                }, 
-                {
-                 "height":0,
-                 "id":253,
-                 "name":"",
-                 "polygon":[
-                        {
-                         "x":0,
-                         "y":0
-                        }, 
-                        {
-                         "x":-64,
-                         "y":0
-                        }, 
-                        {
-                         "x":-64,
-                         "y":768
-                        }, 
-                        {
-                         "x":0,
-                         "y":768
-                        }],
-                 "properties":
-                    {
-                     "texture":"wall"
-                    },
-                 "propertytypes":
-                    {
-                     "texture":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":-64,
-                 "y":-544
-                }, 
-                {
-                 "height":0,
-                 "id":254,
-                 "name":"",
-                 "polygon":[
-                        {
-                         "x":0,
-                         "y":0
-                        }, 
-                        {
-                         "x":0,
-                         "y":-64
-                        }, 
-                        {
-                         "x":704,
-                         "y":-64
-                        }, 
-                        {
-                         "x":704,
-                         "y":0
-                        }],
-                 "properties":
-                    {
-                     "texture":"wall"
-                    },
-                 "propertytypes":
-                    {
-                     "texture":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":-576,
-                 "y":384
-                }, 
-                {
-                 "height":0,
-                 "id":257,
-                 "name":"",
-                 "polygon":[
-                        {
-                         "x":0,
-                         "y":0
-                        }, 
-                        {
-                         "x":64,
-                         "y":0
-                        }, 
-                        {
-                         "x":64,
-                         "y":288
-                        }, 
-                        {
-                         "x":0,
-                         "y":288
-                        }],
-                 "properties":
-                    {
-                     "texture":"wall"
-                    },
-                 "propertytypes":
-                    {
-                     "texture":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":64,
-                 "y":32
-                }, 
-                {
-                 "height":0,
-                 "id":258,
-                 "name":"",
-                 "polygon":[
-                        {
-                         "x":0,
-                         "y":0
-                        }, 
-                        {
-                         "x":64,
-                         "y":0
-                        }, 
-                        {
-                         "x":64,
-                         "y":-480
-                        }, 
-                        {
-                         "x":0,
-                         "y":-480
-                        }],
-                 "properties":
-                    {
-                     "texture":"wall"
-                    },
-                 "propertytypes":
-                    {
-                     "texture":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":64,
-                 "y":-64
-                }, 
-                {
-                 "height":0,
-                 "id":259,
-                 "name":"",
-                 "polygon":[
-                        {
-                         "x":0,
-                         "y":0
-                        }, 
-                        {
-                         "x":0,
-                         "y":64
-                        }, 
-                        {
-                         "x":704,
-                         "y":64
-                        }, 
-                        {
-                         "x":704,
-                         "y":0
-                        }],
-                 "properties":
-                    {
-                     "texture":"wall"
-                    },
-                 "propertytypes":
-                    {
-                     "texture":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":-576,
-                 "y":-672
+                 "x":-1056,
+                 "y":544
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -464,6 +840,7 @@
                  "height":0,
                  "id":58,
                  "name":"PLAYER SPAWN",
+                 "point":true,
                  "properties":
                     {
                      "mob":"player"
@@ -481,8 +858,33 @@
                 }, 
                 {
                  "height":0,
-                 "id":117,
+                 "id":59,
+                 "name":"round 1",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":"1",
+                     "spawnTime":5
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"string",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-800,
+                 "y":-448
+                }, 
+                {
+                 "height":0,
+                 "id":116,
                  "name":"BASIC MOB",
+                 "point":true,
                  "properties":
                     {
                      "mob":"basic",
@@ -499,13 +901,38 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":160,
-                 "y":448
+                 "x":384,
+                 "y":-448
+                }, 
+                {
+                 "height":0,
+                 "id":117,
+                 "name":"round 1",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":"1",
+                     "spawnTime":5
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"string",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":384,
+                 "y":288
                 }, 
                 {
                  "height":0,
                  "id":118,
                  "name":"BASIC MOB",
+                 "point":true,
                  "properties":
                     {
                      "mob":"basic",
@@ -522,18 +949,427 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":-608,
-                 "y":448
+                 "x":-800,
+                 "y":288
+                }, 
+                {
+                 "height":0,
+                 "id":124,
+                 "name":"round 2",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":"2",
+                     "spawnTime":15
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"string",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-800,
+                 "y":320
+                }, 
+                {
+                 "height":0,
+                 "id":125,
+                 "name":"BASIC MOB",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":"1",
+                     "spawnTime":10
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"string",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-832,
+                 "y":-480
+                }, 
+                {
+                 "height":0,
+                 "id":126,
+                 "name":"BASIC MOB",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":"1",
+                     "spawnTime":10
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"string",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":416,
+                 "y":-480
+                }, 
+                {
+                 "height":0,
+                 "id":129,
+                 "name":"BASIC MOB",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":"1",
+                     "spawnTime":10
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"string",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-832,
+                 "y":320
+                }, 
+                {
+                 "height":0,
+                 "id":130,
+                 "name":"BASIC MOB",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":"1",
+                     "spawnTime":10
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"string",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":416,
+                 "y":320
+                }, 
+                {
+                 "height":0,
+                 "id":131,
+                 "name":"BASIC MOB",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":"2",
+                     "spawnTime":20
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"string",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-832,
+                 "y":288
+                }, 
+                {
+                 "height":0,
+                 "id":132,
+                 "name":"BASIC MOB",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":"2",
+                     "spawnTime":20
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"string",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":416,
+                 "y":288
+                }, 
+                {
+                 "height":0,
+                 "id":232,
+                 "name":"round 1",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":"1",
+                     "spawnTime":5
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"string",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-800,
+                 "y":288
+                }, 
+                {
+                 "height":0,
+                 "id":233,
+                 "name":"BASIC MOB",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":"0",
+                     "spawnTime":5
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"string",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":384,
+                 "y":288
+                }, 
+                {
+                 "height":0,
+                 "id":234,
+                 "name":"round 1",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":"1",
+                     "spawnTime":5
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"string",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":384,
+                 "y":-448
+                }, 
+                {
+                 "height":0,
+                 "id":235,
+                 "name":"BASIC MOB",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":"0",
+                     "spawnTime":5
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"string",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-800,
+                 "y":-448
+                }, 
+                {
+                 "height":0,
+                 "id":236,
+                 "name":"round 2",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":"2",
+                     "spawnTime":5
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"string",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-800,
+                 "y":288
+                }, 
+                {
+                 "height":0,
+                 "id":237,
+                 "name":"round 2",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":"2",
+                     "spawnTime":5
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"string",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-800,
+                 "y":-448
+                }, 
+                {
+                 "height":0,
+                 "id":238,
+                 "name":"round 2",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":"2",
+                     "spawnTime":5
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"string",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":384,
+                 "y":288
+                }, 
+                {
+                 "height":0,
+                 "id":239,
+                 "name":"round 2",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":"2",
+                     "spawnTime":5
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"string",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":384,
+                 "y":-448
+                }, 
+                {
+                 "height":0,
+                 "id":240,
+                 "name":"round 2",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":"2",
+                     "spawnTime":10
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"string",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-832,
+                 "y":320
+                }, 
+                {
+                 "height":0,
+                 "id":241,
+                 "name":"round 2",
+                 "point":true,
+                 "properties":
+                    {
+                     "mob":"basic",
+                     "round":"2",
+                     "spawnTime":10
+                    },
+                 "propertytypes":
+                    {
+                     "mob":"string",
+                     "round":"string",
+                     "spawnTime":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":416,
+                 "y":320
                 }, 
                 {
                  "height":0,
                  "id":242,
-                 "name":"BASIC MOB",
+                 "name":"round 2",
+                 "point":true,
                  "properties":
                     {
                      "mob":"basic",
-                     "round":"0",
-                     "spawnTime":5
+                     "round":"2",
+                     "spawnTime":10
                     },
                  "propertytypes":
                     {
@@ -545,312 +1381,14 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":-608,
-                 "y":-736
+                 "x":-832,
+                 "y":-480
                 }, 
                 {
                  "height":0,
                  "id":243,
-                 "name":"BASIC MOB",
-                 "properties":
-                    {
-                     "mob":"basic",
-                     "round":"0",
-                     "spawnTime":5
-                    },
-                 "propertytypes":
-                    {
-                     "mob":"string",
-                     "round":"string",
-                     "spawnTime":"int"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":160,
-                 "y":-736
-                }, 
-                {
-                 "height":0,
-                 "id":272,
-                 "name":"BASIC MOB",
-                 "properties":
-                    {
-                     "mob":"basic",
-                     "round":"1",
-                     "spawnTime":5
-                    },
-                 "propertytypes":
-                    {
-                     "mob":"string",
-                     "round":"string",
-                     "spawnTime":"int"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":-640,
-                 "y":-736
-                }, 
-                {
-                 "height":0,
-                 "id":273,
-                 "name":"BASIC MOB",
-                 "properties":
-                    {
-                     "mob":"basic",
-                     "round":"1",
-                     "spawnTime":5
-                    },
-                 "propertytypes":
-                    {
-                     "mob":"string",
-                     "round":"string",
-                     "spawnTime":"int"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":192,
-                 "y":-736
-                }, 
-                {
-                 "height":0,
-                 "id":274,
-                 "name":"BASIC MOB",
-                 "properties":
-                    {
-                     "mob":"basic",
-                     "round":"1",
-                     "spawnTime":5
-                    },
-                 "propertytypes":
-                    {
-                     "mob":"string",
-                     "round":"string",
-                     "spawnTime":"int"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":192,
-                 "y":448
-                }, 
-                {
-                 "height":0,
-                 "id":275,
-                 "name":"BASIC MOB",
-                 "properties":
-                    {
-                     "mob":"basic",
-                     "round":"1",
-                     "spawnTime":5
-                    },
-                 "propertytypes":
-                    {
-                     "mob":"string",
-                     "round":"string",
-                     "spawnTime":"int"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":-640,
-                 "y":448
-                }, 
-                {
-                 "height":0,
-                 "id":277,
-                 "name":"BASIC MOB",
-                 "properties":
-                    {
-                     "mob":"basic",
-                     "round":"1",
-                     "spawnTime":10
-                    },
-                 "propertytypes":
-                    {
-                     "mob":"string",
-                     "round":"string",
-                     "spawnTime":"int"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":-256,
-                 "y":-736
-                }, 
-                {
-                 "height":0,
-                 "id":281,
-                 "name":"BASIC MOB",
-                 "properties":
-                    {
-                     "mob":"basic",
-                     "round":"1",
-                     "spawnTime":10
-                    },
-                 "propertytypes":
-                    {
-                     "mob":"string",
-                     "round":"string",
-                     "spawnTime":"int"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":-192,
-                 "y":-736
-                }, 
-                {
-                 "height":0,
-                 "id":282,
-                 "name":"BASIC MOB",
-                 "properties":
-                    {
-                     "mob":"basic",
-                     "round":"1",
-                     "spawnTime":10
-                    },
-                 "propertytypes":
-                    {
-                     "mob":"string",
-                     "round":"string",
-                     "spawnTime":"int"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":-192,
-                 "y":448
-                }, 
-                {
-                 "height":0,
-                 "id":283,
-                 "name":"BASIC MOB",
-                 "properties":
-                    {
-                     "mob":"basic",
-                     "round":"1",
-                     "spawnTime":10
-                    },
-                 "propertytypes":
-                    {
-                     "mob":"string",
-                     "round":"string",
-                     "spawnTime":"int"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":-256,
-                 "y":448
-                }, 
-                {
-                 "height":0,
-                 "id":284,
-                 "name":"BASIC MOB",
-                 "properties":
-                    {
-                     "mob":"basic",
-                     "round":"2",
-                     "spawnTime":5
-                    },
-                 "propertytypes":
-                    {
-                     "mob":"string",
-                     "round":"string",
-                     "spawnTime":"int"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":-640,
-                 "y":-704
-                }, 
-                {
-                 "height":0,
-                 "id":285,
-                 "name":"BASIC MOB",
-                 "properties":
-                    {
-                     "mob":"basic",
-                     "round":"2",
-                     "spawnTime":5
-                    },
-                 "propertytypes":
-                    {
-                     "mob":"string",
-                     "round":"string",
-                     "spawnTime":"int"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":192,
-                 "y":-704
-                }, 
-                {
-                 "height":0,
-                 "id":286,
-                 "name":"BASIC MOB",
-                 "properties":
-                    {
-                     "mob":"basic",
-                     "round":"2",
-                     "spawnTime":5
-                    },
-                 "propertytypes":
-                    {
-                     "mob":"string",
-                     "round":"string",
-                     "spawnTime":"int"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":192,
-                 "y":416
-                }, 
-                {
-                 "height":0,
-                 "id":287,
-                 "name":"BASIC MOB",
-                 "properties":
-                    {
-                     "mob":"basic",
-                     "round":"2",
-                     "spawnTime":5
-                    },
-                 "propertytypes":
-                    {
-                     "mob":"string",
-                     "round":"string",
-                     "spawnTime":"int"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":-640,
-                 "y":416
-                }, 
-                {
-                 "height":0,
-                 "id":288,
-                 "name":"BASIC MOB",
+                 "name":"round 2",
+                 "point":true,
                  "properties":
                     {
                      "mob":"basic",
@@ -867,82 +1405,14 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":-608,
-                 "y":416
+                 "x":416,
+                 "y":-480
                 }, 
                 {
                  "height":0,
-                 "id":289,
-                 "name":"BASIC MOB",
-                 "properties":
-                    {
-                     "mob":"basic",
-                     "round":"2",
-                     "spawnTime":10
-                    },
-                 "propertytypes":
-                    {
-                     "mob":"string",
-                     "round":"string",
-                     "spawnTime":"int"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":160,
-                 "y":416
-                }, 
-                {
-                 "height":0,
-                 "id":290,
-                 "name":"BASIC MOB",
-                 "properties":
-                    {
-                     "mob":"basic",
-                     "round":"2",
-                     "spawnTime":10
-                    },
-                 "propertytypes":
-                    {
-                     "mob":"string",
-                     "round":"string",
-                     "spawnTime":"int"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":160,
-                 "y":-704
-                }, 
-                {
-                 "height":0,
-                 "id":291,
-                 "name":"BASIC MOB",
-                 "properties":
-                    {
-                     "mob":"basic",
-                     "round":"2",
-                     "spawnTime":10
-                    },
-                 "propertytypes":
-                    {
-                     "mob":"string",
-                     "round":"string",
-                     "spawnTime":"int"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":-608,
-                 "y":-704
-                }, 
-                {
-                 "height":0,
-                 "id":292,
-                 "name":"BASIC MOB",
+                 "id":244,
+                 "name":"round 2",
+                 "point":true,
                  "properties":
                     {
                      "mob":"basic",
@@ -959,13 +1429,14 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":-640,
-                 "y":480
+                 "x":-800,
+                 "y":-480
                 }, 
                 {
                  "height":0,
-                 "id":293,
-                 "name":"BASIC MOB",
+                 "id":245,
+                 "name":"round 2",
+                 "point":true,
                  "properties":
                     {
                      "mob":"basic",
@@ -982,13 +1453,14 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":192,
-                 "y":480
+                 "x":384,
+                 "y":-480
                 }, 
                 {
                  "height":0,
-                 "id":294,
-                 "name":"BASIC MOB",
+                 "id":246,
+                 "name":"round 2",
+                 "point":true,
                  "properties":
                     {
                      "mob":"basic",
@@ -1005,35 +1477,12 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":-640,
-                 "y":-768
-                }, 
-                {
-                 "height":0,
-                 "id":295,
-                 "name":"BASIC MOB",
-                 "properties":
-                    {
-                     "mob":"basic",
-                     "round":"2",
-                     "spawnTime":15
-                    },
-                 "propertytypes":
-                    {
-                     "mob":"string",
-                     "round":"string",
-                     "spawnTime":"int"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":192,
-                 "y":-768
+                 "x":384,
+                 "y":320
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -1043,96 +1492,141 @@
          "objects":[
                 {
                  "height":0,
-                 "id":228,
+                 "id":227,
                  "name":"",
+                 "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":-480,
-                 "y":-192
-                }, 
-                {
-                 "height":0,
-                 "id":229,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":32,
-                 "y":-576
+                 "x":-768,
+                 "y":-160
                 }, 
                 {
                  "height":0,
                  "id":230,
                  "name":"",
+                 "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":32,
-                 "y":0
+                 "x":-800,
+                 "y":320
+                }, 
+                {
+                 "height":0,
+                 "id":231,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-448,
+                 "y":288
+                }, 
+                {
+                 "height":0,
+                 "id":251,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":352,
+                 "y":320
+                }, 
+                {
+                 "height":0,
+                 "id":252,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-448,
+                 "y":-448
+                }, 
+                {
+                 "height":0,
+                 "id":253,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-800,
+                 "y":-512
+                }, 
+                {
+                 "height":0,
+                 "id":254,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":352,
+                 "y":-512
+                }, 
+                {
+                 "height":0,
+                 "id":255,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":320,
+                 "y":-160
                 }, 
                 {
                  "height":0,
                  "id":260,
                  "name":"",
+                 "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":160,
-                 "y":0
+                 "x":-768,
+                 "y":-32
                 }, 
                 {
                  "height":0,
                  "id":261,
                  "name":"",
+                 "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":160,
-                 "y":-576
+                 "x":320,
+                 "y":-32
                 }, 
                 {
                  "height":0,
                  "id":262,
                  "name":"",
+                 "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":-608,
-                 "y":-192
+                 "x":0,
+                 "y":-448
                 }, 
                 {
                  "height":0,
                  "id":263,
                  "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":160,
-                 "y":416
-                }, 
-                {
-                 "height":0,
-                 "id":264,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":-608,
-                 "y":416
-                }, 
-                {
-                 "height":0,
-                 "id":265,
-                 "name":"",
+                 "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1142,102 +1636,351 @@
                 }, 
                 {
                  "height":0,
-                 "id":266,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":-448,
-                 "y":288
-                }, 
-                {
-                 "height":0,
-                 "id":267,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":-224,
-                 "y":288
-                }, 
-                {
-                 "height":0,
                  "id":268,
                  "name":"",
+                 "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":-224,
-                 "y":-576
+                 "x":224,
+                 "y":-160
                 }, 
                 {
                  "height":0,
                  "id":269,
                  "name":"",
+                 "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":-448,
-                 "y":-576
+                 "x":192,
+                 "y":-288
                 }, 
                 {
                  "height":0,
                  "id":270,
                  "name":"",
+                 "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":-608,
-                 "y":-704
+                 "x":96,
+                 "y":-320
                 }, 
                 {
                  "height":0,
                  "id":271,
                  "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":320,
+                 "y":-320
+                }, 
+                {
+                 "height":0,
+                 "id":272,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":256,
+                 "y":-480
+                }, 
+                {
+                 "height":0,
+                 "id":273,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":352,
+                 "y":128
+                }, 
+                {
+                 "height":0,
+                 "id":274,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":352,
+                 "y":224
+                }, 
+                {
+                 "height":0,
+                 "id":275,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":192,
+                 "y":288
+                }, 
+                {
+                 "height":0,
+                 "id":276,
+                 "name":"",
+                 "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
                  "x":160,
-                 "y":-704
+                 "y":160
+                }, 
+                {
+                 "height":0,
+                 "id":277,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":192,
+                 "y":64
                 }, 
                 {
                  "height":0,
                  "id":278,
                  "name":"",
+                 "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":-224,
-                 "y":480
+                 "x":64,
+                 "y":160
                 }, 
                 {
                  "height":0,
                  "id":279,
                  "name":"",
+                 "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":-224,
-                 "y":-768
+                 "x":-608,
+                 "y":128
                 }, 
                 {
                  "height":0,
                  "id":280,
                  "name":"",
+                 "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":-224,
-                 "y":-128
+                 "x":-544,
+                 "y":160
+                }, 
+                {
+                 "height":0,
+                 "id":281,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-672,
+                 "y":32
+                }, 
+                {
+                 "height":0,
+                 "id":282,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-800,
+                 "y":64
+                }, 
+                {
+                 "height":0,
+                 "id":283,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-800,
+                 "y":160
+                }, 
+                {
+                 "height":0,
+                 "id":284,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-640,
+                 "y":288
+                }, 
+                {
+                 "height":0,
+                 "id":285,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-672,
+                 "y":-640
+                }, 
+                {
+                 "height":0,
+                 "id":286,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-320,
+                 "y":-640
+                }, 
+                {
+                 "height":0,
+                 "id":287,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":32,
+                 "y":-672
+                }, 
+                {
+                 "height":0,
+                 "id":288,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":384,
+                 "y":-640
+                }, 
+                {
+                 "height":0,
+                 "id":289,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":480,
+                 "y":-320
+                }, 
+                {
+                 "height":0,
+                 "id":290,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":512,
+                 "y":-288
+                }, 
+                {
+                 "height":0,
+                 "id":291,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":512,
+                 "y":128
+                }, 
+                {
+                 "height":0,
+                 "id":292,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":512,
+                 "y":352
+                }, 
+                {
+                 "height":0,
+                 "id":293,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":224,
+                 "y":512
+                }, 
+                {
+                 "height":0,
+                 "id":294,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-320,
+                 "y":480
+                }, 
+                {
+                 "height":0,
+                 "id":295,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-704,
+                 "y":480
+                }, 
+                {
+                 "height":0,
+                 "id":296,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":-960,
+                 "y":-352
                 }, 
                 {
                  "height":0,
@@ -1248,8 +1991,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":-608,
-                 "y":-576
+                 "x":-928,
+                 "y":-64
                 }, 
                 {
                  "height":0,
@@ -1260,176 +2003,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":-608,
-                 "y":320
-                }, 
-                {
-                 "height":0,
-                 "id":299,
-                 "name":"",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":160,
-                 "y":288
-                }, 
-                {
-                 "height":0,
-                 "id":300,
-                 "name":"",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":160,
-                 "y":192
-                }, 
-                {
-                 "height":0,
-                 "id":301,
-                 "name":"",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":-608,
-                 "y":64
-                }, 
-                {
-                 "height":0,
-                 "id":302,
-                 "name":"",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":192,
-                 "y":-256
-                }, 
-                {
-                 "height":0,
-                 "id":303,
-                 "name":"",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":0,
-                 "y":-320
-                }, 
-                {
-                 "height":0,
-                 "id":304,
-                 "name":"",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":-224,
-                 "y":-384
-                }, 
-                {
-                 "height":0,
-                 "id":305,
-                 "name":"",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":-224,
-                 "y":64
-                }, 
-                {
-                 "height":0,
-                 "id":306,
-                 "name":"",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":-448,
-                 "y":-416
-                }, 
-                {
-                 "height":0,
-                 "id":307,
-                 "name":"",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":-608,
-                 "y":-416
-                }, 
-                {
-                 "height":0,
-                 "id":309,
-                 "name":"",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":32,
-                 "y":-704
-                }, 
-                {
-                 "height":0,
-                 "id":310,
-                 "name":"",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":-448,
-                 "y":-704
-                }, 
-                {
-                 "height":0,
-                 "id":311,
-                 "name":"",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":-448,
-                 "y":448
-                }, 
-                {
-                 "height":0,
-                 "id":312,
-                 "name":"",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":32,
-                 "y":448
-                }, 
-                {
-                 "height":0,
-                 "id":313,
-                 "name":"",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":-448,
-                 "y":96
+                 "x":-928,
+                 "y":256
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1445,6 +2020,7 @@
                  "height":0,
                  "id":44,
                  "name":"PLAYER SPAWN",
+                 "point":true,
                  "properties":
                     {
                      "mob":"player"
@@ -1464,6 +2040,7 @@
                  "height":0,
                  "id":46,
                  "name":"BASIC MOB",
+                 "point":true,
                  "properties":
                     {
                      "mob":"basic",
@@ -1519,7 +2096,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":314,
+ "nextobjectid":299,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"2017.11.22",
