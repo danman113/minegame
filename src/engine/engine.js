@@ -11,6 +11,9 @@ class Engine {
     middle: false
   }
 
+  touches = []
+  touchmode = false
+
   state = {}
 
   _width = 500
@@ -125,6 +128,46 @@ class Engine {
       if (this.settings.fullscreen) {
         this.width = window.innerWidth
         this.height = window.innerHeight
+      }
+    }, false)
+
+    this.canvas.addEventListener('touchstart', evt => {
+      this.touchmode = true
+      evt.preventDefault()
+      for (let i = 0; i < evt.changedTouches.length; i++) {
+        let touch = evt.touches[i]
+        if (i === 0) {
+          this.mouse.down = true
+          if (touch.pageX) {
+            this.mouse.x = touch.pageX
+            this.mouse.y = touch.pageY
+          }
+        }
+      }
+    }, false)
+
+    this.canvas.addEventListener('touchend', _e => {
+      this.onClick(this)
+      this.mouse.down = false
+      console.log('touchend', _e)
+    }, false)
+
+    this.canvas.addEventListener('touchcancel', _e => {
+      console.log('touchcancel', _e)
+    }, false)
+
+    this.canvas.addEventListener('touchmove', evt => {
+      // console.log('touchmove', evt)
+      evt.preventDefault()
+      for (let i = 0; i < evt.changed.length; i++) {
+        let touch = evt.changedTouches[i]
+        if (i === 0) {
+          this.mouse.down = true
+          if (touch.pageX) {
+            this.mouse.x = touch.pageX
+            this.mouse.y = touch.pageY
+          }
+        }
       }
     }, false)
 

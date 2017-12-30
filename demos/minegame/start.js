@@ -79,7 +79,7 @@ const render = (e, c) => {
   c.fillText(text, e.width / 2 - w.width / 2, 150)
 
   c.fillStyle = '#f00'
-  c.fillRect(e.mouse.x - 1, e.mouse.y - 1, 3, 3)
+  c.fillRect(e.mouse.x - 25, e.mouse.y - 25, 51, 51)
 }
 
 const update = function (e) {
@@ -96,6 +96,6 @@ const keyUp = (e, key, evt) => {
 
 start.render = render
 start.update = update
-start.onClick = e => startContainer.handleClick(e)
+start.onClick = e => { startContainer.handleClick(e); console.log('CLICKED', e) }
 start.keyUp = keyUp
 export default start
