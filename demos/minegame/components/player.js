@@ -26,6 +26,7 @@ export default class Player extends Mob {
     this.speed = 2
     this.alive = true
     this.deadCounter = 0
+    this.lastDirectionVector = null
   }
 
   handleMouseControls (mob, e, camera, d) {
@@ -96,7 +97,14 @@ export default class Player extends Mob {
     let degToLook = -Math.atan2(direction.x, direction.y) - Math.PI
     if (e.touchmode && stage.rightJoystick.position) {
       const aimVector = sub(stage.rightJoystick.position, stage.rightJoystick.currentPosition)
+      this.lastDirectionVector = aimVector
       degToLook = -Math.atan2(aimVector.x, aimVector.y) - Math.PI
+    } else if (e.touchmode && stage.leftJoystick.position) {
+      const moveVector = sub(stage.leftJoystick.currentPosition, stage.leftJoystick.position)
+      this.lastDirectionVector = moveVector
+      degToLook = -Math.atan2(moveVector.x, moveVector.y) - Math.PI
+    } else if (e.touchmode && this.lastDirectionVector) {
+      degToLook = -Math.atan2(this.lastDirectionVector.x, this.lastDirectionVector.y) - Math.PI
     }
     c.save()
     c.translate(x, y)
