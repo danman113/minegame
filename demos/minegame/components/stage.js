@@ -1,10 +1,11 @@
-import { clamp, sub, pt, Segment, sum } from 'math'
+import { clamp, sub, pt, Segment, sum, Rectangle, distance, unit } from 'math'
 import * as keys from 'engine/keys'
 import Camera from './camera'
 import EventManager, { Event } from './eventmanager'
 import { BasicMine } from './projectile'
 import { loadTiled } from './levelparser'
 import { drawSegment } from 'engine/renderer'
+import { VirtualJoystick } from './touch'
 
 export default class Stage {
   constructor ({
@@ -35,7 +36,7 @@ export default class Stage {
     this.animCount++
     c.clearRect(0, 0, e.width, e.height)
     global.player = this.player
-    this.camera.render(c, e)
+    this.camera.render(c, e, this)
 
     if (global.debug) {
       let playerNav = this.camera.navMesh.getNearestPoint(this.player.position)
@@ -130,16 +131,21 @@ export default class Stage {
       75
     )
 
-    c.fillStyle = '#f00'
-    let crossHairSize = 50
-    let half = Math.floor(crossHairSize / 2)
-    c.drawImage(
-      e.state.imageLoader.images['crosshair'],
-      e.mouse.x - half,
-      e.mouse.y - half,
-      crossHairSize,
-      crossHairSize
-    )
+    if (!e.touchmode) {
+      c.fillStyle = '#f00'
+      let crossHairSize = 50
+      let half = Math.floor(crossHairSize / 2)
+      c.drawImage(
+        e.state.imageLoader.images['crosshair'],
+        e.mouse.x - half,
+        e.mouse.y - half,
+        crossHairSize,
+        crossHairSize
+      )
+    } else {
+      this.leftJoystick.render(c)
+      this.rightJoystick.render(c)
+    }
   }
 
   totalDelta = 0
@@ -180,17 +186,40 @@ export default class Stage {
     }
 
     this.testObjective(e)
-
-    // let p = this.camera.navMesh.getNearestPoint(this.player.position)
-    // this.camera.navMesh.path = this.camera.navMesh.search(this.camera.navMesh.points[0], p)
-
-    // Charge
-    this.camera.update(e, d, this)
-    if (e.mouse.down) {
-      this.charge = clamp(((this.charge + 1) * d), 0, this.maxCharge)
-    }
     if (this.selectedMob) {
       this.camera.centerOn(this.selectedMob.position)
+    }
+
+    if (e.touchmode) {
+      this.handleTouchControls(e, d)
+    } else {
+      this.handleMouseControls(e, d)
+    }
+    this.camera.update(e, d, this)
+  }
+  
+  handleTouchControls (e, d) {
+    this.leftJoystick.activationRect = new Rectangle(0, 0, e.width / 2, e.height)
+    this.leftJoystick.update(e)
+    this.rightJoystick.activationRect = new Rectangle(e.width / 2, 0, e.width / 2, e.height)
+    this.rightJoystick.update(e)
+    if (this.rightJoystick.position) {
+      const dist = distance(this.rightJoystick.position, this.rightJoystick.currentPosition)
+      const chargePercent = dist / this.rightJoystick.maxRange
+      this.charge = chargePercent * this.maxCharge
+    }
+  }
+  
+  handleRightJoystickFlick(joystick) {
+    const aimVector = sum(sub(this.rightJoystick.position, this.rightJoystick.currentPosition), this.player.position)
+    this.throwMine(aimVector.x, aimVector.y)
+    this.charge = 0
+  }
+  
+  handleMouseControls (e, d) {
+    // Charge
+    if (e.mouse.down) {
+      this.charge = clamp(((this.charge + 1) * d), 0, this.maxCharge)
     }
     if (keys.H in e.keys) {
       this.camera.screenShake(50)
@@ -204,10 +233,12 @@ export default class Stage {
   }
 
   onClick (e) {
-    let x = e.mouse.x + -this.camera.position.x
-    let y = e.mouse.y + -this.camera.position.y
-    this.throwMine(x, y)
-    this.charge = 0
+    if (!e.touchmode) {
+      let x = e.mouse.x + -this.camera.position.x
+      let y = e.mouse.y + -this.camera.position.y
+      this.throwMine(x, y)
+      this.charge = 0
+    }
   }
 
   keyUp (_e) {
@@ -244,6 +275,10 @@ export default class Stage {
     this.winTime = 0
     this.roundStart = Date.now()
     this.eventManager = new EventManager()
+    this.leftJoystick = new VirtualJoystick({})
+    this.rightJoystick = new VirtualJoystick({
+      onEnd: joy => this.handleRightJoystickFlick(joy)
+    })
     let lvl = loadTiled(level)
     this.camera.addGeometry(...lvl.geometry)
     this.camera.navMesh.addPoints(...lvl.navPoints)

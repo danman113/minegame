@@ -78,8 +78,21 @@ const render = (e, c) => {
   let w = c.measureText(text)
   c.fillText(text, e.width / 2 - w.width / 2, 150)
 
-  c.fillStyle = '#f00'
-  c.fillRect(e.mouse.x - 25, e.mouse.y - 25, 51, 51)
+  if (e.touches.length <= 0) {
+    c.fillStyle = '#f00'
+    c.fillRect(e.mouse.x - 1, e.mouse.y - 1, 3, 3)
+  } else {
+    for (let touch of e.touches) {
+      c.fillStyle = '#f00'
+      c.beginPath()
+      c.arc(
+        touch.position.x,
+        touch.position.y,
+        20, 0, Math.PI * 2
+      )
+      c.fill()
+    }
+  }
 }
 
 const update = function (e) {
@@ -96,6 +109,6 @@ const keyUp = (e, key, evt) => {
 
 start.render = render
 start.update = update
-start.onClick = e => { startContainer.handleClick(e); console.log('CLICKED', e) }
+start.onClick = e => startContainer.handleClick(e)
 start.keyUp = keyUp
 export default start

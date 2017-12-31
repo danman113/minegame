@@ -17,7 +17,7 @@ export default class Camera {
     global.camera = this
   }
 
-  render (c, e) {
+  render (c, e, ...rest) {
     this.width = e.width
     this.height = e.height
     this.viewDistance = Math.max(this.width, this.height) + settings.state.FOV
@@ -38,7 +38,7 @@ export default class Camera {
     }
 
     for (let projectile of this.projectiles) {
-      projectile.render(c, this, e)
+      projectile.render(c, this, e, ...rest)
     }
     for (let geom of this.geometry) {
       let center = pt(
@@ -48,12 +48,12 @@ export default class Camera {
       if (
         distance(center, geom.polygon.center()) < this.viewDistance
       ) {
-        geom.render(c, this, e)
+        geom.render(c, this, e, ...rest)
       } else {
       }
     }
     for (let mob of this.mobs) {
-      mob.render(c, this, e)
+      mob.render(c, this, e, ...rest)
     }
   }
 

@@ -1,4 +1,5 @@
 import 'babel-polyfill'
+import { getTouches } from './touch'
 
 class Engine {
   // Data to handle mouse events. Updated each frame
@@ -133,6 +134,7 @@ class Engine {
 
     this.canvas.addEventListener('touchstart', evt => {
       this.touchmode = true
+      this.touches = getTouches(evt)
       evt.preventDefault()
       for (let i = 0; i < evt.changedTouches.length; i++) {
         let touch = evt.touches[i]
@@ -146,20 +148,22 @@ class Engine {
       }
     }, false)
 
-    this.canvas.addEventListener('touchend', _e => {
+    this.canvas.addEventListener('touchend', evt => {
       this.onClick(this)
+      this.touches = getTouches(evt)
       this.mouse.down = false
-      console.log('touchend', _e)
+      // console.log('touchend', evt)
     }, false)
 
-    this.canvas.addEventListener('touchcancel', _e => {
-      console.log('touchcancel', _e)
+    this.canvas.addEventListener('touchcancel', evt => {
+      this.touches = getTouches(evt)
+      // console.log('touchcancel', evt)
     }, false)
 
     this.canvas.addEventListener('touchmove', evt => {
-      // console.log('touchmove', evt)
+      this.touches = getTouches(evt)
       evt.preventDefault()
-      for (let i = 0; i < evt.changed.length; i++) {
+      for (let i = 0; i < evt.changedTouches.length; i++) {
         let touch = evt.changedTouches[i]
         if (i === 0) {
           this.mouse.down = true

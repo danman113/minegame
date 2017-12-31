@@ -40,25 +40,15 @@ const getLevel = levelStr => {
 
 let currentStage = new Stage({
   level: TestLevel,
-  onMount: _ => {
-
-  },
+  onMount: _ => {},
 })
 
 game.onEnter = _ => {
-  // alert('game start')
   console.log('currentStage')
   console.log(currentStage)
   currentStage.start(game)
   currentStage.loadLevel(getLevel(game.state.currentLevel))
 }
 
-//
-// setTimeout(function () {
-//   // console.log(nextStage, game)
-//   currentStage.loadLevel(Level2)
-//   game.goto('start')
-// }, 500)
 currentStage.start(game)
-// nextStage.start(game)
 export default game
