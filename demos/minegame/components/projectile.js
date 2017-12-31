@@ -1,4 +1,4 @@
-import { Circle, pt, distance, ZERO, unit, scalar, clamp } from 'math'
+import { Circle, pt, distance, ZERO, unit, scalar, clamp, normal, dot, sum } from 'math'
 
 const SCREEN_SHAKE = 50
 
@@ -139,9 +139,12 @@ export class BasicMine extends Projectile {
     }
     for (let geom of geometry) {
       if (this.collider.intersectsPoly(geom.polygon)) {
+        const edge = this.collider.getEdgeFromPoly(geom.polygon)
+        const norm = unit(normal(edge[0], edge[1]))
+        // -2*(V dot N)*N + V
+        const reflectionVector = sum(scalar(norm, (dot(this.velocityVector, norm) * -2)), this.velocityVector)
         this._translate(-x, -y)
-        this.velocityVector.x = this.velocityVector.x * -1
-        this.velocityVector.y = this.velocityVector.y * -1
+        this.velocityVector = reflectionVector
         return false
       }
     }

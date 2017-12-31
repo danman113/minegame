@@ -1,10 +1,15 @@
 const pt = (x, y) => ({x: x, y: y})
 
+const ZERO = pt(0, 0)
+
 // Eucliean distance between two points
 const distance = (pt1, pt2) => Math.sqrt(
   (pt2.x - pt1.x) * (pt2.x - pt1.x) +
   (pt2.y - pt1.y) * (pt2.y - pt1.y)
 )
+
+// Magnitude 
+const magnitude = v => distance(v, ZERO)
 
 // Given the three points, are the counter clockwise?
 const ccw = (a, b, c) => (b.x - a.x) * (c.y - a.y) - (c.x - a.x) * (b.y - a.y)
@@ -29,11 +34,17 @@ const unit = a => {
   return pt(a.x / dist, a.y / dist)
 }
 
+const normal = (p0, p1) => {
+  // if we define dx=x2-x1 and dy=y2-y1, then the normals are (-dy, dx) and (dy, -dx).
+  let dx = p1.x - p0.x
+  let dy = p1.y - p0.y
+  // orthoginal(sub(p1, p0))
+  return pt(-dy, dx)
+}
+
 const orthoginal = v => pt(-v.y, v.x)
 
 const scalar = (a, c) => pt(a.x * c, a.y * c)
-
-const ZERO = pt(0, 0)
 
 export {
   pt,
@@ -44,10 +55,12 @@ export {
   ZERO,
   unit,
   scalar,
+  normal,
   angle2,
   angle3,
   degToRad,
   radToDeg,
   distance,
+  magnitude,
   orthoginal
 }

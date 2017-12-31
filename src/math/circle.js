@@ -35,6 +35,17 @@ export class Circle {
     }
     return false
   }
+  
+  getEdgeFromPoly(poly) {
+    for (let i = 0, j = 1; i < poly.verticies.length; i++, j = ((j + 1) % (poly.verticies.length))) {
+      const p0 = poly.verticies[i]
+      const p1 = poly.verticies[j]
+      if (this.pDistance(this.position.x, this.position.y, p0.x, p0.y, p1.x, p1.y) < this.radius) {
+        return [p0, p1]
+      }
+    }
+    return null
+  }
 
   pDistance (x, y, x1, y1, x2, y2) {
     const A = x - x1
