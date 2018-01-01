@@ -61,7 +61,7 @@ const update = (e) => {
   const total = imageLoader.total + audioLoader.total
   if (loaded >= total) {
     loading.goto('start')
-    e.setSupersampling(window.devicePixelRatio - 1 || 1)
+    e.setSupersampling(window.devicePixelRatio > 2 ? 2 : 1)
   }
 }
 
