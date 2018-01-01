@@ -56,11 +56,12 @@ const render = (e, c) => {
   c.fillRect(e.mouse.x - 1, e.mouse.y - 1, 3, 3)
 }
 
-const update = (_e) => {
+const update = (e) => {
   const loaded = imageLoader.loaded + audioLoader.loaded
   const total = imageLoader.total + audioLoader.total
   if (loaded >= total) {
     loading.goto('start')
+    e.setSupersampling(window.devicePixelRatio - 1 || 1)
   }
 }
 

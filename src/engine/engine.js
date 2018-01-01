@@ -23,7 +23,8 @@ class Engine {
   settings = {
     width: this._width,
     height: this._height,
-    fullscreen: false
+    fullscreen: false,
+    supersampling: 1
   }
 
   // Contains keys that are pressed. Updated each frame
@@ -46,8 +47,10 @@ class Engine {
   // Hooks into an element
   constructor (root, width = 500, height = 500, fullscreen = false) {
     let canvas = document.createElement('canvas')
+    let offscreenCanvas = document.createElement('canvas')
     root.appendChild(canvas)
     this.canvas = canvas
+    this.offscreenCanvas = offscreenCanvas
     this.settings.fullscreen = fullscreen
 
     if (fullscreen) {
@@ -58,12 +61,15 @@ class Engine {
       this.height = height
     }
     this.context = canvas.getContext('2d')
+    this.offscreenContext = offscreenCanvas.getContext('2d')
   }
 
   // Starts the event loop
   run (delta) {
     this.update(this, delta)
-    this.draw(this, this.context)
+    this.draw(this, this.offscreenContext)
+    this.context.clearRect(0, 0, this._width, this._height)
+    this.context.drawImage(this.offscreenCanvas, 0, 0, this._width * 1, this._height * 1)
     window.requestAnimationFrame(delta => this.run(delta))
   }
 
@@ -71,12 +77,12 @@ class Engine {
   start () {
     this.canvas.addEventListener('mousemove', e => {
       if (e.offsetX) {
-        this.mouse.x = e.offsetX
-        this.mouse.y = e.offsetY
+        this.mouse.x = e.offsetX * this.settings.supersampling
+        this.mouse.y = e.offsetY * this.settings.supersampling
       } else if (e.layerX) {
         var box = this.canvas.getBoundingClientRect()
-        this.mouse.x = e.layerX - box.left
-        this.mouse.y = e.layerY - box.top
+        this.mouse.x = (e.layerX - box.left) * this.settings.supersampling
+        this.mouse.y = (e.layerY - box.top) * this.settings.supersampling
       }
     })
 
@@ -134,15 +140,15 @@ class Engine {
 
     this.canvas.addEventListener('touchstart', evt => {
       this.touchmode = true
-      this.touches = getTouches(evt)
+      this.touches = getTouches(evt, this.settings.supersampling)
       evt.preventDefault()
       for (let i = 0; i < evt.changedTouches.length; i++) {
         let touch = evt.touches[i]
         if (i === 0) {
           this.mouse.down = true
           if (touch.pageX) {
-            this.mouse.x = touch.pageX
-            this.mouse.y = touch.pageY
+            this.mouse.x = touch.pageX * this.settings.supersampling
+            this.mouse.y = touch.pageY * this.settings.supersampling
           }
         }
       }
@@ -150,26 +156,26 @@ class Engine {
 
     this.canvas.addEventListener('touchend', evt => {
       this.onClick(this)
-      this.touches = getTouches(evt)
+      this.touches = getTouches(evt, this.settings.supersampling)
       this.mouse.down = false
       // console.log('touchend', evt)
     }, false)
 
     this.canvas.addEventListener('touchcancel', evt => {
-      this.touches = getTouches(evt)
+      this.touches = getTouches(evt, this.settings.supersampling)
       // console.log('touchcancel', evt)
     }, false)
 
     this.canvas.addEventListener('touchmove', evt => {
-      this.touches = getTouches(evt)
+      this.touches = getTouches(evt, this.settings.supersampling)
       evt.preventDefault()
       for (let i = 0; i < evt.changedTouches.length; i++) {
         let touch = evt.changedTouches[i]
         if (i === 0) {
           this.mouse.down = true
           if (touch.pageX) {
-            this.mouse.x = touch.pageX
-            this.mouse.y = touch.pageY
+            this.mouse.x = touch.pageX * this.settings.supersampling
+            this.mouse.y = touch.pageY * this.settings.supersampling
           }
         }
       }
@@ -177,24 +183,34 @@ class Engine {
 
     this.run(0)
   }
+  
+  setSupersampling (val) {
+    this.settings.supersampling = val
+    this.width = window.innerWidth
+    this.height = window.innerHeight
+  }
 
   set width (w) {
     this._width = w
     this.settings.width = w
     this.canvas.width = w
     this.canvas.style.width = w + 'px'
+    this.offscreenCanvas.width = w * this.settings.supersampling
+    this.offscreenCanvas.style.width = (w * this.settings.supersampling) + 'px'
   }
 
-  get width () { return this._width }
+  get width () { return this._width * this.settings.supersampling }
 
   set height (h) {
     this._height = h
     this.settings.height = h
     this.canvas.height = h
     this.canvas.style.height = h + 'px'
+    this.offscreenCanvas.height = (h * this.settings.supersampling)
+    this.offscreenCanvas.style.height = (h * this.settings.supersampling) + 'px'
   }
 
-  get height () { return this._height }
+  get height () { return this._height * this.settings.supersampling }
 }
 
 export default Engine
