@@ -15,3 +15,9 @@ export const memoize = (fn, hash = defaultHash) => {
   memoized._memoizeCache = cache
   return memoized
 }
+
+export const vibrate = ms => {
+  if (window && window.navigator && window.navigator.vibrate) {
+    window.navigator.vibrate(ms)
+  }
+}

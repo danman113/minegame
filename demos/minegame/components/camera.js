@@ -1,4 +1,5 @@
 import { pt, sub, unit, scalar, distance } from 'math'
+import { vibrate } from 'engine/utils'
 import NavMesh, { NavPoint } from './navmesh'
 import settings from '../settings'
 
@@ -122,6 +123,7 @@ export default class Camera {
 
   screenShake (amount, duration = 5) {
     this.shakeDuration = Math.max(duration, this.shakeDuration)
+    vibrate(this.shakeDuration * 1000/60)
     this.shakeAmount = amount
   }
 }
