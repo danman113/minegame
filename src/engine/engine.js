@@ -35,14 +35,14 @@ class Engine {
   keyEvents = {}
 
   // callback for click events
-  onClick (engine) {}
-  keyUp (engine, key, event) {}
+  onClick (_engine) {}
+  keyUp (_engine, _key, _event) {}
 
   // drawn each frame
-  draw (engine, c) {}
+  draw (_engine, _c) {}
 
   // updated each frame
-  update (engine, delta) {}
+  update (_engine, _delta) {}
 
   // Hooks into an element
   constructor (root, width = 500, height = 500, fullscreen = false) {
@@ -183,7 +183,7 @@ class Engine {
 
     this.run(0)
   }
-  
+
   setSupersampling (val) {
     this.settings.supersampling = val
     this.width = window.innerWidth
