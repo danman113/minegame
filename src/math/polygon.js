@@ -4,7 +4,7 @@ import { Rectangle } from './rectangle'
 
 class Polygon {
   constructor (...points) {
-    this.verticies = [...points]
+    this.verticies = points
     this.size = this.verticies.length
     this._AABB = null
     this._AABB_DIRTY = true

@@ -123,7 +123,7 @@ export default class Camera {
 
   screenShake (amount, duration = 5) {
     this.shakeDuration = Math.max(duration, this.shakeDuration)
-    vibrate(this.shakeDuration * 1000/60)
+    vibrate(this.shakeDuration * 1000 / 60)
     this.shakeAmount = amount
   }
 }

@@ -87,15 +87,15 @@ export class BasicEnemy extends Mob {
   update (mob, e, camera, d, stage) {
     // Get path from me to player. If player is ded, some random path.
     this.setPath(this.position, stage.player.alive ? stage.player.position : camera.navMesh.points[0].position, camera)
-    if (this.lastCollision) {
-      this.lastCollision++
-    }
+    this.lastCollision++
     // Figure out the next point on the path
     let nextPt = null
-    if (this.path.length > 1) {
+    if (this.lastCollision < 15) {
+      nextPt = camera.navMesh.getNearestPoint(this.position)
+    } else if (this.path.length > 1) {
       let firstPoint = this.path[0].point.position
       let secondPoint = this.path[1].point.position
-      let seg = new Segment(firstPoint, secondPoint)
+      let seg = new Segment(this.position, secondPoint)
 
       // Get rid of first point if the second is closer
       if (
@@ -108,12 +108,7 @@ export class BasicEnemy extends Mob {
           secondPoint = this.path[1].point.position
         }
       }
-
-      if (this.path.length > 1 && distance(firstPoint, this.position) > distance(secondPoint, this.position) && this.lastCollision < 15) {
-        nextPt = this.path[1].point
-      } else {
-        nextPt = this.path[0].point
-      }
+      nextPt = this.path[0].point
     } else {
       nextPt = this.path[0].point
     }

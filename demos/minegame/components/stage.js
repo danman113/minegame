@@ -1,4 +1,4 @@
-import { clamp, sub, pt, Segment, sum, Rectangle, distance, unit } from 'math'
+import { clamp, sub, pt, Segment, sum, Rectangle, distance } from 'math'
 import * as keys from 'engine/keys'
 import Camera from './camera'
 import EventManager, { Event } from './eventmanager'
@@ -197,8 +197,8 @@ export default class Stage {
     }
     this.camera.update(e, d, this)
   }
-  
-  handleTouchControls (e, d) {
+
+  handleTouchControls (e, _d) {
     this.leftJoystick.activationRect = new Rectangle(0, 0, e.width / 2, e.height)
     this.leftJoystick.update(e)
     this.rightJoystick.activationRect = new Rectangle(e.width / 2, 0, e.width / 2, e.height)
@@ -209,13 +209,13 @@ export default class Stage {
       this.charge = chargePercent * this.maxCharge
     }
   }
-  
-  handleRightJoystickFlick(joystick) {
+
+  handleRightJoystickFlick (_joystick) {
     const aimVector = sum(sub(this.rightJoystick.position, this.rightJoystick.currentPosition), this.player.position)
     this.throwMine(aimVector.x, aimVector.y)
     this.charge = 0
   }
-  
+
   handleMouseControls (e, d) {
     // Charge
     if (e.mouse.down) {

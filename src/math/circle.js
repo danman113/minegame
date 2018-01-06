@@ -1,4 +1,4 @@
-import { pt, distance, sum } from 'math'
+import { pt, distance, sum, Polygon } from 'math'
 
 export class Circle {
   constructor (pos = pt(0, 0), radius = 5) {
@@ -35,8 +35,26 @@ export class Circle {
     }
     return false
   }
-  
-  getEdgeFromPoly(poly) {
+
+  toPolygon () {
+    return new Polygon(
+      pt(this.position.x - this.radius, this.position.y),
+      pt(this.position.x, this.position.y + this.radius),
+      pt(this.position.x + this.radius, this.position.y),
+      pt(this.position.x, this.position.y - this.radius)
+    )
+  }
+
+  mergeCircles (circle) {
+    return new Polygon(
+      pt(this.position.x, this.position.y + this.radius),
+      pt(circle.position.x, circle.position.y + circle.radius),
+      pt(circle.position.x, circle.position.y - circle.radius),
+      pt(this.position.x, this.position.y - this.radius)
+    )
+  }
+
+  getEdgeFromPoly (poly) {
     for (let i = 0, j = 1; i < poly.verticies.length; i++, j = ((j + 1) % (poly.verticies.length))) {
       const p0 = poly.verticies[i]
       const p1 = poly.verticies[j]
