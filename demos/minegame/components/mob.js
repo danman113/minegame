@@ -99,7 +99,7 @@ export class BasicEnemy extends Mob {
 
       // Get rid of first point if the second is closer
       if (
-        distance(firstPoint, this.position) < 10 ||
+        distance(firstPoint, this.position) < 5 ||
         (distance(firstPoint, secondPoint) > distance(this.position, secondPoint) && !segmentIntersectsGeometry(seg, camera.geometry))
       ) {
         this.path.splice(0, 1)

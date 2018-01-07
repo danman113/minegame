@@ -1,4 +1,4 @@
-import { pt, distance, Segment, Circle } from 'math'
+import { pt, distance, Segment, Circle, sum } from 'math'
 import PriorityQueue from 'priorityqueuejs'
 import { memoize } from 'engine/utils'
 
@@ -87,9 +87,28 @@ export default class NavMesh {
           nav.position,
           nextNav.position
         )
+        let segTop = new Segment(
+          sum(nav.position, pt(0, 25)),
+          sum(nextNav.position, pt(0, 25))
+        )
+        let segBottom = new Segment(
+          sum(nav.position, pt(0, -25)),
+          sum(nextNav.position, pt(0, -25))
+        )
+        let segLeft = new Segment(
+          sum(nav.position, pt(25, 0)),
+          sum(nextNav.position, pt(25, 0))
+        )
+        let segRight = new Segment(
+          sum(nav.position, pt(-25, 0)),
+          sum(nextNav.position, pt(-25, 0))
+        )
         let inter = null
         for (let geom of geometry) {
-          inter = geom.polygon.intersectsSegment(seg)
+          inter =
+            geom.polygon.intersectsSegment(seg) || geom.polygon.intersectsSegment(segTop) ||
+            geom.polygon.intersectsSegment(segBottom) || geom.polygon.intersectsSegment(segLeft) ||
+            geom.polygon.intersectsSegment(segRight)
           if (inter) break
         }
         if (!inter) {

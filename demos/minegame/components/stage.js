@@ -49,10 +49,10 @@ export default class Stage {
         // Draw the point
         c.fillRect(this.camera.position.x + nav.position.x, this.camera.position.y + nav.position.y, 5, 5)
         // Draw neighors
-        // for (let neighbor of nav.neighbors) {
-        //   let seg = new Segment(sum(nav.position, this.camera.position), sum(neighbor.point.position, this.camera.position))
-        //   drawSegment(c, seg)
-        // }
+        for (let neighbor of nav.neighbors) {
+          let seg = new Segment(sum(nav.position, this.camera.position), sum(neighbor.point.position, this.camera.position))
+          drawSegment(c, seg)
+        }
       }
 
       // Draw all mob paths

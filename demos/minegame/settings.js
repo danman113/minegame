@@ -16,6 +16,7 @@ settings.state.FOV = 250
 settings.state.stretchTexture = false
 settings.state.music = 100
 settings.state.sound = 100
+settings.state.supersampling = 100
 
 const centerButton = (margins, _offset = 0) => {
   return function (e, btn) {
@@ -75,6 +76,28 @@ let textureStretch = new ImageButton({
   dimensions: rectToPolygon(0, 0, width, height),
 })
 
+let superSampling = new ImageButton({
+  position: pt(40, (i++) * (height + 25) + offset),
+  text: 'Supersampling',
+  onClick: e => {
+    if (e.settings.supersampling < 1) {
+      e.settings.supersampling += 0.25
+    } else {
+      e.settings.supersampling++
+      if (e.settings.supersampling > 4) {
+        e.settings.supersampling = 0.75
+      }
+    }
+    e.setSupersampling(e.settings.supersampling)
+  },
+  update: (e, scene, btn) => {
+    centerButton(0.25)(e, btn)
+    btn.text = 'Supersampling: x' + e.settings.supersampling
+  },
+  fontSize: fontSize,
+  dimensions: rectToPolygon(0, 0, width, height),
+})
+
 let backButton = new ImageButton({
   position: pt(40, (i++) * (height + 25) + offset),
   text: 'Back',
@@ -106,17 +129,23 @@ keyM.addEdge(textureStretch, {
 
 keyM.addEdge(textureStretch, {
   [keys.KEY_UP]: soundButton,
+  [keys.KEY_DOWN]: superSampling,
+  [keys.ENTER]: btn => btn.onClick(),
+})
+
+keyM.addEdge(superSampling, {
+  [keys.KEY_UP]: textureStretch,
   [keys.KEY_DOWN]: backButton,
   [keys.ENTER]: btn => btn.onClick(),
 })
 
 keyM.addEdge(backButton, {
-  [keys.KEY_UP]: textureStretch,
+  [keys.KEY_UP]: superSampling,
   [keys.KEY_DOWN]: musicButton,
   [keys.ENTER]: btn => btn.onClick(),
 })
 
-settingsContainer.addChildren(musicButton, soundButton, textureStretch, backButton)
+settingsContainer.addChildren(musicButton, soundButton, textureStretch, superSampling, backButton)
 
 const render = function (e, c) {
   c.clearRect(0, 0, e.width, e.height)

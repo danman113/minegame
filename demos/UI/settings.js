@@ -71,15 +71,15 @@ settingsContainer.addChildren(musicButton, soundButton, backButton)
 
 const render = function (c) {
   c.clearRect(0, 0, this.width, this.height)
-  
+
   settingsContainer.render(c)
-  
+
   c.fillStyle = '#f00'
   c.fillRect(this.mouse.x - 1, this.mouse.y - 1, 3, 3)
 }
 
 const update = function() {
-  
+
   settingsContainer.handleUpdate(this)
   keyM.handleUpdate(this)
 }

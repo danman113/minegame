@@ -141,9 +141,20 @@ export class MineNavMesh extends NavMesh {
           sum(nav.position, pt(0, -25)),
           sum(nextNav.position, pt(0, -25))
         )
+        let segLeft = new Segment(
+          sum(nav.position, pt(25, 0)),
+          sum(nextNav.position, pt(25, 0))
+        )
+        let segRight = new Segment(
+          sum(nav.position, pt(-25, 0)),
+          sum(nextNav.position, pt(-25, 0))
+        )
         let inter = null
         for (let geom of geometry) {
-          inter = geom.intersectsSegment(seg) || geom.intersectsSegment(segTop) || geom.intersectsSegment(segBottom)
+          inter =
+            geom.intersectsSegment(seg) || geom.intersectsSegment(segTop) ||
+            geom.intersectsSegment(segBottom) || geom.intersectsSegment(segLeft) ||
+            geom.intersectsSegment(segRight)
           if (inter) break
         }
         if (!inter) {
