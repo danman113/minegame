@@ -71,6 +71,18 @@ export default class NavMesh {
   computeNavmeshNeighbors (geometry) {
     for (let i = this.points.length - 1; i >= 0; i--) {
       const nav = this.points[i]
+      const circleLimit = new Circle(nav.position, 25)
+      for (let nextNav of this.points) {
+        if (nav === nextNav) continue
+        if (circleLimit.intersectsPt(nextNav.position)) {
+          this.points.splice(i, 1)
+          break
+        }
+      }
+    }
+
+    for (let i = this.points.length - 1; i >= 0; i--) {
+      const nav = this.points[i]
       let circle = new Circle(nav.position, 30)
       for (let geom of geometry) {
         if (circle.intersectsPoly(geom.polygon)) {

@@ -126,6 +126,18 @@ export class MineNavMesh extends NavMesh {
   }
 
   generateNeighbors (geometry) {
+    const sizeLimit = 25
+    for (let i = this.points.length - 1; i >= 0; i--) {
+      const nav = this.points[i]
+      const circleLimit = new Circle(nav.position, 12)
+      for (let nextNav of this.points) {
+        if (nav === nextNav) continue
+        if (circleLimit.intersectsPt(nextNav.point)) {
+          this.points.splice(i, 1)
+          break
+        }
+      }
+    }
     for (let nav of this.points) {
       for (let nextNav of this.points) {
         if (nav === nextNav) continue
@@ -134,20 +146,20 @@ export class MineNavMesh extends NavMesh {
           nextNav.position
         )
         let segTop = new Segment(
-          sum(nav.position, pt(0, 25)),
-          sum(nextNav.position, pt(0, 25))
+          sum(nav.position, pt(0, sizeLimit)),
+          sum(nextNav.position, pt(0, sizeLimit))
         )
         let segBottom = new Segment(
-          sum(nav.position, pt(0, -25)),
-          sum(nextNav.position, pt(0, -25))
+          sum(nav.position, pt(0, -sizeLimit)),
+          sum(nextNav.position, pt(0, -sizeLimit))
         )
         let segLeft = new Segment(
-          sum(nav.position, pt(25, 0)),
-          sum(nextNav.position, pt(25, 0))
+          sum(nav.position, pt(sizeLimit, 0)),
+          sum(nextNav.position, pt(sizeLimit, 0))
         )
         let segRight = new Segment(
-          sum(nav.position, pt(-25, 0)),
-          sum(nextNav.position, pt(-25, 0))
+          sum(nav.position, pt(-sizeLimit, 0)),
+          sum(nextNav.position, pt(-sizeLimit, 0))
         )
         let inter = null
         for (let geom of geometry) {

@@ -41,7 +41,7 @@ const parseMobs = obj => {
 }
 
 const parseNavMesh = obj => {
-  return new NavPoint(obj)
+  return new NavPoint(pt(obj.x, obj.y))
 }
 
 export const loadTiled = json => {
@@ -69,6 +69,7 @@ export const loadTiled = json => {
       }
       break
     case 'navmesh':
+      console.log(layer)
       for (let obj of layer.objects) {
         let navPoint = parseNavMesh(obj)
         if (navPoint) {

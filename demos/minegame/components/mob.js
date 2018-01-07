@@ -2,11 +2,13 @@ import { pt, Circle, unit, sub, distance, scalar, Segment } from 'math'
 import { segmentIntersectsGeometry } from './geometry'
 import { moveTo } from './ai'
 
+let id = 0
 export class Mob {
   type = 'Mob'
   constructor (circle, update) {
     this.position = circle.position
     this.collider = circle
+    this.id = id++
     if (update) {
       this.update = update
     }
