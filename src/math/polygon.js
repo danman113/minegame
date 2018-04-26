@@ -1,3 +1,4 @@
+import Delaunator from 'delaunator'
 import { distance, ccw, pt, sum, sub, dot, scalar, degToRad, orthoginal } from './point'
 import { segmentIntersectsSegment } from './line'
 import { Rectangle } from './rectangle'
@@ -154,6 +155,7 @@ class Polygon {
       let p0 = this.verticies[i]
       let p1 = this.verticies[j]
       /* eslint-disable no-unused-vars */
+      /* eslint-disable indent */
       // Have to set this to a dummy variable due to bad babel translations/syntax?
       let int = (
         (p0.y <= pt.y && pt.y < p1.y) ||
@@ -163,6 +165,7 @@ class Polygon {
         (p1.y - p0.y) + p0.x)
       ) && (c = !c)
       /* eslint-enable no-unused-vars */
+      /* eslint-enable indent */
     }
     return c
   }
@@ -334,6 +337,37 @@ class Polygon {
     const c = this.verticies[largestIndex]
     this._findHull(hull, c, xmin, -this._findSide(c, xmin, xmax))
     this._findHull(hull, c, xmax, -this._findSide(c, xmax, xmin))
+  }
+
+  isEqual (polygon) {
+    if (polygon.size !== this.size) {
+      return false
+    }
+    for (let i = 0; i < this.size; i++) {
+      if (
+        this.verticies[i].x !== polygon.verticies[i].x ||
+        this.verticies[i].y !== polygon.verticies[i].y
+      ) {
+        return false
+      }
+    }
+    return true
+  }
+  toConvexPolys () {
+    const polygons = []
+    const DMesh = Delaunator.from(this.verticies, p => p.x, p => p.y)
+    const triangles = DMesh.triangles
+    const points = this.verticies
+    for (let i = 0; i < triangles.length; i += 3) {
+      const p1 = points[triangles[i]]
+      const p2 = points[triangles[i + 1]]
+      const p3 = points[triangles[i + 2]]
+      const poly = new Polygon(p1, p2, p3)
+      if (this.intersectsPt(poly.center())) {
+        polygons.push(poly)
+      }
+    }
+    return polygons
   }
 }
 

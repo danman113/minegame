@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <object name="BASIC MOB" width="32" height="32">
+  <properties>
+   <property name="mob" value="basic"/>
+   <property name="spawnTime" type="int" value="5"/>
+  </properties>
+ </object>
+</template>

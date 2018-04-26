@@ -1,6 +1,7 @@
 import { isNode, DocumentMock, WindowMock } from 'engine/isomorphic-helpers'
 import { drawPolygon } from 'engine/renderer'
 import NavMesh, { MineNavMesh, AStarNavMesh, GridStarNavMesh } from './navmesh'
+import DMesh from './mesh'
 import * as keys from 'engine/keys'
 import Engine from 'engine'
 import { Polygon, pt } from 'math'
@@ -76,7 +77,7 @@ const click = e => {
 const keyEvents = {
   [keys.ENTER]: _ => {
     if (points.length > 1) {
-      geometry.push(new Polygon(...points))
+      geometry.push(...(new Polygon(...points).toConvexPolys()))
     }
     points = []
   },
@@ -107,6 +108,12 @@ const keyEvents = {
       navmesh.generate(geometry)
     })
     console.log(navmesh)
+  },
+  [keys.FIVE]: e => {
+    timeit('D NavMesh', _ => {
+      navmesh = new DMesh()
+      navmesh.generate(geometry, e.settings)
+    })
   },
   [keys.R]: _ => {
     console.log(`Size: ${navmesh.getSize()}`)
